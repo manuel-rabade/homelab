@@ -10,72 +10,65 @@
 
 Documentacion de mi infraestructura casera. #WIP4EVER
 
+## Arquitectura
+
+```
++--------------------+                                 +----------------------+
+|                    |                                 |                      |
+|        LAN         |      +-------------------+      |         DMZ          |       +-------------+
+|   192.168.0.0/24   |------|   Router/AP LAN   |------|   192.168.100.0/24   |-------|   ISP ONT   |
+|                    |      +-------------------+      |                      |       +-------------+
++--------------------+                                 +----------------------+
+                                                                   |
+                                                                   |
+                                                            +------------+
+                                                            |   AP DMZ   |
+                                                            +------------+
+```
+
 ## Computadoras
 
-La convención es usar nombres de cantinas, clubs y similares para los hostname.
+La convención es usar nombres de lugares de espacimiento para los hostname.
 
-### balalaika
-
-- GCloud
-
-### covadonga
-
-- NAS
-
-### cuatroveinte
-
-- BB Black
-
-### duxdevenecia
-
-- TBD
-
-### elalicia
-
-- MiniPC
-
-### laesperanza
-
-- TBD
+| Hostname                            | Proposito                                        | IP          |
+|-------------------------------------|--------------------------------------------------|-------------|
+| [lafaena](#lafaena)                 | Streamer de música                               | 192.168.0.3 |
+| [multiforoalicia](#multiforoalicia) | Consola de juegos retro y reproductor multimedia | 192.168.0.4 |
 
 ### lafaena
 
-- RPi
-- [Basic Setup Guide](https://github.com/dtcooper/raspotify/wiki/Basic-Setup-Guide)
+Es una **Raspberry Pi B** con *Raspotify* para hacer streaming de audio a un minicomponente LG.
+
+- CPU: `ARM1176JZFS @ 700MHz`
+- RAM: `256 MB`
+- HDD: `16 GB SD`
+- OS: `Raspbian GNU/Linux 11`
+
+**Referencias**
+
+- [Raspotify Basic Setup Guide](https://github.com/dtcooper/raspotify/wiki/Basic-Setup-Guide)
 - [Raspotify on Pi v1's and Pi Zero v1.x](https://github.com/dtcooper/raspotify/wiki/Raspotify-on-Pi-v1's-and-Pi-Zero-v1.x)
 
-### nibelungengarten
+### multiforoalicia
 
-- TBD
+*Desktop XFce4* en una **Share MiniPC X3700m** conectada a una TV para navegar en Internet, reproducir videos, etc. También tiene *RetroPie* para jugar *Nintendo*.
 
-### riodelaplata
+- CPU: `Intel Celeron 1037U @ 1.80GHz`
+- RAM: `8 GB`
+- HDD: `128 GB mSATA`
+- OS: `Xubuntu 23.10`
 
-- AWS
+**Referencias**
 
-### saloncorona
-
-- BB Original
-
-### savoy
-
-- RPi5
+- [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
 
 ## Dispositivos de red
 
-### Archer C2300
-
-- LAN Router y AP
-- [http://192.168.0.1](http://192.168.0.1)
-
-### Huawei HG8245H
-
-- TotalPlay ONT
-- [http://192.168.100.1](http://192.168.100.1)
-
-### Netgear AV200
-
-- DMZ AP
-- [http://192.168.100.2](http://192.168.100.2)
+| Equipo         | Proposito                      | IP                                    |
+|----------------|--------------------------------|---------------------------------------|
+| Archer C2300   | Ruteador y punto de acceso LAN | [192.168.0.1](http://192.168.0.1)     |
+| Huawei HG8245H | ONT de proveedor de Internet   | [192.168.100.1](http://192.168.100.1) |
+| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.2](http://192.168.100.2) |
 
 ## IoT
 
@@ -106,3 +99,43 @@ Todo lo que tenga dirección IP y no es una computadora.
 ### Terraza
 
 - Becasmart Smart Watering Device BAF-908
+
+<!--
+## WIP
+
+### balalaika
+
+- GCloud
+
+### covadonga
+
+- NAS
+
+### cuatroveinte
+
+- BB Black
+
+### duxdevenecia
+
+- RPi (Pi Hole)
+
+### laesperanza
+
+- TBD
+
+### nibelungengarten
+
+- TBD
+
+### riodelaplata
+
+- AWS
+
+### saloncorona
+
+- BB Original
+
+### savoy
+
+- RPi5
+-->
