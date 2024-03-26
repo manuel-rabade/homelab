@@ -8,32 +8,36 @@
     \/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/____/\/__/\/_/ \/___/
 ```
 
-Documentacion de mi infraestructura casera. #WIP4EVER
+Documentacion de mi infraestructura casera. `#WIP4EVER`
 
-## Arquitectura
+## Red
 
 ```
-+--------------------+                                 +----------------------+
-|                    |                                 |                      |
-|        LAN         |      +-------------------+      |         DMZ          |       +-------------+
-|   192.168.0.0/24   |------|   Router/AP LAN   |------|   192.168.100.0/24   |-------|   ISP ONT   |
-|                    |      +-------------------+      |                      |       +-------------+
-+--------------------+                                 +----------------------+
-                                                                   |
-                                                                   |
-                                                            +------------+
-                                                            |   AP DMZ   |
-                                                            +------------+
+                                                +--------+
+                                                | AP DMZ |
+                                                +--------+
+                                                     |
+                                                     |
++----------------+    +---------------+    +------------------+    +------------+
+|      LAN       |----| Router/AP LAN |----|       DMZ        |----| Router ISP |
+| 192.168.0.0/24 |    +---------------+    | 192.168.100.0/24 |    +------------+
++----------------+                         +------------------+
 ```
+
+| Equipo         | Proposito                      | IP                                    |
+|----------------|--------------------------------|---------------------------------------|
+| Archer C2300   | Ruteador y punto de acceso LAN | [192.168.0.1](http://192.168.0.1)     |
+| Huawei HG8245H | Ruteador proveedor de Internet | [192.168.100.1](http://192.168.100.1) |
+| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
 
 ## Computadoras
 
 La convención es usar nombres de lugares de espacimiento para los hostname.
 
-| Hostname                            | Proposito                                        | IP          |
-|-------------------------------------|--------------------------------------------------|-------------|
-| [lafaena](#lafaena)                 | Streamer de música                               | 192.168.0.3 |
-| [multiforoalicia](#multiforoalicia) | Consola de juegos retro y reproductor multimedia | 192.168.0.4 |
+| Hostname                            | Proposito                                        | Red | IP          |
+|-------------------------------------|--------------------------------------------------|-----|-------------|
+| [lafaena](#lafaena)                 | Streamer de música                               | LAN | 192.168.0.3 |
+| [multiforoalicia](#multiforoalicia) | Consola de juegos retro y reproductor multimedia | LAN | 192.168.0.4 |
 
 ### lafaena
 
@@ -62,80 +66,49 @@ Es una **Raspberry Pi B** con *Raspotify* para hacer streaming de audio a un min
 
 - [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
 
-## Dispositivos de red
-
-| Equipo         | Proposito                      | IP                                    |
-|----------------|--------------------------------|---------------------------------------|
-| Archer C2300   | Ruteador y punto de acceso LAN | [192.168.0.1](http://192.168.0.1)     |
-| Huawei HG8245H | ONT de proveedor de Internet   | [192.168.100.1](http://192.168.100.1) |
-| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
-
 ## IoT
 
 Todo lo que tenga dirección IP y no es una computadora.
 
-### Cuarto de servicio
-
-- Wemo Mini Smart Plug x 2
-
-### Estancia
-
-- Google Nest Hub
-- Magic Home WiFi LED Controller
-- Wiz Wi-Fi DIM/5W G25 Amber 920 E26 6/1PF
-- Wyze Smart Plug
-
-### Estudio
-
-- Google Nest Mini
-- TLC TV 55" 4K UHD
-
-### Recámara
-
-- Google Nest Mini
-- Mi Air Purifier 3C
-- Wemo Insight Smart Plug
-
-### Terraza
-
-- Becasmart Smart Watering Device BAF-908
+| Equipo                           | Lugar              | Proposito                       | Red |
+|----------------------------------|--------------------|---------------------------------|-----|
+| Becasmart BAF-908 Flower Waterer | Balcón             | Sistema de riego automático     | DMZ |
+| Wemo Mini Smart Plug             | Cuarto de servicio | Controla calentador de agua     | DMZ |
+| Wemo Mini Smart Plug             | Cuarto de servicio | Controla bomba presurizadora    | DMZ |
+| Google Nest Hub                  | Estancia           | Pantalla inteligente            | LAN |
+| Magic Home WiFi LED Controller   | Estancia           | Controla tira led               | DMZ |
+| Wiz DIM/5W G25 Amber             | Estancia           | Foco lampara de piso            | DMZ |
+| Wyze Smart Plug                  | Estancia           | Controla luz globo terráqueo    | DMZ |
+| Google Nest Mini                 | Estudio            | Bocina inteligente              | LAN |
+| TLC TV 55" 4K UHD                | Estudio            | Televisión inteligente          | LAN |
+| Google Nest Mini                 | Recámara           | Bocina inteligente              | LAN |
+| Mi Air Purifier 3C               | Recámara           | Purificador de aire             | DMZ |
+| Wemo Insight Smart Plug          | Recámara           | Controla y monitorea calentador | DMZ |
 
 <!--
-## WIP
+**WIP**
 
-### balalaika
+- balalaika
+  - GCloud
+- duxdevenecia
+  - RPi
+  - Pi Hole
+  - Hacks IoT
+- saloncorona
+  - BB Original
+  - RRDTool
+  - NUT
 
-- GCloud
+- cuatroveinte
+  - BB Black c/pantalla
+- covadonga
+  - TrueNAS
 
-### covadonga
+- riodelaplata
+  - AWS
+- savoy
+  - RPi5
 
-- NAS
-
-### cuatroveinte
-
-- BB Black
-
-### duxdevenecia
-
-- RPi (Pi Hole)
-
-### laesperanza
-
-- TBD
-
-### nibelungengarten
-
-- TBD
-
-### riodelaplata
-
-- AWS
-
-### saloncorona
-
-- BB Original
-
-### savoy
-
-- RPi5
+- laesperanza
+- nibelungengarten
 -->
