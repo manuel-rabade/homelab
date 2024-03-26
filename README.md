@@ -68,7 +68,7 @@ Es una **Raspberry Pi B** con *Raspotify* para hacer streaming de audio a un min
 |----------------|--------------------------------|---------------------------------------|
 | Archer C2300   | Ruteador y punto de acceso LAN | [192.168.0.1](http://192.168.0.1)     |
 | Huawei HG8245H | ONT de proveedor de Internet   | [192.168.100.1](http://192.168.100.1) |
-| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.2](http://192.168.100.2) |
+| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
 
 ## IoT
 
