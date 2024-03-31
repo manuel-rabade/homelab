@@ -12,6 +12,8 @@ Documentacion de mi infraestructura casera. `#WIP4EVER`
 
 ## Red
 
+El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confiables_ en la **LAN**.
+
 ```
                                                 +--------+
                                                 | AP DMZ |
@@ -30,41 +32,52 @@ Documentacion de mi infraestructura casera. `#WIP4EVER`
 | Huawei HG8245H | Ruteador proveedor de Internet | [192.168.100.1](http://192.168.100.1) |
 | Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
 
+Un proyecto a futuro es migrar de la doble NAT a redes propiamente enrutadas. Planeo una [NanoPi](https://www.friendlyelec.com/) o [similar](https://es.aliexpress.com/item/4000154940867.html) con OpenWRT como ruteador.
+
 ## Computadoras
 
 La convención es usar nombres de lugares de espacimiento para los hostname.
 
-| Hostname                            | Proposito                                        | Red | IP          |
-|-------------------------------------|--------------------------------------------------|-----|-------------|
-| [lafaena](#lafaena)                 | Streamer de música                               | LAN | 192.168.0.3 |
-| [multiforoalicia](#multiforoalicia) | Consola de juegos retro y reproductor multimedia | LAN | 192.168.0.4 |
+| Hostname                            | Red      | IP            | OS                     | CPU    |
+|-------------------------------------|----------|---------------|------------------------|--------|
+| [balalaika](#balalaika)             | Internet | 34.67.134.108 | Debian GNU/Linux 12    | x86/64 |
+| [laesperanza](#laesperanza)         | LAN      | 192.168.0.2   | Raspbian GNU/Linux 11  | ARMv6  |
+| [lafaena](#lafaena)                 | LAN      | 192.168.0.3   | Raspbian GNU/Linux 11  | ARMv6  |
+| [multiforoalicia](#multiforoalicia) | LAN      | 192.168.0.4   | Xubuntu 23.10          | x86/64 |
+
+### balalaika
+
+Servidor web NGINX con PHP 8.2 en una instancia `e2-micro` de **Google Compute Engine**.
+
+### laesperanza
+
+Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente estoy probando CloudFare.
+
+- [Pi-hole: A black hole for Internet advertisements](https://github.com/pi-hole/pi-hole/)
 
 ### lafaena
 
-Es una **Raspberry Pi B** con *Raspotify* para hacer streaming de audio a un minicomponente LG.
-
-- CPU: `ARM1176JZFS @ 700MHz`
-- RAM: `256 MB`
-- HDD: `16 GB SD`
-- OS: `Raspbian GNU/Linux 11`
-
-**Referencias**
+Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutando Raspotify, un cliente de Spotify.
 
 - [Raspotify Basic Setup Guide](https://github.com/dtcooper/raspotify/wiki/Basic-Setup-Guide)
 - [Raspotify on Pi v1's and Pi Zero v1.x](https://github.com/dtcooper/raspotify/wiki/Raspotify-on-Pi-v1's-and-Pi-Zero-v1.x)
 
 ### multiforoalicia
 
-*Desktop XFce4* en una **Share MiniPC X3700m** conectada a una TV para navegar en Internet, reproducir videos, etc. También tiene *RetroPie* para jugar *Nintendo*.
-
-- CPU: `Intel Celeron 1037U @ 1.80GHz`
-- RAM: `8 GB`
-- HDD: `128 GB mSATA`
-- OS: `Xubuntu 23.10`
-
-**Referencias**
+Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
 
 - [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
+
+<!--
+- riodelaplata -> Servidor docker en AWS
+- duxdevenecia -> Hacks IoT en BB
+- cuatroveinte -> Monitoreo Cacti/NUT en RPi3B
+- saloncorona -> Logger Receptor Alertas en RPi Zero
+- savoy -> Torrents y VPN en RPi5
+- covadonga -> TrueNAS en x86
+- barbaazul -> BB Black con pantalla
+- nibelungengarten ->
+-->
 
 ## IoT
 
@@ -84,31 +97,3 @@ Todo lo que tenga dirección IP y no es una computadora.
 | Google Nest Mini                 | Recámara           | Bocina inteligente              | LAN |
 | Mi Air Purifier 3C               | Recámara           | Purificador de aire             | DMZ |
 | Wemo Insight Smart Plug          | Recámara           | Controla y monitorea calentador | DMZ |
-
-<!--
-**WIP**
-
-- balalaika
-  - GCloud
-- duxdevenecia
-  - RPi
-  - Pi Hole
-  - Hacks IoT
-- saloncorona
-  - BB Original
-  - RRDTool
-  - NUT
-
-- cuatroveinte
-  - BB Black c/pantalla
-- covadonga
-  - TrueNAS
-
-- riodelaplata
-  - AWS
-- savoy
-  - RPi5
-
-- laesperanza
-- nibelungengarten
--->
