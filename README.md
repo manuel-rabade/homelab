@@ -12,7 +12,7 @@ Documentacion de mi infraestructura casera. `#WIP4EVER`
 
 ## Red
 
-El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confiables_ en la **LAN**.
+El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confiables_ en la **LAN**. El plan a futuro es migrar de la doble NAT a redes propiamente enrutadas y filtradas.
 
 ```
                                                 +--------+
@@ -32,11 +32,9 @@ El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confia
 | Huawei HG8245H | Ruteador proveedor de Internet | [192.168.100.1](http://192.168.100.1) |
 | Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
 
-Un proyecto a futuro es migrar de la doble NAT a redes propiamente enrutadas. Planeo una [NanoPi](https://www.friendlyelec.com/) o [similar](https://es.aliexpress.com/item/4000154940867.html) con OpenWRT como ruteador.
-
 ## Computadoras
 
-La convención es usar nombres de lugares de espacimiento para los hostname.
+Dispositivos del hogar que corren Linux. No incluye equipos personales (laptops o teléfonos) ni dispositivos _comerciales_ con Linux empotrado (Google Nest o TV con Android). La convención para los hostname es usar nombres de lugares de espacimiento.
 
 | Hostname                            | Red      | IP            | OS                     | CPU    |
 |-------------------------------------|----------|---------------|------------------------|--------|
@@ -71,12 +69,12 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 <!--
 - riodelaplata -> Servidor docker en AWS
 - duxdevenecia -> Hacks IoT en BB
-- cuatroveinte -> Monitoreo Cacti/NUT en RPi3B
-- saloncorona -> Logger Receptor Alertas en RPi Zero
-- savoy -> Torrents y VPN en RPi5
-- covadonga -> TrueNAS en x86
+- cuatroveinte -> VPN/Cacti/NUT en OPi3B
+- saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Yun
+- savoy -> Torrents y varios en RPi5
+- covadonga -> TrueNAS en x86 o OpenVMS en FriendlyElec
 - barbaazul -> BB Black con pantalla
-- nibelungengarten ->
+- nibelungengarten -> TBD
 -->
 
 ## IoT
