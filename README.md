@@ -12,40 +12,77 @@ Documentacion de mi infraestructura casera. `#WIP4EVER`
 
 ## Red
 
-El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confiables_ en la **LAN**. El plan a futuro es migrar de la doble NAT a redes propiamente enrutadas y filtradas.
+El objetivo es separar los dispositivos _inseguros_ en la **DMZ** de los _confiables_ en la **LAN**.
+
+El propósito de la **VPN** es exponer servicios locales en Internet.
+
+El plan a futuro es migrar de la doble NAT a redes propiamente enrutadas y filtradas.
 
 ```
-                                                +--------+
-                                                | AP DMZ |
-                                                +--------+
-                                                     |
-                                                     |
-+----------------+    +---------------+    +------------------+    +------------+
-|      LAN       |----| Router/AP LAN |----|       DMZ        |----| Router ISP |
-| 192.168.0.0/24 |    +---------------+    | 192.168.100.0/24 |    +------------+
-+----------------+                         +------------------+
++----------------+    +---------------+    +------------------+    +----------+
+|      LAN       |----| Router/AP LAN |----|  Router/ONT ISP  |----| Internet |
+| 192.168.0.0/24 |    +---------------+    +------------------+    +----------+
++----------------+                                  |
+        |                                           |
+        |                                  +------------------+
+ +------------+                            |       DMZ        |
+ | Router VPN |                            | 192.168.100.0/24 |
+ +------------+                            +------------------+
+        |                                           |
+        |                                           |
++----------------+                             +--------+
+|      VPN       |                             | AP DMZ |
+| 192.168.1.0/24 |                             +--------+
++----------------+
 ```
 
-| Equipo         | Proposito                      | IP                                    |
-|----------------|--------------------------------|---------------------------------------|
-| Archer C2300   | Ruteador y punto de acceso LAN | [192.168.0.1](http://192.168.0.1)     |
-| Huawei HG8245H | Ruteador proveedor de Internet | [192.168.100.1](http://192.168.100.1) |
-| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |
+| Equipo         | Proposito                      | DMZ                                   | LAN                               |
+|----------------|--------------------------------|---------------------------------------|-----------------------------------|
+| Archer C2300   | Ruteador y punto de acceso LAN | 192.168.100.2                         | [192.168.0.1](http://192.168.0.1) |
+| Huawei HG8245H | Ruteador proveedor de Internet | [192.168.100.1](http://192.168.100.1) |                                   |
+| Netgear AV200  | Punto de acceso DMZ            | [192.168.100.3](http://192.168.100.3) |                                   |
+
+### VPN
+
+Permite el acceso a servicios locales desde Internet por medio de servidores _en la nube_.
+
+- El servidor de la VPN se encuentra en [riodelaplata](#riodelaplata), un servidor _en la nube_.
+- El cliente de la VPN [cuatroveinte](#cuatroveinte) se encarga de enrutar el trafico con la LAN.
+- También [balalaika](#balalaika) es cliente de la VPN, otro servidor _en la nube_.
+
+Esta configuración es necesaria porque mi ISP utiliza redes privadas y NAT en su servicio de Internet _residencial_.
+
+Laptops y celulares también pueden conectarse a la VPN para acceder recursos locales de forma remota.
 
 ## Computadoras
 
-Dispositivos del hogar que corren Linux. No incluye equipos personales (laptops o teléfonos) ni dispositivos _comerciales_ con Linux empotrado (Google Nest o TV con Android). La convención para los hostname es usar nombres de lugares de espacimiento.
+Dispositivos del hogar que corren Linux.
 
-| Hostname                            | Red      | IP            | OS                     | CPU    |
-|-------------------------------------|----------|---------------|------------------------|--------|
-| [balalaika](#balalaika)             | Internet | 34.67.134.108 | Debian GNU/Linux 12    | x86/64 |
-| [laesperanza](#laesperanza)         | LAN      | 192.168.0.2   | Raspbian GNU/Linux 11  | ARMv6  |
-| [lafaena](#lafaena)                 | LAN      | 192.168.0.3   | Raspbian GNU/Linux 11  | ARMv6  |
-| [multiforoalicia](#multiforoalicia) | LAN      | 192.168.0.4   | Xubuntu 23.10          | x86/64 |
+No incluye equipos personales (laptops o teléfonos) ni dispositivos _comerciales_ con Linux empotrado (Google Nest o TV con Android).
+
+La convención para los hostname es usar nombres de lugares de espacimiento.
+
+| Hostname                            | LAN         | VPN         | DMZ           | OS                     | Arch   |
+|-------------------------------------|-------------|-------------|---------------|------------------------|--------|
+| [balalaika](#balalaika)             |             | 192.168.1.3 |               | Debian GNU/Linux 12    | x86/64 |
+| [cuatroveinte](#cuatroveinte)       | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
+| [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 |                        | ARM32  |
+| [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
+| [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
+| [multiforoalicia](#multiforoalicia) | 192.168.0.4 |             |               | Xubuntu 23.10          | x86/64 |
+| [riodelaplata](#riodelaplata)       |             | 192.168.1.1 |               | AWS Linux 2023         | ARM64  |
 
 ### balalaika
 
-Servidor web NGINX con PHP 8.2 en una instancia `e2-micro` de **Google Compute Engine**.
+Hospeda un servidor web y repositorios de Git en una instancia `e2-micro` de **Google Compute Engine**.
+
+### cuatroveinte
+
+`#WIP`
+
+### duxdevenecia
+
+`#WIP`
 
 ### laesperanza
 
@@ -66,15 +103,16 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 
 - [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
 
+### riodelaplata
+
+`#WIP`
+
 <!--
-- riodelaplata -> Servidor docker en AWS
-- duxdevenecia -> Hacks IoT en BB
-- cuatroveinte -> VPN/Cacti/NUT en OPi3B
 - saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Yun
 - savoy -> Torrents y varios en RPi5
 - covadonga -> TrueNAS en x86 o OpenVMS en FriendlyElec
 - barbaazul -> BB Black con pantalla
-- nibelungengarten -> TBD
+- nibelungengarten -> Router
 -->
 
 ## IoT
@@ -88,10 +126,10 @@ Todo lo que tenga dirección IP y no es una computadora.
 | Wemo Mini Smart Plug             | Cuarto de servicio | Controla bomba presurizadora    | DMZ |
 | Google Nest Hub                  | Estancia           | Pantalla inteligente            | LAN |
 | Magic Home WiFi LED Controller   | Estancia           | Controla tira led               | DMZ |
-| Wiz DIM/5W G25 Amber             | Estancia           | Foco lampara de piso            | DMZ |
 | Wyze Smart Plug                  | Estancia           | Controla luz globo terráqueo    | DMZ |
 | Google Nest Mini                 | Estudio            | Bocina inteligente              | LAN |
 | TLC TV 55" 4K UHD                | Estudio            | Televisión inteligente          | LAN |
 | Google Nest Mini                 | Recámara           | Bocina inteligente              | LAN |
 | Mi Air Purifier 3C               | Recámara           | Purificador de aire             | DMZ |
 | Wemo Insight Smart Plug          | Recámara           | Controla y monitorea calentador | DMZ |
+| Wiz DIM/5W G25 Amber             | Recámara           | Foco en lampara de piso         | DMZ |
