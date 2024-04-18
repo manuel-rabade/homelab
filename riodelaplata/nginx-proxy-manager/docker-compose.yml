@@ -1,0 +1,20 @@
+services:
+  proxy:
+    container_name: nginx-proxy
+    hostname: proxy.riodelaplata
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - './data:/data'
+      - './letsencrypt:/etc/letsencrypt'
+    environment:
+      - TZ=Mexico/General
+
+networks:
+  default:
+    name: riodelaplata-net
+    external: false
