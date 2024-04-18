@@ -47,7 +47,7 @@ El plan a futuro es migrar de la doble NAT a redes propiamente enrutadas y filtr
 Permite el acceso a servicios locales desde Internet por medio de servidores _en la nube_.
 
 - El servidor de la VPN se encuentra en [riodelaplata](#riodelaplata), un servidor _en la nube_.
-- El cliente de la VPN [cuatroveinte](#cuatroveinte) se encarga de enrutar el trafico con la LAN.
+- El cliente de la VPN [latita](#latita) se encarga de enrutar el trafico con la LAN.
 - También [balalaika](#balalaika) es cliente de la VPN, otro servidor _en la nube_.
 
 Esta configuración es necesaria porque mi ISP utiliza redes privadas y NAT en su servicio de Internet _residencial_.
@@ -65,7 +65,7 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 | Hostname                            | LAN         | VPN         | DMZ           | OS                     | Arch   |
 |-------------------------------------|-------------|-------------|---------------|------------------------|--------|
 | [balalaika](#balalaika)             |             | 192.168.1.3 |               | Debian GNU/Linux 12    | x86/64 |
-| [cuatroveinte](#cuatroveinte)       | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
+| [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
 | [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 |                        | ARM32  |
 | [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
@@ -76,7 +76,7 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 
 Hospeda un servidor web y repositorios de Git en una instancia `e2-micro` de **Google Compute Engine**.
 
-### cuatroveinte
+### latita
 
 `#WIP`
 
@@ -113,6 +113,7 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 - covadonga -> TrueNAS en x86 o OpenVMS en FriendlyElec
 - barbaazul -> BB Black con pantalla
 - nibelungengarten -> Router
+- cuatroveinte - TBD
 -->
 
 ## IoT
