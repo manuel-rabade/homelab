@@ -65,10 +65,10 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 | Hostname                            | LAN         | VPN         | DMZ           | OS                     | Arch   |
 |-------------------------------------|-------------|-------------|---------------|------------------------|--------|
 | [balalaika](#balalaika)             |             | 192.168.1.3 |               | Debian GNU/Linux 12    | x86/64 |
-| [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
 | [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 |                        | ARM32  |
 | [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
+| [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
 | [multiforoalicia](#multiforoalicia) | 192.168.0.4 |             |               | Xubuntu 23.10          | x86/64 |
 | [riodelaplata](#riodelaplata)       |             | 192.168.1.1 |               | AWS Linux 2023         | ARM64  |
 
