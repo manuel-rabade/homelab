@@ -65,7 +65,7 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 | Hostname                            | LAN         | VPN         | DMZ           | OS                     | Arch   |
 |-------------------------------------|-------------|-------------|---------------|------------------------|--------|
 | [balalaika](#balalaika)             |             | 192.168.1.3 |               | Debian GNU/Linux 12    | x86/64 |
-| [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 |                        | ARM32  |
+| [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 | Debian GNU/Linux 12    | ARM32  |
 | [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
@@ -75,10 +75,6 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 ### balalaika
 
 Hospeda un servidor web y repositorios de Git en una instancia `e2-micro` de **Google Compute Engine**.
-
-### latita
-
-`#WIP`
 
 ### duxdevenecia
 
@@ -97,6 +93,10 @@ Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutand
 - [Raspotify Basic Setup Guide](https://github.com/dtcooper/raspotify/wiki/Basic-Setup-Guide)
 - [Raspotify on Pi v1's and Pi Zero v1.x](https://github.com/dtcooper/raspotify/wiki/Raspotify-on-Pi-v1's-and-Pi-Zero-v1.x)
 
+### latita
+
+`#WIP`
+
 ### multiforoalicia
 
 Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
@@ -105,7 +105,14 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 
 ### riodelaplata
 
-`#WIP`
+Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores de:
+
+- [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
+- [Micro GPodder server](https://github.com/bohwaz/micro-gpodder-server/)
+
+<!--
+- [OpenVPN server](https://github.com/d3vilh/openvpn-server)
+-->
 
 <!--
 - saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Yun
