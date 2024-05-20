@@ -1,0 +1,5 @@
+services:
+  couchdb:
+    volumes:
+      - /docker/couchdb/data:/opt/couchdb/data
+      - /docker/couchdb/etc:/opt/couchdb/etc/local.d
