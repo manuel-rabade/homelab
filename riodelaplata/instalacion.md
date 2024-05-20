@@ -1,10 +1,10 @@
-# riodelaplata
+# Instalación `riodelaplata`
 
-_Chuleta_ de la configuración de `riodelaplata` con AWS Linux 2023 y operarlo con Docker.
+_Chuleta_ para la instalación y configuración de `riodelaplata` con AWS Linux 2023 y Docker.
 
-## Setup
+## Sistema operativo
 
-### OS
+### Versión
 
 https://docs.aws.amazon.com/linux/al2023/ug/what-is-amazon-linux.html
 
@@ -12,7 +12,7 @@ https://docs.aws.amazon.com/linux/al2023/ug/what-is-amazon-linux.html
 cat /etc/os-release
 ```
 
-### Upgrade
+### Actualizar
 
 https://docs.aws.amazon.com/linux/al2023/ug/managing-repos-os-updates.html
 
@@ -59,6 +59,8 @@ timedatectl set-timezone Mexico/General
 
 ## Docker
 
+### Instalar
+
 https://medium.com/@srijaanaparthy/step-by-step-guide-to-install-docker-on-amazon-linux-machine-in-aws-a690bf44b5fe
 
 
@@ -79,7 +81,7 @@ docker context create riodelaplata --docker "host=ssh://manuel@riodelaplata.raba
 docker context ls
 ```
 
-## Contenedores
+### Operar
 
 En local:
 
@@ -92,4 +94,11 @@ En `riodelaplata`:
 ```
 docker context use riodelaplata
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
+
+Lisar:
+
+```
+# docker ps
+# docker ps -a
 ```

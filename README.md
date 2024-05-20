@@ -105,14 +105,14 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 
 ### riodelaplata
 
-Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores de:
+Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores para:
 
-- [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
-- [Micro GPodder server](https://github.com/bohwaz/micro-gpodder-server/)
+- Almacenar mis suscripciones a podcasts y episodios escuchados (servidor [oPodSync](https://github.com/kd2org/opodsync) para [AntennaPod](https://antennapod.org/))
+- Sincronizar mis notas entre dispositivos (servidor de [CouchDB](https://couchdb.apache.org/) para [LiveSync](https://github.com/vrtmrz/obsidian-livesync) de [Obsidian](https://obsidian.md/))
+- Conectar mi red local con servidores remotos (servidor de [OpenVPN](https://openvpn.net/))
+- Reenviar solicitudes a contendores y mi red local (contenedor de [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager))
 
-<!--
-- [OpenVPN server](https://github.com/d3vilh/openvpn-server)
--->
+Tiene *chuletas* especificas para su [instalación](riodelaplata/instalacion.md) y configurar sus [contenedores](riodelaplata/contenedores.md).
 
 <!--
 - saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Yun
