@@ -1,5 +1,5 @@
 services:
   proxy:
     volumes:
-      - '/docker/nginx-proxy-manager/data:/data'
-      - '/docker/nginx-proxy-manager/letsencrypt:/etc/letsencrypt'
+      - /docker/nginx-proxy-manager/data:/data
+      - /docker/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
