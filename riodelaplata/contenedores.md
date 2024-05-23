@@ -13,26 +13,40 @@ Referencias:
 
 Pasos:
 
-1. Configurar `.env` ver [dot.env](dot.env)
+1. Crear `.env` (ver [dot.env](dot.env)), `/docker/couchdb` y configurar proxy
 
 2. Levantar contenedor: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 
 3. Inicializar BD:
 
 ```
-export hostname=localhost:5984
-export username=goojdasjdas
-export password=kpkdasdosakpdsa
+export hostname=https://couchdb.riodelaplata
+export username=manuel
+export password=
 curl -s https://raw.githubusercontent.com/vrtmrz/obsidian-livesync/main/utils/couchdb/couchdb-init.sh | bash
 ```
 
 4. Generar URI:
 
 ```
-export hostname=https://tiles-photograph-routine-groundwater.trycloudflare.com
-export database=obsidiannotes
-export passphrase=dfsapkdjaskdjasdas
+export hostname=https://couchdb.riodelaplata
+export database=manuel-notes
+export passphrase=
 deno run -A https://raw.githubusercontent.com/vrtmrz/obsidian-livesync/main/utils/flyio/generate_setupuri.ts
 ```
 
 5. Configurar Obisidian
+
+## Nginx Proxy Manager
+
+Referencias:
+
+- https://github.com/NginxProxyManager/nginx-proxy-manager
+
+Pasos:
+
+1. Crear `/docker/nginx-proxy-manager`
+
+2. Levantar contenedor: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
+
+3. Configurar en [proxy.riodelaplata:81](http://proxy.riodelaplata:81)

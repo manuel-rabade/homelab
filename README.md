@@ -8,7 +8,7 @@
     \/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/____/\/__/\/_/ \/___/
 ```
 
-Documentacion de mi infraestructura casera. `#WIP4EVER`
+Documentacion de mi infraestructura casera.
 
 ## Red
 
@@ -114,15 +114,6 @@ Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores para:
 
 Tiene *chuletas* especificas para su [instalación](riodelaplata/instalacion.md) y configurar sus [contenedores](riodelaplata/contenedores.md).
 
-<!--
-- saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Yun
-- savoy -> Torrents y varios en RPi5
-- covadonga -> TrueNAS en x86 o OpenVMS en FriendlyElec
-- barbaazul -> BB Black con pantalla
-- nibelungengarten -> Router
-- cuatroveinte - TBD
--->
-
 ## IoT
 
 Todo lo que tenga dirección IP y no es una computadora.
@@ -141,3 +132,14 @@ Todo lo que tenga dirección IP y no es una computadora.
 | Mi Air Purifier 3C               | Recámara           | Purificador de aire             | DMZ |
 | Wemo Insight Smart Plug          | Recámara           | Controla y monitorea calentador | DMZ |
 | Wiz DIM/5W G25 Amber             | Recámara           | Foco en lampara de piso         | DMZ |
+
+<!--
+## To-dos
+
+- saloncorona -> Logger Receptor Alertas SAME en RPi Zero o Arduino Yun
+- savoy -> Torrents y varios en RPi5
+- covadonga -> TrueNAS en x86 o OpenVMS en FriendlyElec
+- barbaazul -> BB Black con pantalla
+- nibelungengarten -> Router
+- cuatroveinte -> TBD
+-->
