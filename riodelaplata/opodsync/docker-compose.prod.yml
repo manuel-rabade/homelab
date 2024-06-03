@@ -1,0 +1,4 @@
+services:
+  opodsync:
+    volumes:
+      - /docker/opodsync/data:/var/www/server/data

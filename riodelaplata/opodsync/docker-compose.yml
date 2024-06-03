@@ -1,0 +1,17 @@
+services:
+  opodsync:
+    container_name: opodsync
+    hostname: opodsync.riodelaplata
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/var/www/server/data
+
+networks:
+  default:
+    name: riodelaplata-net
+    external: true
