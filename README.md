@@ -108,9 +108,9 @@ Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en I
 Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores para:
 
 - Almacenar mis suscripciones a podcasts y episodios escuchados (servidor [oPodSync](https://github.com/kd2org/opodsync) para [AntennaPod](https://antennapod.org/))
-- Sincronizar mis notas entre dispositivos (servidor de [CouchDB](https://couchdb.apache.org/) para [LiveSync](https://github.com/vrtmrz/obsidian-livesync) de [Obsidian](https://obsidian.md/))
-- Conectar mi red local con servidores remotos (servidor de [OpenVPN](https://openvpn.net/))
-- Reenviar solicitudes a contendores y mi red local (contenedor de [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager))
+- Sincronizar mis notas entre dispositivos (servidor [CouchDB](https://couchdb.apache.org/) para [LiveSync](https://github.com/vrtmrz/obsidian-livesync) de [Obsidian](https://obsidian.md/))
+- Conectar mi red local con servidores remotos (servidor [OpenVPN](https://openvpn.net/))
+- Reenviar solicitudes a contendores y mi red local (contenedor [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager))
 
 Tiene *chuletas* especificas para su [instalación](riodelaplata/instalacion.md) y configurar sus [contenedores](riodelaplata/contenedores.md).
 
