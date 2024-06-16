@@ -80,6 +80,9 @@ Hospeda un servidor web y repositorios de Git en una instancia `e2-micro` de **G
 
 `#WIP`
 
+- [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
+- [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
+
 ### laesperanza
 
 Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente estoy probando CloudFare.
