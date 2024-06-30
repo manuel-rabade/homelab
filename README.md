@@ -115,7 +115,7 @@ Es una instancía `t4g.small` de **AWS EC2** que hospeda contenedores para:
 - Conectar mi red local con servidores remotos (servidor [OpenVPN](https://openvpn.net/))
 - Reenviar solicitudes a contendores y mi red local (contenedor [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager))
 
-Tiene *chuletas* especificas para su [instalación](riodelaplata/instalacion.md) y configurar sus [contenedores](riodelaplata/contenedores.md).
+Hice *chuletas* especificas para su [instalación](riodelaplata/instalacion.md) y configurar sus [contenedores](riodelaplata/contenedores.md).
 
 ## IoT
 
