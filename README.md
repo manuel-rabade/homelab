@@ -69,7 +69,7 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 | [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
-| [multiforoalicia](#multiforoalicia) | 192.168.0.4 |             |               | Xubuntu 23.10          | x86/64 |
+| [multiforoalicia](#multiforoalicia) | 192.168.0.4 |             |               | Ubuntu 24.04           | x86/64 |
 | [riodelaplata](#riodelaplata)       |             | 192.168.1.1 |               | AWS Linux 2023         | ARM64  |
 
 ### balalaika
@@ -100,9 +100,11 @@ Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutand
 
 `#WIP`
 
+- http://www.orangepi.org/orangepiwiki/index.php/Orange_Pi_3B
+
 ### multiforoalicia
 
-Desktop XFce4 en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
+Desktop Ubuntu en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
 
 - [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
 
@@ -128,6 +130,7 @@ Todo lo que tenga dirección IP y no es una computadora.
 | Wemo Mini Smart Plug             | Cuarto de servicio | Controla bomba presurizadora    | DMZ |
 | Google Nest Hub                  | Estancia           | Pantalla inteligente            | LAN |
 | Magic Home WiFi LED Controller   | Estancia           | Controla tira led               | DMZ |
+| Kasa Smart Power Strip KP303     | Estancia           | Controla ruteador LAN y ONT     | DMZ |
 | Wyze Smart Plug                  | Estancia           | Controla luz globo terráqueo    | DMZ |
 | Google Nest Mini                 | Estudio            | Bocina inteligente              | LAN |
 | TLC TV 55" 4K UHD                | Estudio            | Televisión inteligente          | LAN |
