@@ -68,7 +68,7 @@ La convención para los hostname es usar nombres de lugares de espacimiento.
 | [duxdevenecia](#duxdevenecia)       |             |             | 192.168.100.4 | Debian GNU/Linux 12    | ARM32  |
 | [laesperanza](#laesperanza)         | 192.168.0.2 |             |               | Raspbian GNU/Linux 11  | ARM32  |
 | [lafaena](#lafaena)                 | 192.168.0.3 |             |               | Raspbian GNU/Linux 11  | ARM32  |
-| [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               |                        | ARM64  |
+| [latita](#latita)                   | 192.168.0.5 | 192.168.1.2 |               | Armbian 23.11.1        | ARM64  |
 | [multiforoalicia](#multiforoalicia) | 192.168.0.4 |             |               | Ubuntu 24.04           | x86/64 |
 | [riodelaplata](#riodelaplata)       |             | 192.168.1.1 |               | AWS Linux 2023         | ARM64  |
 
@@ -85,7 +85,7 @@ Hospeda un servidor web y repositorios de Git en una instancia `e2-micro` de **G
 
 ### laesperanza
 
-Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente estoy probando CloudFare.
+Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente uso CloudFare.
 
 - [Pi-hole: A black hole for Internet advertisements](https://github.com/pi-hole/pi-hole/)
 
@@ -101,6 +101,7 @@ Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutand
 `#WIP`
 
 - http://www.orangepi.org/orangepiwiki/index.php/Orange_Pi_3B
+- https://www.armbian.com/orangepi3b/
 
 ### multiforoalicia
 
