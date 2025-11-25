@@ -44,13 +44,13 @@ La idea es ir moviendo los dispositivos IoT a `IOT`, que debería:
 
 ```
 
-| Hostname                              | Equipo            | Propósito                      | EXT                                   | LAN                               |
-|---------------------------------------|-------------------|--------------------------------|---------------------------------------|-----------------------------------|
-|                                       | Huawei HG8245H    | Ruteador del ISP               | [192.168.100.1](http://192.168.100.1) |                                   |
-| [nibelungengarten](#nibelungengarten) | GL.iNet GL-MT6000 | Ruteador y punto de acceso LAN | 192.168.100.2                         | [192.168.0.1](http://192.168.0.1) |
-|                                       | Netgear AV200     | Punto de acceso IOT            | [192.168.100.3](http://192.168.100.3) |                                   |
+| Hostname                    | Equipo            | Propósito                      | EXT                                   | LAN                               |
+|-----------------------------|-------------------|--------------------------------|---------------------------------------|-----------------------------------|
+|                             | Huawei HG8245H    | Ruteador del ISP               | [192.168.100.1](http://192.168.100.1) |                                   |
+| [saloncorona](#saloncorona) | GL.iNet GL-MT6000 | Ruteador y punto de acceso LAN | 192.168.100.2                         | [192.168.0.1](http://192.168.0.1) |
+|                             | Netgear AV200     | Punto de acceso IOT            | [192.168.100.3](http://192.168.100.3) |                                   |
 
-### nibelungengarten
+### saloncorona
 
 `#WIP`
 
@@ -81,13 +81,15 @@ No incluye equipos personales (laptops o teléfonos) ni dispositivos _comerciale
 
 ### laesperanza
 
-`#FIX`
+`#DEP`
 
 Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente uso _Cloudfare_.
 
 - [Pi-hole: A black hole for Internet advertisements](https://github.com/pi-hole/pi-hole/)
 
 ### lafaena
+
+`#DEP`
 
 Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutando Raspotify, un cliente de Spotify.
 
@@ -107,6 +109,8 @@ Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutand
 - https://forum.armbian.com/topic/42698-armbian-on-orange-pi-3b-with-vendor-images-linux-66-dont-seem-to-work/
 
 ### multiforoalicia
+
+`#DEP`
 
 Desktop Ubuntu en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
 
