@@ -21,6 +21,7 @@ La convención para los hostname es usar nombres de lugares de esparcimiento.
 Por ahora, los dispositivos _inseguros_ están en `EXT` y los _confiables_ en `LAN`.
 
 La idea es ir moviendo los dispositivos IoT a `IOT`, que debería:
+
 - Aislar los dispositivos entre ellos
 - Tener filtros y rutas hacia la `LAN`
 - Limitar el acceso a Internet por dispositivo
@@ -54,9 +55,9 @@ La idea es ir moviendo los dispositivos IoT a `IOT`, que debería:
 
 `#WIP`
 
-- https://forum.openwrt.org/t/best-newcomer-routers-2024/189050/1
 - https://openwrt.org/toh/gl.inet/gl-mt6000
 - https://openwrt.org/docs/guide-quick-start/walkthrough_login
+- https://forum.openwrt.org/t/best-newcomer-routers-2024/189050/1
 
 ## Computadoras
 
@@ -81,20 +82,11 @@ No incluye equipos personales (laptops o teléfonos) ni dispositivos _comerciale
 
 ### laesperanza
 
-`#DEP`
+Hace streaming de audio a un minicomponente.
 
-Servidor local de DHCP y DNS en una **Raspberry Pi B**. Utiliza Pi-hole, un servidor DNS con bloqueo de anuncios. Como proveedor de DNS ascendente uso _Cloudfare_.
-
-- [Pi-hole: A black hole for Internet advertisements](https://github.com/pi-hole/pi-hole/)
-
-### lafaena
-
-`#DEP`
-
-Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutando Raspotify, un cliente de Spotify.
-
-- [Raspotify Basic Setup Guide](https://github.com/dtcooper/raspotify/wiki/Basic-Setup-Guide)
-- [Raspotify on Pi v1's and Pi Zero v1.x](https://github.com/dtcooper/raspotify/wiki/Raspotify-on-Pi-v1's-and-Pi-Zero-v1.x)
+- [NanoPC-T6 - FriendlyELEC WiKi](https://wiki.friendlyelec.com/wiki/index.php/NanoPC-T6)
+- [NanoPC T6 LTS - Armbian](https://www.armbian.com/nanopct6-lts/)
+- [Raspotify](https://github.com/dtcooper/raspotify)
 
 ### latita
 
@@ -107,14 +99,6 @@ Hace streaming de audio a un minicomponente. Es una **Raspberry Pi B** ejecutand
 `linux-image-current-rockchip64=24.5.3` -> 6.6.39
 
 - https://forum.armbian.com/topic/42698-armbian-on-orange-pi-3b-with-vendor-images-linux-66-dont-seem-to-work/
-
-### multiforoalicia
-
-`#DEP`
-
-Desktop Ubuntu en una **Share MiniPC X3700m** conectada a la TV para navegar en Internet, reproducir videos, etc. Para jugar tiene RetroPie, un emulador de consolas retro.
-
-- [RetroPie Setup](https://github.com/RetroPie/RetroPie-Setup)
 
 ## IoT
 
