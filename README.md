@@ -16,14 +16,16 @@ Fuente de verdad de mi infraestructura casera.
 |---------|----------------|-------|
 | `LAN`   | 192.168.1.0/24 | Dispositivos confiables, sin restricciones |
 | `GUEST` | 192.168.2.0/24 | Solo Wi-Fi, dispositivos aislados, acceso a internet limitado |
-| `IOT`   | 192.168.3.0/24 | Solo Wi-Fi, acceso a internet controlado |
+| `IOT`   | 192.168.3.0/24 | Solo Wi-Fi, acceso a internet controlado por dispositivo |
 
 ## Dispositivos
 
-| Hostname                            | `LAN`       | `GUEST`     | `IOT`       |
-|-------------------------------------|-------------|-------------|-------------|
-| [salon-corona](#salon-corona)       | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |
-| [la-esperanza](#la-esperanza)       | 192.168.1.2 |             |             |
+| Hostname                      | `LAN`       | `GUEST`     | `IOT`       |
+|-------------------------------|-------------|-------------|-------------|
+| [salon-corona](#salon-corona) | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |
+| [la-esperanza](#la-esperanza) | 192.168.1.2 |             |             |
+| [barba-azul](#barba-azul)     | 192.168.1.4 |             | 192.168.3.3 |
+| [savoy](#savoy)               |             | 192.168.2.2 |             |
 
 ### salon-corona
 
@@ -49,21 +51,23 @@ Fuente de verdad de mi infraestructura casera.
 
 ## IoT
 
-| Dispositivo                      | Propósito                       | Zona  |
-|----------------------------------|---------------------------------|-------|
-| Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT` |
-| Google Nest Hub                  | Pantalla cocina                 | `LAN` |
-| Google Nest Mini                 | Bocina estudio                  | `LAN` |
-| Google Nest Mini                 | Bocina recamara                 | `LAN` |
-| Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT` |
-| Magic Home WiFi LED Controller   | Tira led                        | `IOT` |
-| Mi Air Purifier 3C               | Purificador de aire             | `IOT` |
-| TLC TV 55" 4K UHD                | Televisión                      | `LAN` |
-| Wemo Insight Smart Plug          | Switch para calentador          | `IOT` |
-| Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT` |
-| Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT` |
-| Wiz DIM/5W G25 Amber             | Foco atenuable                  | `IOT` |
-| Wyze Smart Plug                  | Switch para lámpara             | `IOT` |
+| Dispositivo                      | Propósito                       | Zona  | Hostname | IP |
+|----------------------------------|---------------------------------|-------|----------|----|
+| Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT` | | |
+| Google Nest Hub                  | Pantalla cocina                 | `LAN` | | |
+| Google Nest Mini                 | Bocina estudio                  | `LAN` | | |
+| Google Nest Mini                 | Bocina recamara                 | `LAN` | | |
+| Lilygo TTGO LoRa 32 V1.6.1       | Estación TinyGS                 | `IOT` | tinygs | 192.168.3.2 |
+| Heltec WiFi LoRa 32 (V4)         | Nodo Meshtastic                 | `IOT` | meshtastic |  192.168.3.10 |
+| Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT` | | |
+| Magic Home WiFi LED Controller   | Tira led                        | `IOT` | | |
+| Mi Air Purifier 3C               | Purificador de aire             | `IOT` | | |
+| TLC TV 55" 4K UHD                | Televisión                      | `LAN` | | |
+| Wemo Insight Smart Plug          | Switch para calentador          | `IOT` | | |
+| Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT` | | |
+| Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT` | | |
+| Wiz DIM/5W G25 Amber             | Foco atenuable                  | `IOT` | | |
+| Wyze Smart Plug                  | Switch para lámpara             | `IOT` | | |
 
 ## Cloud
 
