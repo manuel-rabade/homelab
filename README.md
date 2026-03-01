@@ -12,20 +12,50 @@ Fuente de verdad de mi infraestructura casera.
 
 ## Redes
 
-| Zona    | Segmento       | Notas |
-|---------|----------------|-------|
-| `LAN`   | 192.168.1.0/24 | Dispositivos confiables, sin restricciones |
-| `GUEST` | 192.168.2.0/24 | Solo Wi-Fi, dispositivos aislados, acceso a internet limitado |
-| `IOT`   | 192.168.3.0/24 | Solo Wi-Fi, acceso a internet controlado por dispositivo |
+| Zona    | Segmento       | Propósito          | Notas |
+|---------|----------------|--------------------|-------|
+| `LAN`   | 192.168.1.0/24 | Equipos confiables | Sin restricciones |
+| `GUEST` | 192.168.2.0/24 | Equipos externos   | Solo Wi-Fi, dispositivos aislados, acceso a internet limitado |
+| `IOT`   | 192.168.3.0/24 | Dispositivos IoT   | Solo Wi-Fi, acceso a internet controlado por dispositivo |
+| `SBC`   | 192.168.4.0/24 | Colección SBC      | Solo Ethernet, red aislada, acceso a internet limitado  |
+
+```
+                        +------------+
+                        |  Internet  |
+                        +------------+
+                              |
+                              |
+                      +----------------+
+        --------------|  salon-corona  |-------------
+        |             +----------------+            |
+        |                     |                     |
+        |                     |                     |
++----------------+    +----------------+    +----------------+
+|      LAN       |    |     GUEST      |    |      IOT       |
+| 192.168.1.0/24 |    | 192.168.2.0/24 |    | 192.168.3.0/24 |
++----------------+    +----------------+    +----------------+
+                              |
+                              |
+                      +----------------+
+                      |     savoy      |
+                      +----------------+
+                              |
+                              |
+                      +----------------+
+                      |      SBC       |
+                      | 192.168.4.0/24 |
+                      +----------------+
+```
 
 ## Dispositivos
 
-| Hostname                      | `LAN`       | `GUEST`     | `IOT`       |
-|-------------------------------|-------------|-------------|-------------|
-| [salon-corona](#salon-corona) | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |
-| [la-esperanza](#la-esperanza) | 192.168.1.2 |             |             |
-| [barba-azul](#barba-azul)     | 192.168.1.4 |             | 192.168.3.3 |
-| [savoy](#savoy)               |             | 192.168.2.2 |             |
+| Hostname                          | `LAN`       | `GUEST`     | `IOT`       | `SBC`       |
+|-----------------------------------|-------------|-------------|-------------|-------------|
+| [salon-corona](#salon-corona)     | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |             |
+| [la-esperanza](#la-esperanza)     | 192.168.1.2 |             |             |             |
+| [barba-azul](#barba-azul)         | 192.168.1.4 |             | 192.168.3.3 |             |
+| [savoy](#savoy)                   |             | 192.168.2.2 |             | 192.168.4.1 |
+| [dux-de-venecia](#dux-de-venecia) |             |             |             | 192.168.4.2 |
 
 ### salon-corona
 
