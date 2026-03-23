@@ -47,20 +47,22 @@ Fuente de verdad de mi infraestructura casera.
                       +----------------+
 ```
 
+Adicionalmente, algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), incluyendo una red personal y otra de la [RHED](https://rhed.xyz).
+
 ## Dispositivos
 
 | Hostname                          | `LAN`       | `GUEST`     | `IOT`       | `SBC`       |
 |-----------------------------------|-------------|-------------|-------------|-------------|
 | [salon-corona](#salon-corona)     | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |             |
 | [la-esperanza](#la-esperanza)     | 192.168.1.2 |             |             |             |
+| [el-respiro](#el-respiro)         | 192.168.1.3 |             |             |             |
 | [barba-azul](#barba-azul)         | 192.168.1.4 |             | 192.168.3.3 |             |
 | [savoy](#savoy)                   |             | 192.168.2.2 |             | 192.168.4.1 |
 | [dux-de-venecia](#dux-de-venecia) |             |             |             | 192.168.4.2 |
 
 ### salon-corona
 
-- Router y punto de acceso inalámbrico
-- Aplica segmentación y políticas de red
+Router principal y punto de acceso inalámbrico. Aplica segmentación y políticas de red para toda la infraestructura.
 
 - Hardware: [GL.iNet GL-MT6000](https://www.gl-inet.com/products/gl-mt6000/)
 - OS: OpenWrt 24
@@ -69,8 +71,7 @@ Fuente de verdad de mi infraestructura casera.
 
 ### la-esperanza
 
-- Equipo Linux multipropósito
-- Reproduce Spotify en un amplificador Fosi Audio TB10D1 con bocinas LG FBS162V
+Equipo Linux multipropósito. Reproduce Spotify en un amplificador Fosi Audio TB10D1 con bocinas LG FBS162V.
 
 - Hardware: [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292)
 - OS: Armbian 26 (trixie)
@@ -78,6 +79,45 @@ Fuente de verdad de mi infraestructura casera.
   - [NanoPC-T6 - FriendlyELEC WiKi](https://wiki.friendlyelec.com/wiki/index.php/NanoPC-T6)
   - [NanoPC T6 LTS - Armbian](https://www.armbian.com/nanopct6-lts/)
   - [Raspotify](https://github.com/dtcooper/raspotify)
+
+### el-respiro
+
+Servidor NAS. Almacena datos y gestiona copias de seguridad periódicas.
+
+- Hardware:
+  - [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e)
+  - 2 × 16 TB en RAID 1 (almacenamiento principal)
+  - 1 × 16 TB externo (respaldo general)
+- OS: QTS 5.2
+
+### barba-azul
+
+Plataforma de automatización del hogar. Integra y controla dispositivos IoT.
+
+- Hardware: [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
+- OS: [Home Assistant OS](https://www.home-assistant.io)
+
+### savoy
+
+Nodo de la RHED y router de la red `SBC`.
+
+- Hardware: [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
+- OS: Armbian 26 (trixie)
+- Configuración:
+  - `/etc/sysctl.d/10-ip_forward.conf`
+  - `/etc/netplan/30-wifi-static.yaml`
+  - `/etc/netplan/40-eth-static.yaml`
+  - Ruta estática en `salon-corona` hacia `192.168.4.0/24`
+
+### dux-de-venecia
+
+SBC de colección. Parte del laboratorio personal y nodo de la RHED.
+
+- Hardware: [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original)
+- OS: Debian 12 (bookworm)
+- Referencias:
+  - [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
+  - [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
 
 ## IoT
 
@@ -92,7 +132,7 @@ Fuente de verdad de mi infraestructura casera.
 | Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT` | | |
 | Magic Home WiFi LED Controller   | Tira led                        | `IOT` | | |
 | Mi Air Purifier 3C               | Purificador de aire             | `IOT` | | |
-| TLC TV 55" 4K UHD                | Televisión                      | `LAN` | | |
+| TCL TV 55" 4K UHD                | Televisión                      | `LAN` | | |
 | Wemo Insight Smart Plug          | Switch para calentador          | `IOT` | | |
 | Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT` | | |
 | Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT` | | |

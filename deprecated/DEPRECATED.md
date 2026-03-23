@@ -6,7 +6,6 @@
 | [lafaena](#lafaena)                 | 192.168.0.3 |               | Raspbian GNU/Linux 11  | ARM32  |
 | [multiforoalicia](#multiforoalicia) | 192.168.0.4 |               | Ubuntu 24.04           | x86/64 |
 | [latita](#latita)                   | 192.168.0.5 |               | Armbian 23.11.1        | ARM64  |
-| [duxdevenecia](#duxdevenecia)       |             | 192.168.100.4 | Debian GNU/Linux 12    | ARM32  |
 | [riodelaplata](#riodelaplata)       |             |               | AWS Linux 2023         | ARM64  |
 
 ### laesperanza
@@ -37,11 +36,6 @@ Desktop Ubuntu en una **Share MiniPC X3700m** conectada a la TV para navegar en 
 `linux-image-current-rockchip64=24.5.3` -> 6.6.39
 
 - https://forum.armbian.com/topic/42698-armbian-on-orange-pi-3b-with-vendor-images-linux-66-dont-seem-to-work/
-
-### duxdevenecia
-
-- [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
-- [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
 
 ### riodelaplata
 
