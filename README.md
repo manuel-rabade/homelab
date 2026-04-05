@@ -12,28 +12,31 @@ Fuente de verdad de mi infraestructura casera.
 
 ## Redes
 
-| Zona    | Segmento       | Propósito          | Notas |
-|---------|----------------|--------------------|-------|
-| `LAN`   | 192.168.1.0/24 | Equipos confiables | Sin restricciones |
-| `GUEST` | 192.168.2.0/24 | Equipos externos   | Solo Wi-Fi, dispositivos aislados, acceso a internet limitado |
-| `IOT`   | 192.168.3.0/24 | Dispositivos IoT   | Solo Wi-Fi, acceso a internet controlado por dispositivo |
-| `SBC`   | 192.168.4.0/24 | Colección SBC      | Solo Ethernet, red aislada, acceso a internet limitado  |
+| Zona    | Segmento       | Propósito               | Medio                     | Políticas         |
+|---------|----------------|-------------------------|---------------------------|-------------------|
+| `LAN`   | 192.168.1.0/24 | Equipos confiables      | Wi-Fi 2.4/5 GHz, Ethernet | Sin restricciones |
+| `GUEST` | 192.168.2.0/24 | Equipos externos        | Wi-Fi 5 GHz               | Dispositivos aislados, acceso a internet limitado |
+| `IOT`   | 192.168.3.0/24 | Dispositivos IoT        | Wi-Fi 2.4 GHz             | Acceso a internet controlado por dispositivo |
+| `MEDIA` | 192.168.4.0/24 | Dispositivos multimedia | Wi-Fi 5 GHz               | Acceso limitado a `LAN` |
+| `SBC`   | 192.168.6.0/24 | Colección SBC           | Ethernet                  | Red aislada, acceso a internet limitado  |
 
 ```
-                        +------------+
-                        |  Internet  |
-                        +------------+
-                              |
-                              |
-                      +----------------+
-        --------------|  salon-corona  |-------------
-        |             +----------------+            |
-        |                     |                     |
-        |                     |                     |
-+----------------+    +----------------+    +----------------+
-|      LAN       |    |     GUEST      |    |      IOT       |
-| 192.168.1.0/24 |    | 192.168.2.0/24 |    | 192.168.3.0/24 |
-+----------------+    +----------------+    +----------------+
+                                   +------------+
+                                   |  Internet  |
+                                   +------------+
+                                         |
+                                         |
+                          +-----------------------------+
+        +-----------------|         salon-corona        |-----------------+
+        |                 +-----------------------------+                 |
+        |                     |                     |                     |
+        |                     |                     |                     |
+        |                     |                     |                     |
+        |                     |                     |                     |
++----------------+    +----------------+    +----------------+    +----------------+
+|      LAN       |    |     GUEST      |    |      IOT       |    |     MEDIA      |
+| 192.168.1.0/24 |    | 192.168.2.0/24 |    | 192.168.3.0/24 |    | 192.168.4.0/24 |
++----------------+    +----------------+    +----------------+    +----------------+
                               |
                               |
                       +----------------+
@@ -43,22 +46,22 @@ Fuente de verdad de mi infraestructura casera.
                               |
                       +----------------+
                       |      SBC       |
-                      | 192.168.4.0/24 |
+                      | 192.168.6.0/24 |
                       +----------------+
 ```
 
-Adicionalmente, algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), incluyendo una red personal y otra de la [RHED](https://rhed.xyz).
+Algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), una personal y otra de la [RHED](https://rhed.xyz).
 
-## Dispositivos
+## Equipos y computadoras
 
-| Hostname                          | `LAN`       | `GUEST`     | `IOT`       | `SBC`       |
-|-----------------------------------|-------------|-------------|-------------|-------------|
-| [salon-corona](#salon-corona)     | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 |             |
-| [la-esperanza](#la-esperanza)     | 192.168.1.2 |             |             |             |
-| [el-respiro](#el-respiro)         | 192.168.1.3 |             |             |             |
-| [barba-azul](#barba-azul)         | 192.168.1.4 |             | 192.168.3.3 |             |
-| [savoy](#savoy)                   |             | 192.168.2.2 |             | 192.168.4.1 |
-| [dux-de-venecia](#dux-de-venecia) |             |             |             | 192.168.4.2 |
+| Hostname                          | `LAN`       | `GUEST`     | `IOT`       | `MEDIA`     | `SBC`       | `VPN` | `RHED` |
+|-----------------------------------|-------------|-------------|-------------|-------------|-------------|-------|--------|
+| [salon-corona](#salon-corona)     | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 | 192.168.4.1 |             |       |        |
+| [la-esperanza](#la-esperanza)     | 192.168.1.2 |             |             |             |             |   X   |        |
+| [el-respiro](#el-respiro)         | 192.168.1.3 |             |             |             |             |       |        |
+| [barba-azul](#barba-azul)         | 192.168.1.4 |             | 192.168.3.3 |             |             |       |        |
+| [savoy](#savoy)                   |             | 192.168.2.2 |             |             | 192.168.6.1 |       |   X    |
+| [dux-de-venecia](#dux-de-venecia) |             |             |             |             | 192.168.6.2 |       |   X    |
 
 ### salon-corona
 
@@ -107,7 +110,7 @@ Nodo de la RHED y router de la red `SBC`.
   - `/etc/sysctl.d/10-ip_forward.conf`
   - `/etc/netplan/30-wifi-static.yaml`
   - `/etc/netplan/40-eth-static.yaml`
-  - Ruta estática en `salon-corona` hacia `192.168.4.0/24`
+  - Ruta estática en `salon-corona` hacia `192.168.6.0/24`
 
 ### dux-de-venecia
 
@@ -119,25 +122,26 @@ SBC de colección. Parte del laboratorio personal y nodo de la RHED.
   - [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
   - [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
 
-## IoT
+## Dispositivos IoT y multimedia
 
-| Dispositivo                      | Propósito                       | Zona  | Hostname | IP |
-|----------------------------------|---------------------------------|-------|----------|----|
-| Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT` | | |
-| Google Nest Hub                  | Pantalla cocina                 | `LAN` | | |
-| Google Nest Mini                 | Bocina estudio                  | `LAN` | | |
-| Google Nest Mini                 | Bocina recamara                 | `LAN` | | |
-| Lilygo TTGO LoRa 32 V1.6.1       | Estación TinyGS                 | `IOT` | tinygs | 192.168.3.2 |
-| Heltec WiFi LoRa 32 (V4)         | Nodo Meshtastic                 | `IOT` | meshtastic |  192.168.3.10 |
-| Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT` | | |
-| Magic Home WiFi LED Controller   | Tira led                        | `IOT` | | |
-| Mi Air Purifier 3C               | Purificador de aire             | `IOT` | | |
-| TCL TV 55" 4K UHD                | Televisión                      | `LAN` | | |
-| Wemo Insight Smart Plug          | Switch para calentador          | `IOT` | | |
-| Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT` | | |
-| Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT` | | |
-| Wiz DIM/5W G25 Amber             | Foco atenuable                  | `IOT` | | |
-| Wyze Smart Plug                  | Switch para lámpara             | `IOT` | | |
+| Dispositivo                      | Propósito                       | Zona    | Hostname | IP |
+|----------------------------------|---------------------------------|---------|----------|----|
+| Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT`   | | |
+| Google Nest Hub                  | Pantalla cocina                 | `MEDIA` | | |
+| Google Nest Mini                 | Bocina estudio                  | `MEDIA` | | |
+| Google Nest Mini                 | Bocina recamara                 | `MEDIA` | | |
+| Google TV Streamer 4K            | Reproductor multimedia          | `MEDIA` | | |
+| Lilygo TTGO LoRa 32 V1.6.1       | Estación TinyGS                 | `IOT`   | tinygs | 192.168.3.2 |
+| Heltec WiFi LoRa 32 (V4)         | Nodo Meshtastic                 | `IOT`   | meshtastic |  192.168.3.10 |
+| Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT`   | | |
+| Magic Home WiFi LED Controller   | Tira led                        | `IOT`   | | |
+| Mi Air Purifier 3C               | Purificador de aire             | `IOT`   | | |
+| TCL TV 55" 4K UHD                | Televisión                      | `MEDIA` | | |
+| Wemo Insight Smart Plug          | Switch para calentador          | `IOT`   | | |
+| Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT`   | | |
+| Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT`   | | |
+| Wiz DIM/5W G25 Amber             | Foco atenuable                  | `IOT`   | | |
+| Wyze Smart Plug                  | Switch para lámpara             | `IOT`   | | |
 
 ## Cloud
 
