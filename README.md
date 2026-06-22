@@ -10,6 +10,11 @@
 
 Fuente de verdad de mi infraestructura casera.
 
+Otros documentos:
+
+- [`MAINTENANCE.md`](MAINTENANCE.md): checklist de mantenimiento recurrente.
+- [`LICENSE`](LICENSE): licencia del deposito (CC0 1.0).
+
 ## Redes
 
 | Zona    | Segmento       | Propósito               | Medio                     | Políticas         |
