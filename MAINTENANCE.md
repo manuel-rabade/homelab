@@ -1,6 +1,6 @@
 # Mantenimiento
 
-Checklist a ejecutar sobre la infraestructura descrita en [`README.md`](README.md).
+Checklist de servicio para mi infraestructura casera, ver [`README.md`](README.md).
 
 ## salon-corona
 
@@ -20,3 +20,11 @@ https://firmware-selector.openwrt.org/?target=mediatek%2Ffilogic&id=glinet_gl-mt
 # owut check --version-to 25.12.4 --verbose
 # owut upgrade --version-to 25.12.4
 ```
+
+## la-esperanza
+
+- [ ] Revisar uso de disco: `df -h -t ext4`
+- [ ] Actualizar dotfiles: `git pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+- [ ] Verificar Raspotify: `systemctl status raspotify`
