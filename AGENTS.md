@@ -53,7 +53,7 @@ Each host has a folder `hostname/` whose `README.md` is the source of truth for 
    - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` Tailscale `` / `` `RHED` Tailscale `` for overlays.
 3. `## Servicios`: what the host runs.
 4. `## Referencias`: external links (official docs, repos).
-5. `## Archivos de configuración y scripts`: index of the files in the folder, one line per file, filename linked plus a short description.
+5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked) and relevant on-host config paths (backticked), each with a short description.
 6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md).
 7. `## Pendientes`: one-off or future tasks for this host.
 8. `## Bitácora`: work log, newest entry on top. Each entry is `### YYYY-MM-DD título corto` followed by a summary; commands go in fenced code blocks.
@@ -82,6 +82,7 @@ Template:
 ## Archivos de configuración y scripts
 
 - [script.sh](script.sh): descripción breve.
+- `/etc/ejemplo.conf`: qué configura.
 
 ## Mantenimiento
 

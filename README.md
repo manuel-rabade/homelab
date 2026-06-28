@@ -8,12 +8,10 @@
     \/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/____/\/__/\/_/ \/___/
 ```
 
-Fuente de verdad de mi infraestructura casera.
+Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#computadoras-y-equipos), [dispositivos](#dispositivos-iot-y-multimedia) y [servicios cloud](#cloud).
 
-Otros documentos:
-
-- [`MAINTENANCE.md`](MAINTENANCE.md): checklist de mantenimiento recurrente.
-- [`LICENSE`](LICENSE): licencia del deposito (CC0 1.0).
+- [MAINTENANCE.md](MAINTENANCE.md): checklist de mantenimiento recurrente.
+- [LICENSE](LICENSE): licencia del depósito (CC0 1.0).
 
 ## Redes
 
@@ -57,79 +55,20 @@ Otros documentos:
 
 Algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), una personal y otra de la [RHED](https://rhed.xyz).
 
-## Equipos y computadoras
+## Computadoras y equipos
 
-| Hostname                          | `LAN`       | `GUEST`     | `IOT`       | `MEDIA`     | `SBC`       | `VPN` | `RHED` |
-|-----------------------------------|-------------|-------------|-------------|-------------|-------------|-------|--------|
-| [salon-corona](#salon-corona)     | 192.168.1.1 | 192.168.2.1 | 192.168.3.1 | 192.168.4.1 |             |       |        |
-| [la-esperanza](#la-esperanza)     | 192.168.1.2 |             |             |             |             |   X   |        |
-| [el-respiro](#el-respiro)         | 192.168.1.3 |             |             |             |             |       |        |
-| [barba-azul](#barba-azul)         | 192.168.1.4 |             | 192.168.3.3 |             |             |       |        |
-| [savoy](#savoy)                   |             | 192.168.2.2 |             |             | 192.168.6.1 |       |   X    |
-| [dux-de-venecia](#dux-de-venecia) |             |             |             |             | 192.168.6.2 |       |   X    |
-
-### salon-corona
-
-Router principal y punto de acceso inalámbrico. Aplica segmentación y políticas de red para toda la infraestructura.
-
-- Hardware: [GL.iNet GL-MT6000](https://www.gl-inet.com/products/gl-mt6000/)
-- OS: OpenWrt 24
-- Referencias:
-  - [[OpenWrt Wiki] GL.iNet GL-MT6000](https://openwrt.org/toh/gl.inet/gl-mt6000)
-
-### la-esperanza
-
-Equipo Linux multipropósito. Reproduce Spotify en un amplificador Fosi Audio TB10D1 con bocinas LG FBS162V.
-
-- Hardware: [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292)
-- OS: Armbian 26 (trixie)
-- Referencias:
-  - [NanoPC-T6 - FriendlyELEC WiKi](https://wiki.friendlyelec.com/wiki/index.php/NanoPC-T6)
-  - [NanoPC T6 LTS - Armbian](https://www.armbian.com/nanopct6-lts/)
-  - [Raspotify](https://github.com/dtcooper/raspotify)
-
-### el-respiro
-
-Servidor NAS. Almacena datos y gestiona copias de seguridad periódicas.
-
-- Hardware:
-  - [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e)
-  - 2 × 16 TB en RAID 1 (almacenamiento principal)
-  - 1 × 16 TB externo (respaldo general)
-- OS: QTS 5.2
-
-### barba-azul
-
-Plataforma de automatización del hogar. Integra y controla dispositivos IoT.
-
-- Hardware: [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
-- OS: [Home Assistant OS](https://www.home-assistant.io)
-
-### savoy
-
-Nodo de la RHED y router de la red `SBC`.
-
-- Hardware: [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
-- OS: Armbian 26 (trixie)
-- Configuración:
-  - `/etc/sysctl.d/10-ip_forward.conf`
-  - `/etc/netplan/30-wifi-static.yaml`
-  - `/etc/netplan/40-eth-static.yaml`
-  - Ruta estática en `salon-corona` hacia `192.168.6.0/24`
-
-### dux-de-venecia
-
-SBC de colección. Parte del laboratorio personal y nodo de la RHED.
-
-- Hardware: [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original)
-- OS: Debian 12 (bookworm)
-- Referencias:
-  - [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
-  - [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
+| Hostname                          | Propósito   | Hardware | OS | Redes |
+| --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
+| [salon-corona](salon-corona/)     | Router y AP | [GL.iNet GL-MT6000](https://www.gl-inet.com/products/gl-mt6000/) | [OpenWrt](https://openwrt.org) 24 | `LAN` 192.168.1.1<br>`GUEST` 192.168.2.1<br>`IOT` 192.168.3.1<br>`MEDIA` 192.168.4.1 |
+| [la-esperanza](la-esperanza/)     | Laboratorio LAN | [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292) | [Armbian](https://armbian.com) 26 (trixie) | `LAN` 192.168.1.2<br>`VPN` Tailscale |
+| [el-respiro](el-respiro/)         | NAS         | [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e) | QTS 5.2 | `LAN` 192.168.1.3 |
+| [barba-azul](barba-azul/)         | Hub IoT     | [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | [Home Assistant OS](https://www.home-assistant.io) | `LAN` 192.168.1.4<br>`IOT` 192.168.3.3 |
+| [savoy](savoy/)                   | Laboratorio DMZ | [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | [Armbian](https://armbian.com) 26 (trixie) | `GUEST` 192.168.2.2<br>`SBC` 192.168.6.1<br>`RHED` Tailscale |
+| [dux-de-venecia](dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC` 192.168.6.2<br>`RHED` Tailscale |
 
 ## Dispositivos IoT y multimedia
 
-| Dispositivo                      | Propósito                       | Zona    | Hostname | IP |
+| Dispositivo                      | Propósito                       | Red    | Hostname | IP |
 |----------------------------------|---------------------------------|---------|----------|----|
 | Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT`   | | |
 | Google Nest Hub                  | Pantalla cocina                 | `MEDIA` | | |
@@ -137,7 +76,7 @@ SBC de colección. Parte del laboratorio personal y nodo de la RHED.
 | Google Nest Mini                 | Bocina recamara                 | `MEDIA` | | |
 | Google TV Streamer 4K            | Reproductor multimedia          | `MEDIA` | | |
 | Lilygo TTGO LoRa 32 V1.6.1       | Estación TinyGS                 | `IOT`   | tinygs | 192.168.3.2 |
-| Heltec WiFi LoRa 32 (V4)         | Nodo Meshtastic                 | `IOT`   | meshtastic |  192.168.3.10 |
+| Heltec WiFi LoRa 32 (V4)         | Nodo Meshtastic                 | `IOT`   | meshtastic | 192.168.3.10 |
 | Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT`   | | |
 | Magic Home WiFi LED Controller   | Tira led                        | `IOT`   | | |
 | Mi Air Purifier 3C               | Purificador de aire             | `IOT`   | | |

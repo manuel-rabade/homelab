@@ -1,6 +1,13 @@
-# Mantenimiento
+```
+                 _       _
+                (_)     | |
+ _ __ ___   __ _ _ _ __ | |_ ___ _ __   __ _ _ __   ___ ___
+| '_ ` _ \ / _` | | '_ \| __/ _ \ '_ \ / _` | '_ \ / __/ _ \
+| | | | | | (_| | | | | | ||  __/ | | | (_| | | | | (_|  __/
+|_| |_| |_|\__,_|_|_| |_|\__\___|_| |_|\__,_|_| |_|\___\___|
+```
 
-Checklist de servicio para mi infraestructura casera, ver [`README.md`](README.md).
+Checklist de mantenimiento para mi infraestructura casera.
 
 ## salon-corona
 
@@ -11,16 +18,6 @@ Checklist de servicio para mi infraestructura casera, ver [`README.md`](README.m
   - [ ] Descargar respaldos: `scp -O root@salon-corona:/tmp/backup-*-salon-corona.* ~`
 - [ ] Buscar actualizaciones mayores: `owut versions`
 
-**Pendiente**
-
-- [ ] Actualizar a OpenWrt 25
-```
-https://firmware-selector.openwrt.org/?target=mediatek%2Ffilogic&id=glinet_gl-mt6000
-
-# owut check --version-to 25.12.4 --verbose
-# owut upgrade --version-to 25.12.4
-```
-
 ## la-esperanza
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
@@ -28,3 +25,19 @@ https://firmware-selector.openwrt.org/?target=mediatek%2Ffilogic&id=glinet_gl-mt
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar Raspotify: `systemctl status raspotify`
+
+## el-respiro
+
+Nada por ahora.
+
+## barba-azul
+
+Nada por ahora.
+
+## savoy
+
+Nada por ahora.
+
+## dux-de-venecia
+
+Nada por ahora.
