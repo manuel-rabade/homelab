@@ -24,10 +24,10 @@ Each host's `hostname/README.md` is the single source of truth for that host. Th
 Authored directly in [README.md](README.md). Defines the network zones.
 
 - A table `Zona | Segmento | Propósito | Medio | Políticas`, one row per zone.
-- An ASCII diagram showing how the zones connect; include only the hosts that route between networks, not every host.
+- An ASCII diagram of how the zones connect (only the hosts that route between networks, not every host). It comes from outside this repo: maintained in [textik.com](https://textik.com) and imported as-is, so never edit or regenerate it.
 - A prose note about the Tailscale networks.
 
-Keep zone codes in backticks. Update the table and the diagram together when a zone is added or removed.
+Keep zone codes in backticks. Update the table when a zone is added or removed.
 
 ## Computadoras y equipos
 
@@ -39,7 +39,7 @@ The inventory table in [README.md](README.md) is **derived** from the host pages
 - **OS** ← `OS:` bullet verbatim, link included, sub-bullets dropped.
 - **Redes** ← `Redes:` sub-bullets joined with `<br>`.
 
-Strip the trailing period from every cell. `Redes` is plural because a host can sit on several networks. When you add or retire a host, update this table and the `## Redes` diagram as needed.
+Strip the trailing period from every cell. `Redes` is plural because a host can sit on several networks. When you add or retire a host, update this table.
 
 ### Host page
 
