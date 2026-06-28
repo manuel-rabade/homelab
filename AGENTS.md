@@ -14,10 +14,10 @@ This repository is the source of truth for my home infrastructure.
 
 - [README.md](README.md): top-level inventory of networks, computers and devices.
 - [MAINTENANCE.md](MAINTENANCE.md): aggregated recurring-maintenance checklist.
-- One folder per computer (e.g. [la-esperanza/](la-esperanza/)): scripts, config files and a `README.md`.
+- [hosts/](hosts/): one folder per computer (e.g. [hosts/la-esperanza/](hosts/la-esperanza/)): scripts, config files and a `README.md`.
 - [deprecated/](deprecated/): retired computers and configurations.
 
-Each host's `hostname/README.md` is the single source of truth for that host. The `## Computadoras y equipos` table in [README.md](README.md) and [MAINTENANCE.md](MAINTENANCE.md) are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate both to match. [la-esperanza/README.md](la-esperanza/README.md) is the canonical example of a host page.
+Each host's `hosts/hostname/README.md` is the single source of truth for that host. The `## Computadoras y equipos` table in [README.md](README.md) and [MAINTENANCE.md](MAINTENANCE.md) are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate both to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
 
 ## Redes
 
@@ -33,7 +33,7 @@ Keep zone codes in backticks. Update the table when a zone is added or removed.
 
 The inventory table in [README.md](README.md) is **derived** from the host pages, which are the source of truth. Columns `Hostname | Propósito | Hardware | OS | Redes`, each cell taken from the matching host page:
 
-- **Hostname** ← folder name, linked to `hostname/`.
+- **Hostname** ← folder name, linked to `hosts/hostname/`.
 - **Propósito** ← `Propósito:` bullet.
 - **Hardware** ← `Hardware:` bullet verbatim, link included, sub-bullets dropped.
 - **OS** ← `OS:` bullet verbatim, link included, sub-bullets dropped.
@@ -43,7 +43,7 @@ Strip the trailing period from every cell. `Redes` is plural because a host can 
 
 ### Host page
 
-Each host has a folder `hostname/` whose `README.md` is the source of truth for that host. Every host page has the same structure, in this order. The identity bullets and every `##` section are **always present**; an empty `##` section holds the line `Nada por ahora.` instead of being omitted.
+Each host has a folder `hosts/hostname/` whose `README.md` is the source of truth for that host. Every host page has the same structure, in this order. The identity bullets and every `##` section are **always present**; an empty `##` section holds the line `Nada por ahora.` instead of being omitted.
 
 1. `# hostname`: matches the folder name.
 2. **Identity bullets**, in order, the fields the inventory table mirrors:
