@@ -61,7 +61,7 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
 | [salon-corona](hosts/salon-corona/)     | Router y AP | [GL.iNet GL-MT6000](https://www.gl-inet.com/products/gl-mt6000/) | [OpenWrt](https://openwrt.org) 24 | `LAN` 192.168.1.1<br>`GUEST` 192.168.2.1<br>`IOT` 192.168.3.1<br>`MEDIA` 192.168.4.1 |
 | [la-esperanza](hosts/la-esperanza/)     | Laboratorio LAN | [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292) | [Armbian](https://armbian.com) 26 (trixie) | `LAN` 192.168.1.2<br>`VPN` Tailscale |
-| [el-respiro](hosts/el-respiro/)         | NAS         | [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e) | QTS 5.2 | `LAN` 192.168.1.3 |
+| [el-respiro](hosts/el-respiro/)         | NAS         | [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e) | [QTS](https://www.qnap.com/la/operating-system/qts) 5.2 | `LAN` 192.168.1.3 |
 | [barba-azul](hosts/barba-azul/)         | Hub IoT     | [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | [Home Assistant OS](https://www.home-assistant.io) | `LAN` 192.168.1.4<br>`IOT` 192.168.3.3 |
 | [savoy](hosts/savoy/)                   | Laboratorio DMZ | [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | [Armbian](https://armbian.com) 26 (trixie) | `GUEST` 192.168.2.2<br>`SBC` 192.168.6.1<br>`RHED` Tailscale |
 | [dux-de-venecia](hosts/dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC` 192.168.6.2<br>`RHED` Tailscale |
