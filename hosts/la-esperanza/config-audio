@@ -1,6 +1,6 @@
 #!/bin/bash
-# config-audio.sh — Sets master output volume AND resets the rt5616 codec
-# to a clean baseline (disables capture, line-out off, saves asound.state).
+# config-audio — Resets the rt5616 codec to a clean baseline AND sets the
+# master output volume (disables capture, line-out off, saves asound.state).
 # NanoPC-T6 LTS, kernel 6.12 — rear 3.5mm jack into external amplifier.
 #
 # DAC1 is the real master volume. Volume is a percentage (0-100) passed
@@ -8,12 +8,12 @@
 # Note: below ~30% this chip is barely audible; use the amp for fine low-end.
 #
 # Usage:
-#   ./config-audio.sh        # default 75%
-#   ./config-audio.sh 60     # 60%
+#   ./config-audio        # default 75%
+#   ./config-audio 90     # 90%
 
 CARD=0
 HP_VOL=30             # HP stage: fixed, kept open (DAC controls level)
-VOL_PCT="${1:-60}"    # master volume percentage; arg $1 or default 75
+VOL_PCT="${1:-75}"    # master volume percentage; arg $1 or default 75
 set -e
 
 # Validate percentage (0-100)
@@ -23,6 +23,11 @@ if ! [[ "$VOL_PCT" =~ ^[0-9]+$ ]] || [ "$VOL_PCT" -gt 100 ]; then
 fi
 
 echo ">> Master volume: ${VOL_PCT}% (ALSA native scale)"
+
+echo ">> ===== RESET (card defaults) ====="
+# Restore the codec to its kernel default state first, so every control
+# below starts from a known baseline instead of whatever was left over.
+sudo alsactl init $CARD >/dev/null 2>&1 || true
 
 echo ">> ===== OUTPUT (playback) ====="
 # Master DAC — percentage handed directly to ALSA
@@ -66,9 +71,9 @@ amixer -c $CARD sget 'DAC1' | grep -E 'Front (Left|Right)'
 amixer -c $CARD sget 'HP'   | grep -E 'Front (Left|Right)'
 
 echo ""
-echo ">> Sound test (Front Center x3)..."
+echo ">> Sound test (Front Left, Front Right, Front Center)..."
 sleep 1
-for i in 1 2 3; do
-    aplay -D plughw:$CARD,0 /usr/share/sounds/alsa/Front_Center.wav 2>/dev/null
-done
+aplay -D plughw:$CARD,0 /usr/share/sounds/alsa/Front_Left.wav 2>/dev/null
+aplay -D plughw:$CARD,0 /usr/share/sounds/alsa/Front_Right.wav 2>/dev/null
+aplay -D plughw:$CARD,0 /usr/share/sounds/alsa/Front_Center.wav 2>/dev/null
 echo ">> Done."

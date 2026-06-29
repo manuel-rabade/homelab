@@ -1,0 +1,12 @@
+[Unit]
+Description=go-librespot (Spotify Connect)
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+ExecStart=%h/bin/go-librespot
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

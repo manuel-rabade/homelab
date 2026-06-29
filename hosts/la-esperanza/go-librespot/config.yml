@@ -1,0 +1,10 @@
+device_name: "Librespot"
+device_type: speaker
+bitrate: 320
+audio_device: "plughw:realtekrt5616co,0"
+volume_steps: 100
+initial_volume: 25
+ignore_last_volume: true
+zeroconf_enabled: true
+credentials:
+  type: zeroconf

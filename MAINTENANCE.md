@@ -24,7 +24,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Actualizar dotfiles: `git pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
-- [ ] Verificar Raspotify: `systemctl status raspotify`
+- [ ] Verificar go-librespot: `systemctl --user status go-librespot`
 
 ## el-respiro
 
