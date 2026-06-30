@@ -34,7 +34,7 @@
 ## Pendientes
 
 - [ ] Actualizar a OpenWrt 25
-```
+```bash
 https://firmware-selector.openwrt.org/?target=mediatek%2Ffilogic&id=glinet_gl-mt6000
 
 # owut check --version-to 25.12.4 --verbose

@@ -130,5 +130,5 @@ Authored directly in [README.md](README.md). A `Hostname | IP` table, followed b
 - **Sub-bullets** nest 2 spaces.
 - **Tables** (markdown pipes) for inventories; `<br>` to stack multiple values in one cell.
 - **Lists** with `-`; checkboxes `- [ ]` for maintenance and pending tasks.
-- **Fenced code blocks** for multi-line commands, scripts or configuration; inline backticks for a single command.
+- **Fenced code blocks** for multi-line commands, scripts or configuration; inline backticks for a single command. Warn when an opening fence has no language tag (`bash` for shell, `yaml`, `markdown`, ...); the only blocks that stay language-less are the figlet banners of the three top-level docs and the imported ASCII network diagram in `README.md`.
 - **Tone**: concise and technical; no filler. OS versions and hardware models always specific and linked.
