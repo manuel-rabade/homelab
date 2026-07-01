@@ -48,13 +48,13 @@ Each host has a folder `hosts/hostname/` whose `README.md` is the source of trut
 1. `# hostname`: matches the folder name.
 2. **Identity bullets**, in order, the fields the inventory table mirrors:
    - `- Propósito:` short role, one phrase.
-   - `- Hardware:` primary device, linked; components as 2-space sub-bullets when relevant.
+   - `- Hardware:` the specific machine model, linked; internal components and storage as 2-space sub-bullets when relevant. A RAM/storage sub-bullet reads `<capacity/type> <interface> (role)` with the role in lowercase parentheses (e.g. `2 × 16 TB SATA RAID 1 (almacenamiento principal)`); when a slot holds a specific device worth naming, nest its linked model one level deeper.
    - `- OS:` name and version, linked when there's an official page.
    - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` Tailscale `` / `` `RHED` Tailscale `` for overlays.
 3. `## Servicios`: what the host runs.
 4. `## Referencias`: external links (official docs, repos).
 5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked) and relevant on-host config paths (backticked), each with a short description.
-6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md).
+6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md). Each task names where it is done: a shell host uses an inline command (`` Tarea: `comando` ``); a GUI appliance points at the UI instead - a single app or section woven in with a preposition (`` Revisar estado en `Almacenamiento e instantáneas` ``), or a multi-step navigation path as `` Tarea: `Menú → Submenú → Opción` ``. See [hosts/el-respiro/README.md](hosts/el-respiro/README.md) for a GUI-appliance example.
 7. `## Pendientes`: one-off or future tasks for this host.
 8. `## Bitácora`: work log, newest entry on top. Each entry is `### YYYY-MM-DD título corto` followed by a summary; commands go in fenced code blocks.
 
@@ -125,7 +125,7 @@ Authored directly in [README.md](README.md). A `Hostname | IP` table, followed b
 - **Heading hierarchy**: host pages go `# hostname` then `## section`. Root `README.md` goes `## category`, with `### name` only for entries that have no own page (e.g. under `## Cloud`).
 - **No frontmatter**: files start straight with the content.
 - **Banner**: the three top-level docs open with an ASCII-art title (figlet) instead of an `#` heading, each in its own font: `larry3d` for `README.md`, `doom` for `MAINTENANCE.md`, `terminus` for `AGENTS.md`. Host pages use a plain `# hostname`.
-- **Backticks** for technical terms: network zones (`LAN`, `GUEST`, `IOT`, `MEDIA`, `SBC`), CIDR segments and IPs, hostnames, file paths and inline commands.
+- **Backticks** for technical terms: network zones (`LAN`, `GUEST`, `IOT`, `MEDIA`, `SBC`), CIDR segments and IPs, hostnames, file paths, inline commands, and GUI app names and menu navigation paths (`App Center`, `Panel de control → Estado del sistema`).
 - **Links**: use the bare filename or path as link text, without backticks (`[README.md](README.md)`). Internal references by anchor; external links to official documentation or repositories under `## Referencias`.
 - **Sub-bullets** nest 2 spaces.
 - **Tables** (markdown pipes) for inventories; `<br>` to stack multiple values in one cell.
