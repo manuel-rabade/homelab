@@ -5,10 +5,10 @@
   - MediaTek MT7986A (Filogic 830, Cortex-A53 quad-core 2.0 GHz)
   - 1 GB DDR4 RAM
   - 8 GB NAND Flash
-  - 2 puertos Ethernet 2.5G (Internet y disponible)
-  - 4 puertos Ethernet 1G (`LAN`)
-  - Wi-Fi 802.11ac/ax/n (`LAN`, `GUEST` y `MEDIA`)
-  - Wi-Fi 802.11ax/b/g/n (`LAN` y `IOT`)
+  - 2 Ethernet 2.5G (Internet, disponible)
+  - 4 Ethernet 1G (`LAN`)
+  - Wi-Fi 802.11ac/ax/n (`LAN`, `GUEST`, `MEDIA`)
+  - Wi-Fi 802.11ax/b/g/n (`LAN`, `IOT`)
 - OS: [OpenWrt](https://openwrt.org) 24
 - Redes:
   - `LAN` 192.168.1.1

@@ -7,7 +7,7 @@
   - 64 GB eMMC (disco de sistema)
   - 1 TB SSD NVMe (almacenamiento de datos)
     - [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
-  - 2 puertos Ethernet 2.5G (`LAN` y disponible)
+  - 2 Ethernet 2.5G (`LAN`, disponible)
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
   - `LAN` 192.168.1.2

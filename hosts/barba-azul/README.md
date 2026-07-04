@@ -6,7 +6,7 @@
   - 8 GB LPDDR4X RAM
   - 128 GB microSDXC (disco de sistema)
     - [Samsung PRO Endurance](https://www.samsung.com/us/computing/memory-storage/memory-cards/pro-endurance-adapter-microsdxc-128gb-mb-mj128ka-am/)
-  - 1 puerto Ethernet 1G (`LAN`)
+  - Ethernet 1G (`LAN`)
   - Wi-Fi 802.11ac (`IOT`)
 - OS: [Home Assistant OS](https://www.home-assistant.io) 18
 - Redes:

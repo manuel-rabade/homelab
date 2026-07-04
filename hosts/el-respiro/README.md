@@ -11,7 +11,7 @@
     - [WD Gold](https://www.westerndigital.com/products/internal-drives/wd-gold-sata-hdd)
   - 16 TB USB 3.0 (respaldo general)
     - [Seagate Expansion Desktop](https://www.seagate.com/products/external-hard-drives/desktop-drives/expansion-desktop/)
-  - 2 puertos Ethernet 2.5G (`LAN` y disponible)
+  - 2 Ethernet 2.5G (`LAN`, disponible)
 - OS: [QTS](https://www.qnap.com/la/operating-system/qts) 5.2
 - Redes:
   - `LAN` 192.168.1.3
