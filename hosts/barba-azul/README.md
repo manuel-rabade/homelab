@@ -3,9 +3,11 @@
 - Propósito: Hub IoT.
 - Hardware: [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
   - Broadcom BCM2712 (Cortex-A76 quad-core 2.4 GHz)
-  - 8 GB RAM
+  - 8 GB LPDDR4X RAM
   - 128 GB microSDXC (disco de sistema)
     - [Samsung PRO Endurance](https://www.samsung.com/us/computing/memory-storage/memory-cards/pro-endurance-adapter-microsdxc-128gb-mb-mj128ka-am/)
+  - 1 puerto Ethernet 1G (`LAN`)
+  - Wi-Fi 802.11ac (`IOT`)
 - OS: [Home Assistant OS](https://www.home-assistant.io) 18
 - Redes:
   - `LAN` 192.168.1.4

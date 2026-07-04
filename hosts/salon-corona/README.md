@@ -2,6 +2,13 @@
 
 - Propósito: Router y AP.
 - Hardware: [GL.iNet GL-MT6000](https://www.gl-inet.com/products/gl-mt6000/)
+  - MediaTek MT7986A (Filogic 830, Cortex-A53 quad-core 2.0 GHz)
+  - 1 GB DDR4 RAM
+  - 8 GB NAND Flash
+  - 2 puertos Ethernet 2.5G (Internet y disponible)
+  - 4 puertos Ethernet 1G (`LAN`)
+  - Wi-Fi 802.11ac/ax/n (`LAN`, `GUEST` y `MEDIA`)
+  - Wi-Fi 802.11ax/b/g/n (`LAN` y `IOT`)
 - OS: [OpenWrt](https://openwrt.org) 24
 - Redes:
   - `LAN` 192.168.1.1

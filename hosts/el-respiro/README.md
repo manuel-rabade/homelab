@@ -2,7 +2,8 @@
 
 - Propósito: NAS.
 - Hardware: [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e)
-  - 16 GB DDR4
+  - Intel Celeron J6412 (quad-core 2.0 GHz)
+  - 16 GB DDR4 RAM
   - 1 TB SSD NVMe (disco de sistema)
     - [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
   - 2 × 16 TB SATA RAID 1 (almacenamiento principal)
@@ -10,6 +11,7 @@
     - [WD Gold](https://www.westerndigital.com/products/internal-drives/wd-gold-sata-hdd)
   - 16 TB USB 3.0 (respaldo general)
     - [Seagate Expansion Desktop](https://www.seagate.com/products/external-hard-drives/desktop-drives/expansion-desktop/)
+  - 2 puertos Ethernet 2.5G (`LAN` y disponible)
 - OS: [QTS](https://www.qnap.com/la/operating-system/qts) 5.2
 - Redes:
   - `LAN` 192.168.1.3
@@ -50,6 +52,7 @@ Nada por ahora.
 - [ ] Configurar reglas de alerta para eventos SMART, de temperatura y del ventilador.
 - [ ] Configurar instantáneas.
 - [ ] Actualizar Jellyfin.
+- [ ] Automatizar el respaldo de las demás computadoras hacia el-respiro.
 
 ## Bitácora
 

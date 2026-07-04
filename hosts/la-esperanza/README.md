@@ -2,6 +2,12 @@
 
 - Propósito: Laboratorio LAN.
 - Hardware: [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292)
+  - Rockchip RK3588 (4× Cortex-A76 + 4× Cortex-A55, hasta 2.4 GHz)
+  - 16 GB LPDDR4X RAM
+  - 64 GB eMMC (disco de sistema)
+  - 1 TB SSD NVMe (almacenamiento de datos)
+    - [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
+  - 2 puertos Ethernet 2.5G (`LAN` y disponible)
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
   - `LAN` 192.168.1.2
