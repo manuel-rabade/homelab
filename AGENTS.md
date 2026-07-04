@@ -48,13 +48,19 @@ Each host has a folder `hosts/hostname/` whose `README.md` is the source of trut
 1. `# hostname`: matches the folder name.
 2. **Identity bullets**, in order, the fields the inventory table mirrors:
    - `- Propósito:` short role, one phrase.
-   - `- Hardware:` the specific machine model, linked; internal components and storage as 2-space sub-bullets when relevant. A RAM/storage sub-bullet reads `<capacity/type> <interface> (role)` with the role in lowercase parentheses (e.g. `2 × 16 TB SATA RAID 1 (almacenamiento principal)`); when a slot holds a specific device worth naming, nest its linked model one level deeper.
+   - `- Hardware:` the specific machine model, linked; internal components as 2-space sub-bullets when relevant, ordered processor, then RAM, then storage:
+     - Processor: a plain sub-bullet naming the model and key specs (e.g. `Broadcom BCM2712 (Cortex-A76 quad-core 2.4 GHz)`).
+     - RAM: a plain sub-bullet mentioning the capacity (e.g. `8 GB RAM`).
+     - Storage: `<capacity/type> <interface> (role)` with the role in lowercase parentheses (e.g. `2 × 16 TB SATA RAID 1 (almacenamiento principal)`); when a slot holds a specific device worth naming, nest its linked model one level deeper.
    - `- OS:` name and version, linked when there's an official page.
    - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` Tailscale `` / `` `RHED` Tailscale `` for overlays.
 3. `## Servicios`: what the host runs.
 4. `## Referencias`: external links (official docs, repos).
 5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked) and relevant on-host config paths (backticked), each with a short description.
-6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md). Each task names where it is done: a shell host uses an inline command (`` Tarea: `comando` ``); a GUI appliance points at the UI instead - a single app or section woven in with a preposition (`` Revisar estado en `Almacenamiento e instantáneas` ``), or a multi-step navigation path as `` Tarea: `Menú → Submenú → Opción` ``. See [hosts/el-respiro/README.md](hosts/el-respiro/README.md) for a GUI-appliance example.
+6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md). Each task names where it is done:
+   - Shell host: an inline command (`` Tarea: `comando` ``).
+   - GUI appliance: point at the UI instead - a single app or section woven in with a preposition (`` Revisar estado en `Almacenamiento e instantáneas` ``), or a multi-step navigation path as `` Tarea: `Menú → Submenú → Opción` ``. See [hosts/el-respiro/README.md](hosts/el-respiro/README.md) for a GUI-appliance example.
+   - Trailing period depends on the kind of line, not how deeply it is nested. A task (a checkbox line, `- [ ]`) is a short instruction and takes no period, even when nested under another task. A plain sub-bullet (`-`, no checkbox) that adds a note about its task is a full sentence and ends with a period. Example in [hosts/el-respiro/README.md](hosts/el-respiro/README.md): the nested SMART `- [ ]` checkbox has no period, while the `-` note beneath it listing which attributes to watch does.
 7. `## Pendientes`: one-off or future tasks for this host.
 8. `## Bitácora`: work log, newest entry on top. Each entry is `### YYYY-MM-DD título corto` followed by a summary; commands go in fenced code blocks.
 
