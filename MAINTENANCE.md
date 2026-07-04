@@ -42,7 +42,12 @@ Checklist de mantenimiento para mi infraestructura casera.
 
 ## barba-azul
 
-Nada por ahora.
+- [ ] Revisar y limpiar notificaciones del menú principal
+- [ ] Revisar `Reparaciones` y `Registros` en `Configuración → Sistema`
+- [ ] Revisar uso de disco: `Configuración → Sistema → Almacenamiento`
+- [ ] Verificar copias de seguridad automáticas: `Configuración → Sistema → Copias de seguridad`
+- [ ] Aplicar actualizaciones de Core, OS, Supervisor y Aplicaciones: `Configuración → Sistema → Actualizaciones`
+- [ ] Revisar dispositivos no disponibles: `Configuración → Dispositivos y servicios → Entidades` y filtrar por `Estado = No disponible`
 
 ## savoy
 

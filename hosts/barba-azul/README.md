@@ -2,7 +2,11 @@
 
 - Propósito: Hub IoT.
 - Hardware: [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
-- OS: [Home Assistant OS](https://www.home-assistant.io)
+  - Broadcom BCM2712 (Cortex-A76 quad-core 2.4 GHz)
+  - 8 GB RAM
+  - 128 GB microSDXC (disco de sistema)
+    - [Samsung PRO Endurance](https://www.samsung.com/us/computing/memory-storage/memory-cards/pro-endurance-adapter-microsdxc-128gb-mb-mj128ka-am/)
+- OS: [Home Assistant OS](https://www.home-assistant.io) 18
 - Redes:
   - `LAN` 192.168.1.4
   - `IOT` 192.168.3.3
@@ -22,7 +26,12 @@ Nada por ahora.
 
 ## Mantenimiento
 
-Nada por ahora.
+- [ ] Revisar y limpiar notificaciones del menú principal
+- [ ] Revisar `Reparaciones` y `Registros` en `Configuración → Sistema`
+- [ ] Revisar uso de disco: `Configuración → Sistema → Almacenamiento`
+- [ ] Verificar copias de seguridad automáticas: `Configuración → Sistema → Copias de seguridad`
+- [ ] Aplicar actualizaciones de Core, OS, Supervisor y Aplicaciones: `Configuración → Sistema → Actualizaciones`
+- [ ] Revisar dispositivos no disponibles: `Configuración → Dispositivos y servicios → Entidades` y filtrar por `Estado = No disponible`
 
 ## Pendientes
 
