@@ -91,4 +91,4 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 
 | Hostname                      | Propósito        | Proveedor | Instancia | OS | IP |
 | ----------------------------- | ---------------- | --------- | --------- | -- | -- |
-| [balalaika](cloud/balalaika/) | Servidor público | [Google Compute Engine](https://cloud.google.com/compute) | `e2-micro` | [Debian](https://www.debian.org) 12 (bookworm) | 34.67.134.108 |
+| [balalaika](cloud/balalaika/) | Servidor público | [Google Cloud](https://cloud.google.com) | `e2-micro` | [Debian](https://www.debian.org) 12 (bookworm) | 34.67.134.108 |

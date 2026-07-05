@@ -1,7 +1,7 @@
 # balalaika
 
 - Propósito: Servidor público.
-- Proveedor: [Google Compute Engine](https://cloud.google.com/compute)
+- Proveedor: [Google Cloud](https://cloud.google.com)
 - Instancia: `e2-micro`
 - OS: [Debian](https://www.debian.org) 12 (bookworm)
 - IP: 34.67.134.108

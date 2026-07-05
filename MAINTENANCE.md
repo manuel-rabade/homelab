@@ -26,7 +26,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 ## la-esperanza
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
-- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar go-librespot: `systemctl --user status go-librespot`
@@ -57,7 +57,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 ## savoy
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
-- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar conectividad hacia la red `SBC`: `ping -c 3 192.168.6.2`
@@ -66,7 +66,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 ## dux-de-venecia
 
 - [ ] Revisar uso de disco: `df -h`
-- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar estado de Tailscale: `tailscale status`

@@ -32,7 +32,7 @@
 ## Mantenimiento
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
-- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar go-librespot: `systemctl --user status go-librespot`
