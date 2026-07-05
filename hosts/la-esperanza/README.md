@@ -4,10 +4,9 @@
 - Hardware: [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292)
   - Rockchip RK3588 (4× Cortex-A76 + 4× Cortex-A55, hasta 2.4 GHz)
   - 16 GB LPDDR4X RAM
-  - 64 GB eMMC (disco de sistema)
-  - 1 TB SSD NVMe (almacenamiento de datos)
-    - [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
-  - 2 Ethernet 2.5G (`LAN`, disponible)
+  - 64 GB eMMC
+  - 1 TB SSD NVMe [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
+  - 2 Ethernet 2.5G
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
   - `LAN` 192.168.1.2
@@ -33,7 +32,7 @@
 ## Mantenimiento
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
-- [ ] Actualizar dotfiles: `git pull`
+- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar go-librespot: `systemctl --user status go-librespot`

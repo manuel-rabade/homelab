@@ -11,7 +11,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 
 ## salon-corona
 
-- [ ] Revisar estado del router en `Status → Overview`
+- [ ] Revisar estado del router: `Status → Overview`
 - [ ] Revisar logs del sistema: `logread -e error`
 - [ ] Hacer backup del sistema
   - [ ] Guardar configuración: `sysupgrade -b /tmp/backup-config-salon-corona.tar.gz`
@@ -20,13 +20,13 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Buscar actualizaciones: `owut check`
 - [ ] Aplicar actualización: `owut upgrade`
 - [ ] Buscar actualizaciones mayores: `owut versions`
-- [ ] Revisar canales y congestión Wi-Fi en `Network → Wireless`
-- [ ] Revisar reglas de firewall y redirecciones de puertos en `Network → Firewall`
+- [ ] Revisar canales y congestión Wi-Fi: `Network → Wireless`
+- [ ] Revisar reglas de firewall y redirecciones de puertos: `Network → Firewall`
 
 ## la-esperanza
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
-- [ ] Actualizar dotfiles: `git pull`
+- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
 - [ ] Actualizar paquetes: `apt update && apt upgrade`
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar go-librespot: `systemctl --user status go-librespot`

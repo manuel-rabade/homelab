@@ -5,10 +5,10 @@
   - MediaTek MT7986A (Filogic 830, Cortex-A53 quad-core 2.0 GHz)
   - 1 GB DDR4 RAM
   - 8 GB NAND Flash
-  - 2 Ethernet 2.5G (Internet, disponible)
-  - 4 Ethernet 1G (`LAN`)
-  - Wi-Fi 802.11ac/ax/n (`LAN`, `GUEST`, `MEDIA`)
-  - Wi-Fi 802.11ax/b/g/n (`LAN`, `IOT`)
+  - 2 Ethernet 2.5G
+  - 4 Ethernet 1G
+  - Wi-Fi 802.11ac/ax/n
+  - Wi-Fi 802.11ax/b/g/n
 - OS: [OpenWrt](https://openwrt.org) 24
 - Redes:
   - `LAN` 192.168.1.1
@@ -27,11 +27,11 @@
 
 ## Archivos de configuración y scripts
 
-- Ruta estática a `192.168.6.0/24` por medio de [savoy](../savoy/).
+- Ruta estática a `192.168.6.0/24` por medio de [savoy](../savoy/) en `Network → Routing`.
 
 ## Mantenimiento
 
-- [ ] Revisar estado del router en `Status → Overview`
+- [ ] Revisar estado del router: `Status → Overview`
 - [ ] Revisar logs del sistema: `logread -e error`
 - [ ] Hacer backup del sistema
   - [ ] Guardar configuración: `sysupgrade -b /tmp/backup-config-salon-corona.tar.gz`
@@ -40,8 +40,8 @@
 - [ ] Buscar actualizaciones: `owut check`
 - [ ] Aplicar actualización: `owut upgrade`
 - [ ] Buscar actualizaciones mayores: `owut versions`
-- [ ] Revisar canales y congestión Wi-Fi en `Network → Wireless`
-- [ ] Revisar reglas de firewall y redirecciones de puertos en `Network → Firewall`
+- [ ] Revisar canales y congestión Wi-Fi: `Network → Wireless`
+- [ ] Revisar reglas de firewall y redirecciones de puertos: `Network → Firewall`
 
 ## Pendientes
 

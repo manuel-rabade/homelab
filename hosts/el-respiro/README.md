@@ -4,14 +4,12 @@
 - Hardware: [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e)
   - Intel Celeron J6412 (quad-core 2.0 GHz)
   - 16 GB DDR4 RAM
-  - 1 TB SSD NVMe (disco de sistema)
-    - [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
-  - 2 × 16 TB SATA RAID 1 (almacenamiento principal)
+  - 1 TB SSD NVMe [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
+  - 2 × 16 TB SATA RAID 1
     - [Toshiba N300](https://www.toshiba-storage.com/products/toshiba-n300-nas-hard-drive/)
     - [WD Gold](https://www.westerndigital.com/products/internal-drives/wd-gold-sata-hdd)
-  - 16 TB USB 3.0 (respaldo general)
-    - [Seagate Expansion Desktop](https://www.seagate.com/products/external-hard-drives/desktop-drives/expansion-desktop/)
-  - 2 Ethernet 2.5G (`LAN`, disponible)
+  - 16 TB USB 3.0 [Seagate Expansion Desktop](https://www.seagate.com/products/external-hard-drives/desktop-drives/expansion-desktop/)
+  - 2 Ethernet 2.5G
 - OS: [QTS](https://www.qnap.com/la/operating-system/qts) 5.2
 - Redes:
   - `LAN` 192.168.1.3

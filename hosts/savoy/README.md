@@ -4,10 +4,9 @@
 - Hardware: [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
   - Broadcom BCM2711 (Cortex-A72 quad-core 1.8 GHz)
   - 4 GB LPDDR4 RAM
-  - 64 GB microSDXC (disco de sistema)
-    - [ADATA High Endurance](https://www.adata.com/us/consumer/614/)
-  - Ethernet 1G (`SBC`)
-  - Wi-Fi 802.11ac (`GUEST`)
+  - 64 GB microSDXC [ADATA High Endurance](https://www.adata.com/us/consumer/614/)
+  - Ethernet 1G
+  - Wi-Fi 802.11ac
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
   - `GUEST` 192.168.2.2

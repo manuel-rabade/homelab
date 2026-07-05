@@ -4,9 +4,8 @@
 - Hardware: [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original)
   - TI Sitara AM3359 (Cortex-A8 720 MHz)
   - 256 MB DDR2 RAM
-  - 32 GB microSDHC (disco de sistema)
-    - [SanDisk Ultra](https://www.sandisk.com/products/memory-cards/microsd-cards/sandisk-ultra-microsd)
-  - Ethernet 100M (`SBC`)
+  - 32 GB microSDHC [SanDisk Ultra](https://www.sandisk.com/products/memory-cards/microsd-cards/sandisk-ultra-microsd)
+  - Ethernet 100M
 - OS: [Debian](https://www.debian.org) 12 (bookworm)
 - Redes:
   - `SBC` 192.168.6.2
@@ -42,7 +41,7 @@ Nada por ahora.
 ## Pendientes
 
 - [ ] Documentar servidor web
-- [ ] *Web Shell RHED*
+- [ ] *Web Shell Museo de SBCs*
 
 ## Bitácora
 
