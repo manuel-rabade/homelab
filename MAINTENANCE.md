@@ -65,4 +65,9 @@ Checklist de mantenimiento para mi infraestructura casera.
 
 ## dux-de-venecia
 
-Nada por ahora.
+- [ ] Revisar uso de disco: `df -h`
+- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+- [ ] Verificar estado de Tailscale: `tailscale status`
+- [ ] Verificar estado de NGINX: `systemctl status nginx`

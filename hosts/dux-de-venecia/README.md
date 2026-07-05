@@ -2,6 +2,11 @@
 
 - Propósito: SBC vintage.
 - Hardware: [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original)
+  - TI Sitara AM3359 (Cortex-A8 720 MHz)
+  - 256 MB DDR2 RAM
+  - 32 GB microSDHC (disco de sistema)
+    - [SanDisk Ultra](https://www.sandisk.com/products/memory-cards/microsd-cards/sandisk-ultra-microsd)
+  - Ethernet 100M (`SBC`)
 - OS: [Debian](https://www.debian.org) 12 (bookworm)
 - Redes:
   - `SBC` 192.168.6.2
@@ -10,13 +15,16 @@
 ## Servicios
 
 - SBC (single board computer) de colección.
-- Nodo de la RHED.
+- Nodo de la *hipermegaRHED*.
 - Servidor web con phpSysInfo.
 
 ## Referencias
 
 - [BeagleBone System Reference Manual](https://github.com/beagleboard/BeagleBone/blob/master/BeagleBone_SRM_A6_0_1.pdf)
-- [Debian 11.x (Bullseye) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-11-x-bullseye-monthly-snapshot-2023-10-07/31280/5)
+- [Debian 12.x (Bookworm) - Monthly Snapshot - 2023-10-07](https://forum.beagleboard.org/t/debian-12-x-bookworm-monthly-snapshot-2023-10-07/36175)
+- [phpSysInfo](https://phpsysinfo.github.io)
+- [Red Hispana de Entusiastas Digitales](https://rhed.xyz)
+- [Tailscale](https://tailscale.com)
 
 ## Archivos de configuración y scripts
 
@@ -24,11 +32,17 @@ Nada por ahora.
 
 ## Mantenimiento
 
-Nada por ahora.
+- [ ] Revisar uso de disco: `df -h`
+- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+- [ ] Verificar estado de Tailscale: `tailscale status`
+- [ ] Verificar estado de NGINX: `systemctl status nginx`
 
 ## Pendientes
 
-Nada por ahora.
+- [ ] Documentar servidor web
+- [ ] *Web Shell RHED*
 
 ## Bitácora
 
