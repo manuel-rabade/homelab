@@ -15,9 +15,10 @@ This repository is the source of truth for my home infrastructure.
 - [README.md](README.md): top-level inventory of networks, computers and devices.
 - [MAINTENANCE.md](MAINTENANCE.md): aggregated recurring-maintenance checklist.
 - [hosts/](hosts/): one folder per computer (e.g. [hosts/la-esperanza/](hosts/la-esperanza/)): scripts, config files and a `README.md`.
+- [cloud/](cloud/): one folder per cloud host (e.g. [cloud/balalaika/](cloud/balalaika/)): same page structure as a host, for rented VMs off the home network.
 - [deprecated/](deprecated/): retired computers and configurations.
 
-Each host's `hosts/hostname/README.md` is the single source of truth for that host. The `## Computadoras y equipos` table in [README.md](README.md) and [MAINTENANCE.md](MAINTENANCE.md) are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate both to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
+Each host's `hosts/hostname/README.md` (and each cloud host's `cloud/hostname/README.md`) is the single source of truth for that host. The `## Computadoras y Equipos` and `## Servicios Cloud` tables in [README.md](README.md), and the sections in [MAINTENANCE.md](MAINTENANCE.md), are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate the affected views to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
 
 ## Redes
 
@@ -29,7 +30,7 @@ Authored directly in [README.md](README.md). Defines the network zones.
 
 Keep zone codes in backticks. Update the table when a zone is added or removed.
 
-## Computadoras y equipos
+## Computadoras y Equipos
 
 The inventory table in [README.md](README.md) is **derived** from the host pages, which are the source of truth. Columns `Hostname | Propósito | Hardware | OS | Redes`, each cell taken from the matching host page:
 
@@ -106,19 +107,70 @@ Nada por ahora.
 Resumen del trabajo realizado.
 ```
 
-### Maintenance checklist
-
-[MAINTENANCE.md](MAINTENANCE.md) is a derived view: the recurring service checklist for all hosts. It lists **every** host, one `## hostname` section in the same order as the inventory table, copying that host's `## Mantenimiento` verbatim (including nested checkboxes and fenced commands). A host with no recurring tasks shows `Nada por ahora.`.
-
-Checked boxes (`[x]`) are ephemeral working state for a service pass; never sync them back to the host page. Task lists live unchecked in git on both sides.
-
-## Dispositivos IoT y multimedia
+## Dispositivos IoT y Multimedia
 
 Authored directly in [README.md](README.md). Devices that aren't full hosts (no folder). Table `Dispositivo | Propósito | Red | Hostname | IP`. The column is `Red` (singular) because each device sits on exactly one network, unlike the computers table's `Redes` (plural). Leave `Hostname` and `IP` blank for devices without a reserved address.
 
-## Cloud
+## Servicios Cloud
 
-Authored directly in [README.md](README.md). A `Hostname | IP` table, followed by a `### hostname` block per host with bullets (provider, instance type, OS, what it hosts).
+The `## Servicios Cloud` table in [README.md](README.md) is **derived** from the cloud host pages, the same source-of-truth model as [Computadoras y Equipos](#computadoras-y-equipos). A cloud host is a rented VM, not a machine on the home network, so it lives in its own `cloud/hostname/` folder and its identity bullets differ: no physical `Hardware`, no zone-based `Redes`. Columns `Hostname | Propósito | Proveedor | Instancia | OS | IP`, each cell taken from the matching cloud host page:
+
+- **Hostname** ← folder name, linked to `cloud/hostname/`.
+- **Propósito** ← `Propósito:` bullet.
+- **Proveedor** ← `Proveedor:` bullet verbatim, link included.
+- **Instancia** ← `Instancia:` bullet verbatim.
+- **OS** ← `OS:` bullet verbatim, link included.
+- **IP** ← `IP:` bullet.
+
+Strip the trailing period from every cell. When you add or retire a cloud host, update this table.
+
+### Cloud host page
+
+Each cloud host has a folder `cloud/hostname/` whose `README.md` is its source of truth. It follows the same section order and rules as a [host page](#host-page), and its `## Mantenimiento` is aggregated into [MAINTENANCE.md](MAINTENANCE.md) alongside the computers. Only the identity bullets differ: `Proveedor`, `Instancia` and a plain `IP:` bullet replace the physical `Hardware` and the zone-based `Redes`.
+
+Template:
+
+```markdown
+# hostname
+
+- Propósito: Rol breve.
+- Proveedor: [Proveedor](url)
+- Instancia: `tipo`
+- OS: [Nombre](url) versión
+- IP: 203.0.113.1
+
+## Servicios
+
+- Qué hospeda.
+
+## Referencias
+
+- [Enlace oficial](url)
+
+## Archivos de configuración y scripts
+
+- `/etc/ejemplo.conf`: qué configura.
+
+## Mantenimiento
+
+- [ ] Tarea con comando: `comando`
+
+## Pendientes
+
+Nada por ahora.
+
+## Bitácora
+
+### 2026-06-24 título corto
+
+Resumen del trabajo realizado.
+```
+
+## Maintenance checklist
+
+[MAINTENANCE.md](MAINTENANCE.md) is a derived view: the recurring service checklist for all hosts. It lists **every** host, computers first then cloud hosts, one `## hostname` section in the same order as the `## Computadoras y Equipos` and `## Servicios Cloud` tables, copying that host's `## Mantenimiento` verbatim (including nested checkboxes and fenced commands). A host with no recurring tasks shows `Nada por ahora.`.
+
+Checked boxes (`[x]`) are ephemeral working state for a service pass; never sync them back to the host page. Task lists live unchecked in git on both sides.
 
 ## Writing conventions
 
@@ -129,12 +181,12 @@ Authored directly in [README.md](README.md). A `Hostname | IP` table, followed b
   - When writing Spanish prose, translate «repository» as «depósito», not «repositorio».
 - **Dashes**: use a regular hyphen (`-`); never em dashes (`—`) or en dashes (`–`).
 - **Lines**: let prose flow, one line per paragraph; don't hard-wrap by hand.
-- **Heading hierarchy**: host pages go `# hostname` then `## section`. Root `README.md` goes `## category`, with `### name` only for entries that have no own page (e.g. under `## Cloud`).
+- **Heading hierarchy**: host and cloud pages go `# hostname` then `## section`. Root `README.md` goes `## category` for its sections; `### name` subsections appear only inside those pages (`## Bitácora` entries).
 - **No frontmatter**: files start straight with the content.
 - **Banner**: the three top-level docs open with an ASCII-art title (figlet) instead of an `#` heading, each in its own font: `larry3d` for `README.md`, `doom` for `MAINTENANCE.md`, `terminus` for `AGENTS.md`. Host pages use a plain `# hostname`.
 - **Backticks** for technical terms: network zones (`LAN`, `GUEST`, `IOT`, `MEDIA`, `SBC`), CIDR segments and IPs, hostnames, file paths, inline commands, and GUI app names and menu navigation paths (`App Center`, `Panel de control → Estado del sistema`).
 - **Italics** (`*…*`): only for proper names, never for general emphasis. Two cases: (a) *hipermegaRHED*, the proper name of the `RHED` overlay network - used in narrative prose (Bitácora, and the Servicios/Pendientes items tied to it); in structured fields use the backticked zone code `` `RHED` `` instead (`Redes` bullets, `Mantenimiento` tasks, the README `## Redes` table and the inventory `Redes` column), the two being synonyms. (b) The codename of a planned experiment or project, e.g. `*Museo de SBCs*`, `*Disco duro hipermegaRHED*`; when the codename embeds the network name the whole phrase stays italic.
-- **Links**: use the bare filename or path as link text, without backticks (`[README.md](README.md)`). Internal references by anchor; external links to official documentation or repositories under `## Referencias`.
+- **Links**: use the bare filename or path as link text, without backticks (`[README.md](README.md)`). Internal references by anchor; external links to official documentation or repositories under `## Referencias`. A page may still link its own hosted sites or services inline in `## Servicios`.
 - **Sub-bullets** nest 2 spaces.
 - **Tables** (markdown pipes) for inventories; `<br>` to stack multiple values in one cell.
 - **Lists** with `-`; checkboxes `- [ ]` for maintenance and pending tasks.
