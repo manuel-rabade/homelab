@@ -71,3 +71,14 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Reiniciar: `reboot`
 - [ ] Verificar estado de Tailscale: `tailscale status`
 - [ ] Verificar estado de NGINX: `systemctl status nginx`
+
+## balalaika
+
+- [ ] Revisar uso de disco: `df -h`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+- [ ] Verificar estado de NGINX: `systemctl status nginx`
+- [ ] Revisar la vigencia de los certificados SSL: `certbot certificates`
+- [ ] Verificar que los sitios web respondan correctamente
+- [ ] Verificar que AntennaPod sincronice con oPodSync

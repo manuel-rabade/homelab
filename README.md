@@ -8,7 +8,7 @@
     \/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/____/\/__/\/_/ \/___/
 ```
 
-Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#computadoras-y-equipos), [dispositivos](#dispositivos-iot-y-multimedia) y [servicios cloud](#cloud).
+Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#computadoras-y-equipos), [dispositivos](#dispositivos-iot-y-multimedia) y [servicios cloud](#servicios-cloud).
 
 - [MAINTENANCE.md](MAINTENANCE.md): checklist de mantenimiento recurrente.
 - [LICENSE](LICENSE): licencia del depósito (CC0 1.0).
@@ -55,7 +55,7 @@ Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#
 
 Algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), una personal y otra de la [RHED](https://rhed.xyz).
 
-## Computadoras y equipos
+## Computadoras y Equipos
 
 | Hostname                          | Propósito   | Hardware | OS | Redes |
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
@@ -66,7 +66,7 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | [savoy](hosts/savoy/)                   | Laboratorio DMZ | [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | [Armbian](https://armbian.com) 26 (trixie) | `GUEST` 192.168.2.2<br>`SBC` 192.168.6.1<br>`RHED` Tailscale |
 | [dux-de-venecia](hosts/dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC` 192.168.6.2<br>`RHED` Tailscale |
 
-## Dispositivos IoT y multimedia
+## Dispositivos IoT y Multimedia
 
 | Dispositivo                      | Propósito                       | Red    | Hostname | IP |
 |----------------------------------|---------------------------------|---------|----------|----|
@@ -87,17 +87,8 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | Wiz DIM/5W G25 Amber             | Foco atenuable                  | `IOT`   | | |
 | Wyze Smart Plug                  | Switch para lámpara             | `IOT`   | | |
 
-## Cloud
+## Servicios Cloud
 
-| Hostname                      | IP            |
-|-------------------------------|---------------|
-| [balalaika](#balalaika)       | 34.67.134.108 |
-
-### balalaika
-
-- Servidor Linux público
-- Hospeda sitios web y depósitos Git
-
-- Cloud: Google Compute Engine
-- Instancia: `e2-micro`
-- OS: Debian GNU/Linux 12
+| Hostname                      | Propósito        | Proveedor | Instancia | OS | IP |
+| ----------------------------- | ---------------- | --------- | --------- | -- | -- |
+| [balalaika](cloud/balalaika/) | Servidor público | [Google Compute Engine](https://cloud.google.com/compute) | `e2-micro` | [Debian](https://www.debian.org) 12 (bookworm) | 34.67.134.108 |
