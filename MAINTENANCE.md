@@ -56,7 +56,12 @@ Checklist de mantenimiento para mi infraestructura casera.
 
 ## savoy
 
-Nada por ahora.
+- [ ] Revisar uso de disco: `df -h -t ext4`
+- [ ] Actualizar dotfiles (`root` y usuario): `git pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+- [ ] Verificar conectividad hacia la red `SBC`: `ping -c 3 192.168.6.2`
+- [ ] Verificar estado de Tailscale: `tailscale status`
 
 ## dux-de-venecia
 
