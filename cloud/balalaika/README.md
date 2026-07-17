@@ -13,7 +13,7 @@
   - Sitio de experimentos: [rabade.dev](https://rabade.dev)
   - Sitio pendiente: [rabade.com](https://rabade.com)
   - Fotoetnografías de la pandemia: [fotoetnografiasdelapandemia.com](https://fotoetnografiasdelapandemia.com)
-- Servidor de [oPodSync](https://ops.rabade.net) para respaldar mi historial de podcasts escuchados en AntennaPod.
+- Servidor de [oPodSync](https://ops.rabade.net) para sincronizar mi historial de podcasts escuchados en AntennaPod.
 - Aloja depósitos Git personales.
 
 ## Referencias

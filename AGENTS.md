@@ -20,13 +20,19 @@ This repository is the source of truth for my home infrastructure.
 
 Each host's `hosts/hostname/README.md` (and each cloud host's `cloud/hostname/README.md`) is the single source of truth for that host. The `## Computadoras y Equipos` and `## Servicios Cloud` tables in [README.md](README.md), and the sections in [MAINTENANCE.md](MAINTENANCE.md), are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate the affected views to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
 
+## Resúmenes de sección
+
+Every `##` section in [README.md](README.md) opens with a short summary paragraph, placed between the heading and the section's content. One or two sentences of Spanish prose giving the gist: what the section holds and its notable specifics (roles, groupings, what sits on which network). The paragraph is authored directly, even in the sections whose table is a derived view ([Computadoras y Equipos](#computadoras-y-equipos), [Servicios Cloud](#servicios-cloud)): the table below is regenerated from the host pages, the summary above is written by hand.
+
+Keep the summary in sync with the data it describes: whenever the table or the host pages behind it change (a host or device added, retired, moved between networks, or repurposed), update the paragraph in the same edit so it never contradicts the content below it.
+
 ## Redes
 
 Authored directly in [README.md](README.md). Defines the network zones.
 
+- The section summary (see [Resúmenes de sección](#resúmenes-de-sección)), which for this section also carries the note about the Tailscale networks: one personal and the [RHED](https://rhed.xyz) one.
 - A table `Zona | Segmento | Propósito | Medio | Políticas`, one row per zone.
-- An ASCII diagram of how the zones connect (only the hosts that route between networks, not every host). It comes from outside this repo: maintained in [textik.com](https://textik.com) and imported as-is, so never edit or regenerate it.
-- A prose note about the Tailscale networks.
+- A `### Mapa` subsection holding an ASCII diagram of how the zones connect (only the hosts that route between networks, not every host). It comes from outside this repo: maintained in [textik.com](https://textik.com) and imported as-is, so never edit or regenerate it.
 
 Keep zone codes in backticks. Update the table when a zone is added or removed.
 
@@ -181,7 +187,7 @@ Checked boxes (`[x]`) are ephemeral working state for a service pass; never sync
   - When writing Spanish prose, translate «repository» as «depósito», not «repositorio».
 - **Dashes**: use a regular hyphen (`-`); never em dashes (`—`) or en dashes (`–`).
 - **Lines**: let prose flow, one line per paragraph; don't hard-wrap by hand.
-- **Heading hierarchy**: host and cloud pages go `# hostname` then `## section`. Root `README.md` goes `## category` for its sections; `### name` subsections appear only inside those pages (`## Bitácora` entries).
+- **Heading hierarchy**: host and cloud pages go `# hostname` then `## section`. Root `README.md` goes `## category` for its sections, with one exception: the `### Mapa` subsection under `## Redes`. Other `### name` subsections appear only inside host and cloud pages (`## Bitácora` entries).
 - **No frontmatter**: files start straight with the content.
 - **Banner**: the three top-level docs open with an ASCII-art title (figlet) instead of an `#` heading, each in its own font: `larry3d` for `README.md`, `doom` for `MAINTENANCE.md`, `terminus` for `AGENTS.md`. Host pages use a plain `# hostname`.
 - **Backticks** for technical terms: network zones (`LAN`, `GUEST`, `IOT`, `MEDIA`, `SBC`), CIDR segments and IPs, hostnames, file paths, inline commands, and GUI app names and menu navigation paths (`App Center`, `Panel de control → Estado del sistema`).

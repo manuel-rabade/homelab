@@ -15,6 +15,8 @@ Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#
 
 ## Redes
 
+Cinco zonas segmentan la casa por nivel de confianza: `LAN` confiable, `GUEST` aislada, e `IOT` y `MEDIA` para los dispositivos del hogar. `salon-corona` rutea esas cuatro y `SBC` cuelga de `savoy` como red aislada. Algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com), una personal y otra de la [RHED](https://rhed.xyz).
+
 | Zona    | Segmento       | Propósito               | Medio                     | Políticas         |
 |---------|----------------|-------------------------|---------------------------|-------------------|
 | `LAN`   | 192.168.1.0/24 | Equipos confiables      | Wi-Fi 2.4/5 GHz, Ethernet | Sin restricciones |
@@ -22,6 +24,8 @@ Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#
 | `IOT`   | 192.168.3.0/24 | Dispositivos IoT        | Wi-Fi 2.4 GHz             | Acceso a internet controlado por dispositivo |
 | `MEDIA` | 192.168.4.0/24 | Dispositivos multimedia | Wi-Fi 5 GHz               | Acceso limitado a `LAN` |
 | `SBC`   | 192.168.6.0/24 | Colección SBC           | Ethernet                  | Red aislada, acceso a internet limitado  |
+
+### Mapa
 
 ```
                                    +------------+
@@ -53,9 +57,9 @@ Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#
                       +----------------+
 ```
 
-Algunos equipos participan en redes privadas virtuales de [Tailscale](https://tailscale.com/), una personal y otra de la [RHED](https://rhed.xyz).
-
 ## Computadoras y Equipos
+
+Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta y aplica firewall entre zonas; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB y Jellyfin; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
 
 | Hostname                          | Propósito   | Hardware | OS | Redes |
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
@@ -67,6 +71,8 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | [dux-de-venecia](hosts/dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC` 192.168.6.2<br>`RHED` Tailscale |
 
 ## Dispositivos IoT y Multimedia
+
+Dispositivos de propósito específico, a diferencia de las computadoras de propósito general, repartidos entre las redes `IOT` y `MEDIA`. En `IOT` predominan enchufes inteligentes (Wemo, Kasa, Wyze), iluminación (Magic Home, Wiz) y nodos LoRa para TinyGS y Meshtastic; en `MEDIA` están las bocinas, pantallas y el reproductor de Google.
 
 | Dispositivo                      | Propósito                       | Red    | Hostname | IP |
 |----------------------------------|---------------------------------|---------|----------|----|
@@ -80,7 +86,7 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | Kasa Smart Power Strip KP303     | Multicontacto                   | `IOT`   | | |
 | Magic Home WiFi LED Controller   | Tira led                        | `IOT`   | | |
 | Mi Air Purifier 3C               | Purificador de aire             | `IOT`   | | |
-| TCL TV 55" 4K UHD                | Televisión                      | `MEDIA` | | |
+| TCL TV 55" 4K UHD                | Televisión                      | `IOT`   | | |
 | Wemo Insight Smart Plug          | Switch para calentador          | `IOT`   | | |
 | Wemo Mini Smart Plug             | Switch para bomba presurizadora | `IOT`   | | |
 | Wemo Mini Smart Plug             | Switch para calentador de agua  | `IOT`   | | |
@@ -88,6 +94,8 @@ Algunos equipos participan en redes privadas virtuales de [Tailscale](https://ta
 | Wyze Smart Plug                  | Switch para lámpara             | `IOT`   | | |
 
 ## Servicios Cloud
+
+VMs rentadas fuera de la red casera para servicios que necesitan exponerse a internet. Por ahora solo `balalaika`, una `e2-micro` con Debian en Google Cloud que hospeda mis sitios web (rabade.net, rabade.dev, entre otros), un servidor oPodSync para sincronizar mi historial de podcasts escuchados en AntennaPod y depósitos Git personales.
 
 | Hostname                      | Propósito        | Proveedor | Instancia | OS | IP |
 | ----------------------------- | ---------------- | --------- | --------- | -- | -- |
