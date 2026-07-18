@@ -38,7 +38,7 @@ Nada por ahora.
 
 ## Pendientes
 
-- [ ] Conectar a Tailnet `VPN`
+- [ ] Conectar a tailnet `VPN`
 
 ## Bitácora
 

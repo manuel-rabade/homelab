@@ -30,7 +30,7 @@ Keep the summary in sync with the data it describes: whenever the table or the h
 
 Authored directly in [README.md](README.md). Defines the network zones.
 
-- The section summary (see [Resúmenes de sección](#resúmenes-de-sección)), which for this section also carries the note about the Tailscale networks: one personal and the [RHED](https://rhed.xyz) one.
+- The section summary (see [Resúmenes de sección](#resúmenes-de-sección)), which for this section also carries the note about the tailnets: one personal and the [RHED](https://rhed.xyz) one.
 - A table `Zona | Segmento | Propósito | Medio | Políticas`, one row per zone.
 - A `### Mapa` subsection holding an ASCII diagram of how the zones connect (only the hosts that route between networks, not every host). It comes from outside this repo: maintained in [textik.com](https://textik.com) and imported as-is, so never edit or regenerate it.
 
@@ -61,7 +61,7 @@ Each host has a folder `hosts/hostname/` whose `README.md` is the source of trut
      - Storage: `<capacity/type> <interface> <model>`. When the slot holds a specific device model worth naming, name it inline and linked on the same line (e.g. `32 GB microSDHC [SanDisk Ultra](url)`). Exception: a multi-disk array can't inline several models, so it stays a bare line with each linked model nested one level deeper (e.g. `2 × 16 TB SATA RAID 1` with `Toshiba N300` and `WD Gold` as sub-bullets).
      - Networking: one sub-bullet per interface or port group, wired before wireless, the speed only. Prefix the port count only when there is more than one (`Ethernet 1G`, `2 Ethernet 2.5G`, `4 Ethernet 1G`), or give the Wi-Fi 802.11 standards (`Wi-Fi 802.11ax/b/g/n`).
    - `- OS:` name and version, linked when there's an official page.
-   - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` Tailscale `` / `` `RHED` Tailscale `` for overlays.
+   - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` tailnet `` / `` `RHED` tailnet `` for overlays (the tailnet, not the Tailscale/Headscale service running it).
 3. `## Servicios`: what the host runs.
 4. `## Referencias`: external links (official docs, repos).
 5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked) and relevant on-host config paths (backticked), each with a short description.
@@ -83,7 +83,7 @@ Template:
 - OS: [Nombre](url) versión
 - Redes:
   - `ZONA` 192.168.x.y
-  - `VPN` Tailscale
+  - `VPN` tailnet
 
 ## Servicios
 

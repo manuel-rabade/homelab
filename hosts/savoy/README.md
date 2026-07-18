@@ -11,7 +11,7 @@
 - Redes:
   - `GUEST` 192.168.2.2
   - `SBC` 192.168.6.1
-  - `RHED` Tailscale
+  - `RHED` tailnet
 
 ## Servicios
 

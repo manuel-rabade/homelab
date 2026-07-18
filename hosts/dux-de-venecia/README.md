@@ -9,7 +9,7 @@
 - OS: [Debian](https://www.debian.org) 12 (bookworm)
 - Redes:
   - `SBC` 192.168.6.2
-  - `RHED` Tailscale
+  - `RHED` tailnet
 
 ## Servicios
 

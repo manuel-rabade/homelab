@@ -10,7 +10,7 @@
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
   - `LAN` 192.168.1.2
-  - `VPN` Tailscale
+  - `VPN` tailnet
 
 ## Servicios
 
