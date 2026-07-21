@@ -19,7 +19,8 @@
 
 ## Referencias
 
-Nada por ahora.
+- [HACS](https://hacs.xyz): tienda de integraciones y complementos de la comunidad de Home Assistant.
+- [hassio-ecoflow-cloud](https://github.com/tolwi/hassio-ecoflow-cloud): integración para monitorear y controlar la DELTA 3 por medio de la nube de EcoFlow.
 
 ## Archivos de configuración y scripts
 
@@ -40,4 +41,9 @@ Nada por ahora.
 
 ## Bitácora
 
-Nada por ahora.
+### 2026-07-20 monitoreo de la estación EcoFlow
+
+Para monitorear y controlar la DELTA 3 Classic desde Home Assistant instalé HACS y la integración EcoFlow Cloud.
+
+1. Instalé HACS por medio de la aplicación `Get HACS` del listado oficial de Home Assistant y seguí la configuración básica.
+2. Para la integración EcoFlow Cloud, instalé `hassio-ecoflow-cloud` por medio de HACS y agregué un dispositivo EcoFlow usando el modo `private_api` que por el momento es el único que soporta la DELTA 3.

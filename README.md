@@ -72,11 +72,12 @@ Las computadoras administradas del hogar, excluyendo las personales. Cada una co
 
 ## Dispositivos IoT y Multimedia
 
-Dispositivos de propósito específico, a diferencia de las computadoras de propósito general, repartidos entre las redes `IOT` y `MEDIA`. En `IOT` predominan enchufes inteligentes (Wemo, Kasa, Wyze), iluminación (Magic Home, Wiz) y nodos LoRa para TinyGS y Meshtastic; en `MEDIA` están las bocinas, pantallas y el reproductor de Google.
+Dispositivos de propósito específico, a diferencia de las computadoras de propósito general, repartidos entre las redes `IOT` y `MEDIA`. En `IOT` predominan enchufes inteligentes (Wemo, Kasa, Wyze), iluminación (Magic Home, Wiz), nodos LoRa para TinyGS y Meshtastic y una estación EcoFlow que respalda el homelab como UPS; en `MEDIA` están las bocinas, pantallas y el reproductor de Google.
 
 | Dispositivo                      | Propósito                       | Red    | Hostname | IP |
 |----------------------------------|---------------------------------|---------|----------|----|
 | Becasmart BAF-908 Flower Waterer | Sistema de riego                | `IOT`   | | |
+| EcoFlow DELTA 3 Classic          | UPS del homelab                 | `IOT`   | | |
 | Google Nest Hub                  | Pantalla cocina                 | `MEDIA` | | |
 | Google Nest Mini                 | Bocina estudio                  | `MEDIA` | | |
 | Google Nest Mini                 | Bocina recamara                 | `MEDIA` | | |
