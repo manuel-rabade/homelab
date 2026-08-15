@@ -5,7 +5,7 @@
   - Rockchip RK3588 (4× Cortex-A76 + 4× Cortex-A55, hasta 2.4 GHz)
   - 16 GB LPDDR4X RAM
   - 64 GB eMMC
-  - 1 TB SSD NVMe [Kingston NV3](https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd)
+  - 500 GB SSD NVMe [WD Green SN3000](https://www.sandisk.com/products/ssd/internal-ssd/wd-green-sn3000-nvme-ssd)
   - 2 Ethernet 2.5G
 - OS: [Armbian](https://armbian.com) 26 (trixie)
 - Redes:
