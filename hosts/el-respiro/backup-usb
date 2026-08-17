@@ -1,0 +1,310 @@
+#!/bin/bash
+
+# backup-usb - Powers the external USB disk on, watches the HBS jobs that back
+# up to it, and powers it back off through the Home Assistant API.
+# QNAP TS-253E, QTS 5.2 - run from cron via /etc/config/crontab.
+
+# The disk hangs off a smart plug and stays unpowered between runs: power on,
+# wait for the mount, watch the jobs start and finish, unmount and power off.
+# The jobs are not launched from here, they are scheduled inside HBS to start
+# five minutes after the disk powers on, so the script only watches the QNAP
+# event log and reports what it saw. A run where a job ended badly or never
+# came back leaves the disk exactly as it is, mounted and powered on.
+
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+USER_HOME="/share/homes/manuel"
+
+HA_HOST="barba-azul"             # Home Assistant host
+HA_PORT="8123"
+HA_SWITCH="switch.hdd_backup"    # Plug the disk hangs off
+HA_TOKEN="$USER_HOME/.ha-token"  # File with the long-lived access token
+
+DISK_MOUNT="/share/Backup"       # USB disk mount point, a symlink to the mount
+
+HBS_JOBS=("Backup SSD" "Backup RAID")  # Job names as the event log spells them
+
+MOUNT_TIMEOUT=300                # Mount detection timeout in seconds (5 min)
+POLL_INTERVAL=60                 # Seconds between event log reads
+MAX_WAIT=14400                   # Budget for the whole batch (4 hours)
+
+LOG_TOOL="/sbin/log_tool"        # QTS event log CLI
+LOG_ROWS=200                     # Entries to read per poll, newest first
+
+NOTIFY="/usr/local/sbin/notify"  # QTS notifications CLI
+NOTIFY_APP="A013"                # System Logs
+NOTIFY_CATEGORY="C001"           # System Event
+NOTIFY_KEY="backup-usb"          # Dummy Key
+NOTIFY_PREFIX="[Backup USB]"     # Prepended to every message
+
+LOG="$USER_HOME/backup-usb.log"  # Debug log
+
+# #################################################################################################
+
+# Sends a QTS notification: $1 is the level (info, warn or error) and $2 the
+# message. -A, -C, -M and -l are all mandatory, omit one and notify prints its
+# help and exits 0 without sending anything. Messages must carry no braces:
+# notify reads {0} and friends as argument placeholders.
+notify_send() {
+  "$NOTIFY" send -A "$NOTIFY_APP" -C "$NOTIFY_CATEGORY" -M "$NOTIFY_KEY" \
+    -l "$1" -t 3 "$NOTIFY_PREFIX $2"
+}
+
+# Renders seconds as the minutes a human reads: "42 min".
+duration() {
+  echo "$(( ($1 + 30) / 60 )) min"
+}
+
+# Calls a switch service ($1 is turn_on or turn_off) on the plug and echoes the
+# HTTP status code, 200 when Home Assistant accepted the call.
+ha_switch() {
+  curl -s -o /dev/null -w "%{http_code}" -X POST \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{\"entity_id\": \"$HA_SWITCH\"}" \
+    "http://$HA_HOST:$HA_PORT/api/services/switch/$1"
+}
+
+# True when the USB disk is really mounted. $DISK_MOUNT is a symlink and the
+# directory behind it outlives the unmount, so testing the path alone would not
+# tell a mounted disk from an empty stub, and syncing into the stub would fill
+# the internal volume instead of the disk.
+disk_mounted() {
+  local target
+  target=$(readlink -f "$DISK_MOUNT" 2>/dev/null)
+  [ -n "$target" ] && grep -q " $target " /proc/mounts
+}
+
+# Echoes the entries of the event log snapshot $3 where job $1 reports that it
+# started ($2 is start) or that it ended ($2 is end), ignoring anything older
+# than $FLOOR. HBS has three endings and all three have to be matched, since a
+# bad one is not simply a missing "Finished":
+#   Finished Sync job: "NAME". ...
+#   Finished Sync job "NAME" with errors. ...
+#   Failed to complete Sync job: "NAME". ...
+# Recency goes by date and time, fields 3 and 4: they sit before the
+# description, which carries commas of its own and shifts every field after it.
+# Event ids are no use here, the log gets cleared and rotated.
+job_events() {
+  local re
+
+  case "$2" in
+    start) re="Started +Sync job: \"$1\"\." ;;
+    end)   re="(Finished +Sync job: \"$1\"\.|Finished +Sync job \"$1\" with errors\.|Failed to complete +Sync job: \"$1\"\.)" ;;
+  esac
+
+  printf '%s\n' "$3" | grep -E "$re" \
+    | awk -F, -v floor="$FLOOR" \
+        '{ stamp = $3 $4; gsub(/[-:]/, "", stamp); if (stamp + 0 >= floor + 0) print }'
+}
+
+# Echoes the time of the newest entry in $1, as the event log spells it.
+event_stamp() {
+  printf '%s\n' "$1" | awk -F, 'NF > 4 { print $4; exit }'
+}
+
+# #################################################################################################
+
+# 1. Read the Home Assistant token. An abort here appends to the log instead of
+# truncating it: the run never started, so the previous run's log survives to
+# be read.
+if [ ! -r "$HA_TOKEN" ]; then
+  echo "=== $(date) - Aborted: cannot read the HA token at $HA_TOKEN ===" >> "$LOG"
+  notify_send error "Cannot read the Home Assistant token at $HA_TOKEN. Sync cancelled."
+  exit 1
+fi
+
+PERMS=$(stat -c "%a" "$HA_TOKEN")
+
+if [ "$PERMS" != "600" ]; then
+  echo "=== $(date) - Aborted: unsafe permissions on $HA_TOKEN ($PERMS) ===" >> "$LOG"
+  notify_send error "Unsafe permissions on the Home Assistant token: $PERMS instead of 600. Sync cancelled, run chmod 600 $HA_TOKEN."
+  exit 1
+fi
+
+TOKEN=$(cat "$HA_TOKEN")
+RESULT=0
+
+# 2. Power the disk on through Home Assistant. The run is real from here, so
+# the log starts fresh. A plug that refuses to turn on is the one failure worth
+# giving up on: there is no disk to wait four hours for, and nothing to power
+# off afterwards.
+
+# The previous run keeps its log as $LOG.old. Cron leaves no run history and QTS
+# has no task GUI, so once the notification of a bad run is gone this file is
+# the only account of it left, and the next run would otherwise erase it.
+[ -f "$LOG" ] && mv "$LOG" "$LOG.old"
+
+echo "=== $(date) - Starting script ===" > "$LOG"
+
+# $FLOOR is the cutoff that tells this run's event log entries from an older
+# run's, so it is taken before anything this run can cause. Not after the mount
+# wait: MOUNT_TIMEOUT is as long as the delay HBS keeps before starting, and a
+# slow mount would push the cutoff past the first job's start entry, which
+# would then read as stale.
+FLOOR=$(date +%Y%m%d%H%M%S)
+
+CODE=$(ha_switch turn_on)
+echo "HA turn_on response: $CODE" >> "$LOG"
+
+if [ "$CODE" != "200" ]; then
+  echo "ERROR: HA refused the turn_on call (HTTP $CODE). Aborting." >> "$LOG"
+  notify_send error "Home Assistant refused the turn_on call (HTTP $CODE). Sync cancelled, check the token and $HA_SWITCH."
+  exit 1
+fi
+
+notify_send info "Powering the USB disk on. Waiting for the mount..."
+
+# 3. Wait for the disk to mount. Not mounting is worth a warning rather than an
+# abort: HBS starts the jobs on its own schedule either way, and how they end
+# says more about the disk than this check does.
+COUNT=0
+until disk_mounted || [ $COUNT -ge $MOUNT_TIMEOUT ]; do
+  sleep 5
+  COUNT=$((COUNT + 5))
+done
+
+if disk_mounted; then
+  echo "Disk mounted at $(readlink -f "$DISK_MOUNT") after ${COUNT}s." >> "$LOG"
+else
+  echo "WARNING: disk not mounted after ${MOUNT_TIMEOUT}s. Watching the jobs anyway." >> "$LOG"
+  notify_send warn "USB disk not mounted after ${MOUNT_TIMEOUT}s. Watching the HBS jobs anyway."
+  RESULT=1
+fi
+
+# 4. Watch the jobs, ignoring anything the event log recorded before $FLOOR.
+# Each job carries its own start and end flag, so every entry is logged and
+# counted the moment it shows up instead of being read back at the end from the
+# last snapshot: an ending that scrolls out of the newest $LOG_ROWS entries
+# during a noisy run has already been counted by then. Bash 3.2 has no
+# associative arrays, so the flags are indexed arrays parallel to $HBS_JOBS.
+# MAX_WAIT is the budget for the whole batch and not a limit per job: what it
+# caps is how long the disk is left spinning.
+STARTED=$(date +%s)
+DEADLINE=$((STARTED + MAX_WAIT))
+TOTAL=${#HBS_JOBS[@]}
+
+UP=0        # Jobs seen starting
+OK=0        # Jobs that finished cleanly
+BAD=0       # Jobs that finished with errors or failed outright
+EMPTY=0     # Whether the empty-read warning has been said
+
+for (( I = 0; I < TOTAL; I++ )); do
+  SEEN_START[$I]=0
+  SEEN_END[$I]=0
+done
+
+notify_send info "Watching $TOTAL HBS jobs, up to $(duration $MAX_WAIT)."
+
+while [ "$(date +%s)" -lt "$DEADLINE" ]; do
+  sleep $POLL_INTERVAL
+
+  # -v is what makes log_tool print anything at all, without it it stays silent
+  # and still exits 0. -s 1 sorts newest first, -l is a row offset and -o a row
+  # count. Never -c, -r or -f here: they are --initdb, --rmdb and --flushdb.
+  SNAPSHOT=$("$LOG_TOOL" -q -v -s 1 -l 0 -o "$LOG_ROWS")
+
+  # An empty read is not the same as no job entries yet: $SNAPSHOT is the newest
+  # $LOG_ROWS system events, unfiltered, and a running NAS writes those all the
+  # time. Nothing at all means the read itself failed or the event log was just
+  # cleared, and either one explains a batch that would otherwise look like it
+  # never started. Said once, since the alternative is one line per poll.
+  if [ -z "$SNAPSHOT" ] && [ "$EMPTY" -eq 0 ]; then
+    EMPTY=1
+    echo "WARNING: $LOG_TOOL returned no rows. The read failed or the event log was just cleared." >> "$LOG"
+  fi
+
+  for (( I = 0; I < TOTAL; I++ )); do
+    JOB="${HBS_JOBS[$I]}"
+
+    # 5. Log every start and every ending as it is found, so the log shows the
+    # batch advancing instead of only its outcome.
+    if [ "${SEEN_START[$I]}" -eq 0 ]; then
+      BEGAN=$(job_events "$JOB" start "$SNAPSHOT")
+
+      if [ -n "$BEGAN" ]; then
+        SEEN_START[$I]=1
+        UP=$((UP + 1))
+        echo "$JOB started at $(event_stamp "$BEGAN")." >> "$LOG"
+      fi
+    fi
+
+    if [ "${SEEN_END[$I]}" -eq 0 ]; then
+      ENDED=$(job_events "$JOB" end "$SNAPSHOT")
+
+      if [ -n "$ENDED" ]; then
+        SEEN_END[$I]=1
+
+        if printf '%s\n' "$ENDED" | grep -qE 'with errors|Failed to complete'; then
+          BAD=$((BAD + 1))
+          echo "$JOB ended with errors at $(event_stamp "$ENDED")." >> "$LOG"
+        else
+          OK=$((OK + 1))
+          echo "$JOB finished at $(event_stamp "$ENDED")." >> "$LOG"
+        fi
+      fi
+    fi
+  done
+
+  [ $((OK + BAD)) -eq "$TOTAL" ] && break
+done
+
+# 6. Report the batch as three counts. The three failure modes are all readable
+# from them: fewer started than listed points at the schedule inside HBS, more
+# started than ended means a job never came back, and anything in the error
+# count means the backup itself went wrong. An empty $HBS_JOBS has nothing to
+# report and would otherwise read as a clean run.
+ELAPSED=$(( $(date +%s) - STARTED ))
+SUMMARY="$UP of $TOTAL jobs started, $OK finished OK, $BAD finished with errors"
+CLEAN=0
+
+[ "$TOTAL" -gt 0 ] && [ "$OK" -eq "$TOTAL" ] && CLEAN=1
+
+echo "Done after $(duration $ELAPSED): $SUMMARY" >> "$LOG"
+
+if [ "$CLEAN" -eq 1 ]; then
+  notify_send info "Sync finished in $(duration $ELAPSED): $SUMMARY. Unmounting and powering the USB disk off."
+else
+  notify_send error "Sync ended with problems in $(duration $ELAPSED): $SUMMARY. The USB disk is left powered on, check the log at $LOG."
+  RESULT=1
+fi
+
+# 7. Unmount and power the disk off, but only when every job finished cleanly.
+# Anything else leaves the disk exactly as it is, so what went wrong can be
+# looked at where it happened. An unmount that fails leaves it powered on too:
+# cutting power to a mounted filesystem is worse than a disk left spinning.
+POWER_OFF=1
+
+if [ "$CLEAN" -ne 1 ]; then
+  echo "Leaving the USB disk as it is, powered on, for inspection." >> "$LOG"
+  POWER_OFF=0
+elif disk_mounted; then
+  TARGET=$(readlink -f "$DISK_MOUNT")
+  sync   # The disk is about to lose power, flush anything still in flight.
+
+  if umount "$TARGET" >> "$LOG" 2>&1; then
+    echo "Unmounted $TARGET." >> "$LOG"
+  else
+    echo "ERROR: cannot unmount $TARGET. Leaving the disk powered on." >> "$LOG"
+    notify_send warn "Cannot unmount the USB disk, so it is left powered on. Check the log at $LOG."
+    POWER_OFF=0
+    RESULT=1
+  fi
+fi
+
+if [ "$POWER_OFF" -eq 1 ]; then
+  CODE=$(ha_switch turn_off)
+  echo "HA turn_off response: $CODE" >> "$LOG"
+
+  if [ "$CODE" != "200" ]; then
+    echo "ERROR: HA refused the turn_off call (HTTP $CODE). Disk still on." >> "$LOG"
+    notify_send warn "Home Assistant refused the turn_off call (HTTP $CODE). The USB disk is still powered on."
+    RESULT=1
+  fi
+fi
+
+echo "=== $(date) - Script finished ===" >> "$LOG"
+
+# Nothing reads this under cron: QTS has no scheduled-task GUI and crond has no
+# MTA to mail the output to. What a run actually leaves behind is the
+# notification and $LOG. The code is set anyway, for a run started by hand.
+exit $RESULT

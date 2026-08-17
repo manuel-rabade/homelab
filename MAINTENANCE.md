@@ -38,7 +38,7 @@ Checklist de mantenimiento para mi infraestructura casera.
   - [ ] Revisar salud, temperatura y atributos SMART de los discos en `Discos/VJBOD`
     - Vigilar `Reallocated_Sector_Ct`, `Current_Pending_Sector`, `Offline_Uncorrectable` y `UDMA_CRC_Error`; cualquiera `> 0` es señal temprana de falla.
 - [ ] Revisar temperatura del sistema/CPU y velocidad del ventilador: `Panel de control → Estado del sistema`
-- [ ] Sincronizar al disco externo: `HBS 3 → Sincronizar`
+- [ ] Validar últimas sincronizaciones: `HBS 3 → Trabajos → Informe`
 - [ ] Verificar respaldos automáticos del sistema: `File Station → RAID → backups → el-respiro`
 - [ ] Revisar el `Centro de seguridad` y ejecutar un `Security Checkup`
 - [ ] Buscar actualizaciones de QTS: `Panel de control → Actualización de firmware`
@@ -53,6 +53,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Verificar copias de seguridad automáticas: `Configuración → Sistema → Copias de seguridad`
 - [ ] Aplicar actualizaciones de Core, OS, Supervisor y Aplicaciones: `Configuración → Sistema → Actualizaciones`
 - [ ] Revisar dispositivos no disponibles: `Configuración → Dispositivos y servicios → Entidades` y filtrar por `Estado = No disponible`
+- [ ] Revisar los tokens de acceso de larga duración: `Perfil → Seguridad`
 
 ## savoy
 

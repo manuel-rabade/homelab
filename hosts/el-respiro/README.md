@@ -18,15 +18,20 @@
 
 - Servidor de archivos SMB para la red local.
 - Servidor multimedia [Jellyfin](https://jellyfin.org), puerto `8096`.
-- Sincronización periódica de datos al disco externo.
+- Respaldo automático de datos al disco externo.
 
 ## Referencias
 
-- [Jellyfin](https://hub.docker.com/r/jellyfin/jellyfin)
+- [Jellyfin](https://hub.docker.com/r/jellyfin/jellyfin): imagen oficial de Docker del servidor multimedia.
+- [Hybrid Backup Sync](https://www.qnap.com/en/software/hybrid-backup-sync): la aplicación de QTS que hace los respaldos al disco externo.
+- [Home Assistant REST API](https://developers.home-assistant.io/docs/api/rest/): API HTTP con la que el script de respaldo prende y apaga el enchufe del disco externo.
 
 ## Archivos de configuración y scripts
 
-Nada por ahora.
+- [backup-usb](backup-usb): prende y apaga el disco externo por medio de Home Assistant, y vigila los trabajos de HBS que respaldan en él.
+- `/etc/config/crontab`: programación de [backup-usb](backup-usb).
+- `~/.ha-token`: token de acceso a Home Assistant.
+- `~/backup-usb.log`: bitácora que deja el script de respaldo.
 
 ## Mantenimiento
 
@@ -35,7 +40,7 @@ Nada por ahora.
   - [ ] Revisar salud, temperatura y atributos SMART de los discos en `Discos/VJBOD`
     - Vigilar `Reallocated_Sector_Ct`, `Current_Pending_Sector`, `Offline_Uncorrectable` y `UDMA_CRC_Error`; cualquiera `> 0` es señal temprana de falla.
 - [ ] Revisar temperatura del sistema/CPU y velocidad del ventilador: `Panel de control → Estado del sistema`
-- [ ] Sincronizar al disco externo: `HBS 3 → Sincronizar`
+- [ ] Validar últimas sincronizaciones: `HBS 3 → Trabajos → Informe`
 - [ ] Verificar respaldos automáticos del sistema: `File Station → RAID → backups → el-respiro`
 - [ ] Revisar el `Centro de seguridad` y ejecutar un `Security Checkup`
 - [ ] Buscar actualizaciones de QTS: `Panel de control → Actualización de firmware`
@@ -44,8 +49,6 @@ Nada por ahora.
 
 ## Pendientes
 
-- [ ] Configurar la sincronización automática al disco externo.
-  - Reemplazar en Mantenimiento "Sincronizar al disco externo" por "Validar últimas sincronizaciones: `HBS 3 → Trabajos → Informe`".
 - [ ] Programar pruebas SMART en cada disco: rápida semanal y completa mensual.
 - [ ] Configurar reglas de alerta para eventos SMART, de temperatura y del ventilador.
 - [ ] Configurar instantáneas.
@@ -54,4 +57,41 @@ Nada por ahora.
 
 ## Bitácora
 
-Nada por ahora.
+### 2026-08-16 respaldo automático al disco externo
+
+El disco externo está alimentado por un enchufe inteligente y permanece apagado entre respaldos. Quien copia los datos es HBS, con sus propios trabajos y su propia programación; [backup-usb](backup-usb) solo se encarga de la corriente y de mirar: prende el enchufe, espera el montaje, sigue en el registro de eventos cuándo arranca y cuándo termina cada trabajo, reporta lo que vio y, si todo salió bien, desmonta y apaga el disco. El proceso completo es:
+
+1. Cron ejecuta `backup-usb` los jueves a las 2:00.
+2. El script lee el token de Home Assistant, rota la bitácora de la corrida anterior y marca la hora de corte.
+3. Llama al servicio `switch.turn_on` de la API de Home Assistant sobre el enchufe del disco.
+4. Espera hasta 5 minutos a que el disco monte. Si no monta, avisa y sigue de todos modos.
+5. A las 2:05 HBS arranca `Backup SSD` y `Backup RAID` por su propia programación.
+6. El script lee el registro de eventos cada minuto y anota cada arranque y cada final conforme aparecen, con un límite de 4 horas para el lote completo.
+7. Reporta tres cuentas: cuántos trabajos arrancaron, cuántos terminaron bien y cuántos terminaron con errores.
+8. Si todos terminaron bien desmonta el disco y llama a `switch.turn_off`. Cualquier otro desenlace lo deja montado y encendido para revisarlo a mano.
+
+Las llamadas a Home Assistant van autenticadas con un token de acceso de larga duración que el script lee de `~/.ha-token`. Antes de leerlo verifica que el archivo tenga permisos `600` y cancela si están más abiertos. Cada paso manda una notificación con `notify`, la utilería de Notification Center, y todo queda además registrado en `~/backup-usb.log`.
+
+#### ¿Por qué el script no lanza los trabajos?
+
+La API de HBS vive en `/cc3/v1/` y exige un encabezado `X-QNAP-SID` que solo entrega `authLogin.cgi` después de un login real, así que un script desatendido tendría que guardar la contraseña de una cuenta de admin para pedir un SID que además caduca. Me pareció más sencillo programar `backup-usb` unos minutos antes que los trabajos de HBS y vigilar el registro de eventos para saber cuándo apagar el disco.
+
+La otra alternativa sin autenticación es `hbs3-rr3c`, el motor de copia de HBS derivado de rclone: `hbssync origen destino` no pide credenciales y devuelve código de salida en vez de exigir sondeo, pero no usa las definiciones de trabajos ni deja registro en sus informes, que es justo lo que se revisa en el mantenimiento.
+
+#### Programación periódica
+
+La entrada de cron quedó puesta con:
+
+```bash
+echo "0 2 * * 4 /share/homes/manuel/backup-usb" >> /etc/config/crontab
+crontab /etc/config/crontab && /etc/init.d/crond.sh restart
+```
+
+Las actualizaciones de QTS suelen borrar esa entrada, así que conviene revisar `crontab -l` después de cada una. El entorno de cron se prueba con `env -i PATH=/usr/bin:/bin /bin/bash`, más pobre que el real: si el `PATH` y el `USER_HOME` que fija el script bastan ahí, bastan en cron.
+
+#### Notas de QTS
+
+Lo que costó trabajo averiguar y no se ve en el script:
+
+- `notify` cae al texto libre solo cuando la llave `-M` no existe en ningún catálogo gettext. Una llave real hace que QNAP imprima su propia plantilla traducida en lugar del mensaje del script. `-A` y `-C` tienen que ser una app y una categoría registradas; un ID inventado devuelve código 12. Se usa `A013` (System Logs) con `C001` (System Event), y no `A200` (Hybrid Backup Sync), para no mezclar los avisos del script con las entradas que HBS escribe por su cuenta.
+- QTS guarda los registros en dos lugares: `notify` escribe en la base MariaDB de QuLog Center (`qulogdb`) y `log_tool` en el SQLite `/mnt/HDA_ROOT/.logs/event.log`. QuLog Center muestra los dos, así que buscar en el archivo equivocado hace creer que la herramienta no sirve.

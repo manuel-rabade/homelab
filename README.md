@@ -59,7 +59,7 @@ Cinco zonas segmentan la casa por nivel de confianza: `LAN` confiable, `GUEST` a
 
 ## Computadoras y Equipos
 
-Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta y aplica firewall entre zonas; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB y Jellyfin; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
+Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta y aplica firewall entre zonas; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB, Jellyfin y respaldo automático de datos a un disco externo; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
 
 | Hostname                          | Propósito   | Hardware | OS | Redes |
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |

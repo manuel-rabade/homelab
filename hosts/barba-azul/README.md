@@ -16,11 +16,14 @@
 
 - Plataforma de automatización del hogar.
 - Integra y controla dispositivos IoT.
+- Servidor API para que otros equipos operen dispositivos IoT.
+  - [el-respiro](../el-respiro/): enciende y apaga el enchufe de su disco externo con [backup-usb](../el-respiro/backup-usb).
 
 ## Referencias
 
 - [HACS](https://hacs.xyz): tienda de integraciones y complementos de la comunidad de Home Assistant.
 - [hassio-ecoflow-cloud](https://github.com/tolwi/hassio-ecoflow-cloud): integración para monitorear y controlar la DELTA 3 por medio de la nube de EcoFlow.
+- [REST API](https://developers.home-assistant.io/docs/api/rest/): API HTTP de Home Assistant para operar Home Assistant desde otros equipos.
 
 ## Archivos de configuración y scripts
 
@@ -34,6 +37,7 @@ Nada por ahora.
 - [ ] Verificar copias de seguridad automáticas: `Configuración → Sistema → Copias de seguridad`
 - [ ] Aplicar actualizaciones de Core, OS, Supervisor y Aplicaciones: `Configuración → Sistema → Actualizaciones`
 - [ ] Revisar dispositivos no disponibles: `Configuración → Dispositivos y servicios → Entidades` y filtrar por `Estado = No disponible`
+- [ ] Revisar los tokens de acceso de larga duración: `Perfil → Seguridad`
 
 ## Pendientes
 

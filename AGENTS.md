@@ -62,9 +62,9 @@ Each host has a folder `hosts/hostname/` whose `README.md` is the source of trut
      - Networking: one sub-bullet per interface or port group, wired before wireless, the speed only. Prefix the port count only when there is more than one (`Ethernet 1G`, `2 Ethernet 2.5G`, `4 Ethernet 1G`), or give the Wi-Fi 802.11 standards (`Wi-Fi 802.11ax/b/g/n`).
    - `- OS:` name and version, linked when there's an official page.
    - `- Redes:` 2-space sub-bullets, one per network: `` `ZONA` IP `` for local zones, `` `VPN` tailnet `` / `` `RHED` tailnet `` for overlays (the tailnet, not the Tailscale/Headscale service running it).
-3. `## Servicios`: what the host runs.
+3. `## Servicios`: what the host runs. One bullet per service, each a full sentence ending in a period. A service another host consumes takes a sub-bullet per consumer, `- [hostname](../hostname/): qué hace por ese host.`, also a full sentence with its period. See [hosts/barba-azul/README.md](hosts/barba-azul/README.md).
 4. `## Referencias`: external links (official docs, repos).
-5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked) and relevant on-host config paths (backticked), each with a short description.
+5. `## Archivos de configuración y scripts`: the host's configuration and scripts - repo files in the folder (filename linked), relevant on-host config paths, and the paths a script reads or writes when they matter for maintenance (its token file, its log), all backticked and each with a short description. Write on-host paths with `~/` when they sit in a user's home, absolute otherwise.
 6. `## Mantenimiento`: recurring service checklist, task definitions only, boxes left unchecked. Aggregated into [MAINTENANCE.md](MAINTENANCE.md). Each task names where it is done:
    - Shell host: an inline command (`` Tarea: `comando` ``).
    - GUI appliance: point at the UI instead - a single app or section woven in with a preposition (`` Revisar estado en `Almacenamiento e instantáneas` ``), or a multi-step navigation path as `` Tarea: `Menú → Submenú → Opción` ``. See [hosts/el-respiro/README.md](hosts/el-respiro/README.md) for a GUI-appliance example.
@@ -187,7 +187,7 @@ Checked boxes (`[x]`) are ephemeral working state for a service pass; never sync
   - When writing Spanish prose, translate «repository» as «depósito», not «repositorio».
 - **Dashes**: use a regular hyphen (`-`); never em dashes (`—`) or en dashes (`–`).
 - **Lines**: let prose flow, one line per paragraph; don't hard-wrap by hand.
-- **Heading hierarchy**: host and cloud pages go `# hostname` then `## section`. Root `README.md` goes `## category` for its sections, with one exception: the `### Mapa` subsection under `## Redes`. Other `### name` subsections appear only inside host and cloud pages (`## Bitácora` entries).
+- **Heading hierarchy**: host and cloud pages go `# hostname` then `## section`. Root `README.md` goes `## category` for its sections, with one exception: the `### Mapa` subsection under `## Redes`. Other `### name` subsections appear only inside host and cloud pages (`## Bitácora` entries). A `## Bitácora` entry long enough to need parts breaks into `#### name` subsections; bold text is never used as a heading.
 - **No frontmatter**: files start straight with the content.
 - **Banner**: the three top-level docs open with an ASCII-art title (figlet) instead of an `#` heading, each in its own font: `larry3d` for `README.md`, `doom` for `MAINTENANCE.md`, `terminus` for `AGENTS.md`. Host pages use a plain `# hostname`.
 - **Backticks** for technical terms: network zones (`LAN`, `GUEST`, `IOT`, `MEDIA`, `SBC`), CIDR segments and IPs, hostnames, file paths, inline commands, and GUI app names and menu navigation paths (`App Center`, `Panel de control → Estado del sistema`).
