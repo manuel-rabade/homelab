@@ -55,6 +55,13 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Revisar dispositivos no disponibles: `Configuración → Dispositivos y servicios → Entidades` y filtrar por `Estado = No disponible`
 - [ ] Revisar los tokens de acceso de larga duración: `Perfil → Seguridad`
 
+## covadonga
+
+- [ ] Revisar uso de disco: `df -h -t ext4`
+- [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
+- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Reiniciar: `reboot`
+
 ## savoy
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
