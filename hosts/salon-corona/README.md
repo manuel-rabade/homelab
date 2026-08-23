@@ -20,6 +20,8 @@
 
 - Router principal y punto de acceso inalámbrico.
 - Aplica segmentación, enrutamiento y políticas de firewall entre las zonas de red.
+- Servidor DHCP de las redes `LAN`, `GUEST`, `IOT` y `MEDIA`.
+- Servidor DNS de todas las redes, incluida `SBC`.
 
 ## Referencias
 
