@@ -91,7 +91,10 @@ Las actualizaciones de QTS suelen borrar esa entrada, así que conviene revisar 
 
 #### Notas de QTS
 
-Lo que costó trabajo averiguar y no se ve en el script:
+Todo esto es sobre la parte de `notify` de `backup-usb`, o sea la función `notify_send` y las variables `NOTIFY_*` que la alimentan. Es lo que costó trabajo averiguar y no se ve leyendo el script:
 
-- `notify` cae al texto libre solo cuando la llave `-M` no existe en ningún catálogo gettext. Una llave real hace que QNAP imprima su propia plantilla traducida en lugar del mensaje del script. `-A` y `-C` tienen que ser una app y una categoría registradas; un ID inventado devuelve código 12. Se usa `A013` (System Logs) con `C001` (System Event), y no `A200` (Hybrid Backup Sync), para no mezclar los avisos del script con las entradas que HBS escribe por su cuenta.
+- `NOTIFY_KEY` pasado por `-M` no es un identificador del mensaje, es una llave que `notify` busca en el catálogo de la app que se pasa en `-A`. Si la encuentra imprime la plantilla de QNAP y tira el texto del script, así que la llave tiene que no existir: `backup-usb` sirve porque las llaves de `A200` son todas numéricas o `Vnnn`.
+- `-A` tiene que ser una app registrada: un ID inventado devuelve código 12 y no manda nada. `-C` no se valida y una categoría inventada devuelve 0, pero el evento sale sin categoría. Se usa `A200` (Hybrid Backup Sync) con `C006` (System).
+- Los avisos no salen por correo solos. Hay que crear una regla en Notification Center que empate con el `NOTIFY_PREFIX` en los tres niveles (`info`, `warning` y `error`), porque la regla general de la NAS arranca en `warning` y tira todo el `info`.
+- `notify` siempre termina en 0, aunque el evento no empate con ninguna regla y nunca salga de la NAS. El veredicto está en `/var/log/nc.log` (`1 policies matched` contra `not match any policy`) y el resultado del envío en `/mnt/ext/opt/NotificationCenter/qanalytics/analytic.log`.
 - QTS guarda los registros en dos lugares: `notify` escribe en la base MariaDB de QuLog Center (`qulogdb`) y `log_tool` en el SQLite `/mnt/HDA_ROOT/.logs/event.log`. QuLog Center muestra los dos, así que buscar en el archivo equivocado hace creer que la herramienta no sirve.

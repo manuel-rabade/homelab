@@ -31,8 +31,8 @@ LOG_TOOL="/sbin/log_tool"        # QTS event log CLI
 LOG_ROWS=200                     # Entries to read per poll, newest first
 
 NOTIFY="/usr/local/sbin/notify"  # QTS notifications CLI
-NOTIFY_APP="A013"                # System Logs
-NOTIFY_CATEGORY="C001"           # System Event
+NOTIFY_APP="A200"                # Hybrid Backup Sync
+NOTIFY_CATEGORY="C006"           # System
 NOTIFY_KEY="backup-usb"          # Dummy Key
 NOTIFY_PREFIX="[Backup USB]"     # Prepended to every message
 
