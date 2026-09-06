@@ -168,7 +168,6 @@ if disk_mounted; then
 else
   echo "WARNING: disk not mounted after ${MOUNT_TIMEOUT}s. Watching the jobs anyway." >> "$LOG"
   notify_send warn "USB disk not mounted after ${MOUNT_TIMEOUT}s. Watching the HBS jobs anyway."
-  RESULT=1
 fi
 
 # 4. Watch the jobs, ignoring anything the event log recorded before $FLOOR.
@@ -285,7 +284,7 @@ elif disk_mounted; then
     echo "Unmounted $TARGET." >> "$LOG"
   else
     echo "ERROR: cannot unmount $TARGET. Leaving the disk powered on." >> "$LOG"
-    notify_send warn "Cannot unmount the USB disk, so it is left powered on. Check the log at $LOG."
+    notify_send error "Cannot unmount the USB disk, so it is left powered on. Check the log at $LOG."
     POWER_OFF=0
     RESULT=1
   fi
@@ -297,7 +296,7 @@ if [ "$POWER_OFF" -eq 1 ]; then
 
   if [ "$CODE" != "200" ]; then
     echo "ERROR: HA refused the turn_off call (HTTP $CODE). Disk still on." >> "$LOG"
-    notify_send warn "Home Assistant refused the turn_off call (HTTP $CODE). The USB disk is still powered on."
+    notify_send error "Home Assistant refused the turn_off call (HTTP $CODE). The USB disk is still powered on."
     RESULT=1
   fi
 fi
