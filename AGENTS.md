@@ -44,7 +44,7 @@ The inventory table in [README.md](README.md) is **derived** from the host pages
 - **Propósito** ← `Propósito:` bullet.
 - **Hardware** ← `Hardware:` bullet verbatim, link included, sub-bullets dropped.
 - **OS** ← `OS:` bullet verbatim, link included, sub-bullets dropped.
-- **Redes** ← `Redes:` sub-bullets joined with `<br>`.
+- **Redes** ← `Redes:` sub-bullets joined with `<br>`, the space inside each pair written as `&nbsp;` so a zone never gets split from its address (`` `LAN`&nbsp;192.168.1.2<br>`VPN`&nbsp;tailnet ``).
 
 Strip the trailing period from every cell. `Redes` is plural because a host can sit on several networks. When you add or retire a host, update this table.
 
@@ -176,11 +176,11 @@ Resumen del trabajo realizado.
 
 The `## Bitácora` table in [README.md](README.md) is a **derived** view of the `## Bitácora` entries of every host and cloud page: one row per entry, all hosts merged into a single timeline, newest first. It sits at the bottom of [README.md](README.md), after [Servicios Cloud](#servicios-cloud), because it grows without bound and the inventory is what the page is for. Columns `Fecha | Host | Descripción`:
 
-- **Fecha** ← the `YYYY-MM-DD` of the entry heading, linked to that heading's anchor in the host page (e.g. `[2026-08-22](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga)`). The anchor is the whole heading text lowercased, spaces turned into hyphens, accents kept and punctuation dropped, so `### 2026-06-23 audio roto por kernel 6.18` anchors as `#2026-06-23-audio-roto-por-kernel-618` and the italics of `### 2026-07-04 Conexión a la *hipermegaRHED*` vanish in `#2026-07-04-conexión-a-la-hipermegarhed`.
+- **Fecha** ← the date of the entry heading, written `Mmm D, YYYY` with the Spanish month abbreviated (`Ene`, `Feb`, `Mar`, `Abr`, `May`, `Jun`, `Jul`, `Ago`, `Sep`, `Oct`, `Nov`, `Dic`) and the day without a leading zero, both spaces written as `&nbsp;` so the date never wraps (`Ago&nbsp;22,&nbsp;2026`). The entry heading itself keeps the `YYYY-MM-DD` form, so the link target is the ISO date: `[Ago&nbsp;22,&nbsp;2026](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga)`. The anchor is the whole heading text lowercased, spaces turned into hyphens, accents kept and punctuation dropped, so `### 2026-06-23 audio roto por kernel 6.18` anchors as `#2026-06-23-audio-roto-por-kernel-618` and the italics of `### 2026-07-04 Conexión a la *hipermegaRHED*` vanish in `#2026-07-04-conexión-a-la-hipermegarhed`.
 - **Host** ← folder name, linked to `hosts/hostname/` or `cloud/hostname/`, the same link text as the inventory tables.
 - **Descripción** ← two sentences at most, written for this table rather than copied from the entry: what was done and the part worth remembering. Keep the prose conventions of the entry itself, backticks for technical terms and italics for *hipermegaRHED*.
 
-Rows carry no trailing period. Two entries on the same host and date sort by the order they appear on the host page. When an entry is added, edited or removed, update this table in the same edit.
+Rows carry no trailing period. Rows sort by the entry date, newest first, regardless of how the date reads once formatted; two entries on the same host and date sort by the order they appear on the host page. When an entry is added, edited or removed, update this table in the same edit.
 
 ## Maintenance checklist
 
@@ -204,7 +204,7 @@ Checked boxes (`[x]`) are ephemeral working state for a service pass; never sync
 - **Italics** (`*…*`): only for proper names, never for general emphasis. Two cases: (a) *hipermegaRHED*, the proper name of the `RHED` overlay network - used in narrative prose (Bitácora, and the Servicios/Pendientes items tied to it); in structured fields use the backticked zone code `` `RHED` `` instead (`Redes` bullets, `Mantenimiento` tasks, the README `## Redes` table and the inventory `Redes` column), the two being synonyms. (b) The codename of a planned experiment or project, e.g. `*Museo de SBCs*`, `*Disco duro hipermegaRHED*`; when the codename embeds the network name the whole phrase stays italic.
 - **Links**: use the bare filename or path as link text, without backticks (`[README.md](README.md)`). Internal references by anchor; external links to official documentation or repositories under `## Referencias`. A page may still link its own hosted sites or services inline in `## Servicios`.
 - **Sub-bullets** nest 2 spaces.
-- **Tables** (markdown pipes) for inventories; `<br>` to stack multiple values in one cell.
+- **Tables** (markdown pipes) for inventories; `<br>` to stack multiple values in one cell, and `&nbsp;` in place of a space that must not become a line break (the `Redes` cells of [Computadoras y Equipos](#computadoras-y-equipos), the `Fecha` cells of [Bitácora](#bitácora)). A `&nbsp;` only works outside backticks: a code span renders it literally.
 - **Lists** with `-`; checkboxes `- [ ]` for maintenance and pending tasks.
 - **Fenced code blocks** for multi-line commands, scripts or configuration; inline backticks for a single command. Warn when an opening fence has no language tag (`bash` for shell, `yaml`, `markdown`, ...); the only blocks that stay language-less are the figlet banners of the three top-level docs and the imported ASCII network diagram in `README.md`.
 - **Tone**: concise and technical; no filler. OS versions and hardware models always specific and linked.
