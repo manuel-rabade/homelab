@@ -12,17 +12,17 @@ Guide for maintaining this repository's documentation. Read it before adding or 
 
 This repository is the source of truth for my home infrastructure.
 
-- [README.md](README.md): top-level inventory of networks, computers and devices.
+- [README.md](README.md): top-level inventory of networks, computers and devices, plus the aggregated work log.
 - [MAINTENANCE.md](MAINTENANCE.md): aggregated recurring-maintenance checklist.
 - [hosts/](hosts/): one folder per computer (e.g. [hosts/la-esperanza/](hosts/la-esperanza/)): scripts, config files and a `README.md`.
 - [cloud/](cloud/): one folder per cloud host (e.g. [cloud/balalaika/](cloud/balalaika/)): same page structure as a host, for rented VMs off the home network.
 - [deprecated/](deprecated/): retired computers and configurations.
 
-Each host's `hosts/hostname/README.md` (and each cloud host's `cloud/hostname/README.md`) is the single source of truth for that host. The `## Computadoras y Equipos` and `## Servicios Cloud` tables in [README.md](README.md), and the sections in [MAINTENANCE.md](MAINTENANCE.md), are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate the affected views to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
+Each host's `hosts/hostname/README.md` (and each cloud host's `cloud/hostname/README.md`) is the single source of truth for that host. The `## Computadoras y Equipos`, `## Servicios Cloud` and `## Bitácora` tables in [README.md](README.md), and the sections in [MAINTENANCE.md](MAINTENANCE.md), are **aggregated views**: regenerated from the host pages, never authored directly. When you change a host page, regenerate the affected views to match. [hosts/la-esperanza/README.md](hosts/la-esperanza/README.md) is the canonical example of a host page.
 
 ## Resúmenes de sección
 
-Every `##` section in [README.md](README.md) opens with a short summary paragraph, placed between the heading and the section's content. One or two sentences of Spanish prose giving the gist: what the section holds and its notable specifics (roles, groupings, what sits on which network). The paragraph is authored directly, even in the sections whose table is a derived view ([Computadoras y Equipos](#computadoras-y-equipos), [Servicios Cloud](#servicios-cloud)): the table below is regenerated from the host pages, the summary above is written by hand.
+Every `##` section in [README.md](README.md) opens with a short summary paragraph, placed between the heading and the section's content. One or two sentences of Spanish prose giving the gist: what the section holds and its notable specifics (roles, groupings, what sits on which network). The paragraph is authored directly, even in the sections whose table is a derived view ([Computadoras y Equipos](#computadoras-y-equipos), [Servicios Cloud](#servicios-cloud), [Bitácora](#bitácora)): the table below is regenerated from the host pages, the summary above is written by hand.
 
 Keep the summary in sync with the data it describes: whenever the table or the host pages behind it change (a host or device added, retired, moved between networks, or repurposed), update the paragraph in the same edit so it never contradicts the content below it.
 
@@ -70,7 +70,7 @@ Each host has a folder `hosts/hostname/` whose `README.md` is the source of trut
    - GUI appliance: point at the UI instead - a single app or section woven in with a preposition (`` Revisar estado en `Almacenamiento e instantáneas` ``), or a multi-step navigation path as `` Tarea: `Menú → Submenú → Opción` ``. See [hosts/el-respiro/README.md](hosts/el-respiro/README.md) for a GUI-appliance example.
    - Trailing period depends on the kind of line, not how deeply it is nested. A task (a checkbox line, `- [ ]`) is a short instruction and takes no period, even when nested under another task. A plain sub-bullet (`-`, no checkbox) that adds a note about its task is a full sentence and ends with a period. Example in [hosts/el-respiro/README.md](hosts/el-respiro/README.md): the nested SMART `- [ ]` checkbox has no period, while the `-` note beneath it listing which attributes to watch does.
 7. `## Pendientes`: one-off or future tasks for this host.
-8. `## Bitácora`: work log, newest entry on top. Each entry is `### YYYY-MM-DD título corto` followed by a summary; commands go in fenced code blocks.
+8. `## Bitácora`: work log, newest entry on top. Each entry is `### YYYY-MM-DD título corto` followed by a summary; commands go in fenced code blocks. Every entry also gets a row in the [Bitácora](#bitácora) table of [README.md](README.md): add it in the same edit that adds the entry.
 
 Template:
 
@@ -171,6 +171,16 @@ Nada por ahora.
 
 Resumen del trabajo realizado.
 ```
+
+## Bitácora
+
+The `## Bitácora` table in [README.md](README.md) is a **derived** view of the `## Bitácora` entries of every host and cloud page: one row per entry, all hosts merged into a single timeline, newest first. It sits at the bottom of [README.md](README.md), after [Servicios Cloud](#servicios-cloud), because it grows without bound and the inventory is what the page is for. Columns `Fecha | Host | Descripción`:
+
+- **Fecha** ← the `YYYY-MM-DD` of the entry heading, linked to that heading's anchor in the host page (e.g. `[2026-08-22](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga)`). The anchor is the whole heading text lowercased, spaces turned into hyphens, accents kept and punctuation dropped, so `### 2026-06-23 audio roto por kernel 6.18` anchors as `#2026-06-23-audio-roto-por-kernel-618` and the italics of `### 2026-07-04 Conexión a la *hipermegaRHED*` vanish in `#2026-07-04-conexión-a-la-hipermegarhed`.
+- **Host** ← folder name, linked to `hosts/hostname/` or `cloud/hostname/`, the same link text as the inventory tables.
+- **Descripción** ← two sentences at most, written for this table rather than copied from the entry: what was done and the part worth remembering. Keep the prose conventions of the entry itself, backticks for technical terms and italics for *hipermegaRHED*.
+
+Rows carry no trailing period. Two entries on the same host and date sort by the order they appear on the host page. When an entry is added, edited or removed, update this table in the same edit.
 
 ## Maintenance checklist
 

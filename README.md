@@ -8,7 +8,7 @@
     \/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/____/\/__/\/_/ \/___/
 ```
 
-Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#computadoras-y-equipos), [dispositivos](#dispositivos-iot-y-multimedia) y [servicios cloud](#servicios-cloud).
+Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#computadoras-y-equipos), [dispositivos](#dispositivos-iot-y-multimedia) y [servicios cloud](#servicios-cloud), más la [bitácora](#bitácora) del trabajo hecho en cada host.
 
 - [MAINTENANCE.md](MAINTENANCE.md): checklist de mantenimiento recurrente.
 - [LICENSE](LICENSE): licencia del depósito (CC0 1.0).
@@ -102,3 +102,16 @@ VMs rentadas fuera de la red casera para servicios que necesitan exponerse a int
 | Hostname                      | Propósito        | Proveedor | Instancia | OS | IP |
 | ----------------------------- | ---------------- | --------- | --------- | -- | -- |
 | [balalaika](cloud/balalaika/) | Servidor público | [Google Cloud](https://cloud.google.com) | `e2-micro` | [Debian](https://www.debian.org) 12 (bookworm) | 34.67.134.108 |
+
+## Bitácora
+
+Vista agregada del trabajo registrado en cada host, de lo más reciente a lo más viejo.
+
+| Fecha | Host | Descripción |
+| ----- | ---- | ----------- |
+| [2026-08-22](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga) | [covadonga](hosts/covadonga/) | Alta del mini PC dedicado a experimentar con LLMs locales. Se instaló Ubuntu Server 26.04 LTS con IP fija en la `LAN` |
+| [2026-08-16](hosts/el-respiro/README.md#2026-08-16-respaldo-automático-al-disco-externo) | [el-respiro](hosts/el-respiro/) | El script `backup-usb` prende el enchufe inteligente del disco externo, espera el montaje y vigila el registro de eventos hasta que terminan los trabajos de HBS. Si todos salen bien desmonta y apaga el disco, reportando cada paso por Notification Center |
+| [2026-07-20](hosts/barba-azul/README.md#2026-07-20-monitoreo-de-la-estación-ecoflow) | [barba-azul](hosts/barba-azul/) | Instalación de HACS y de la integración EcoFlow Cloud en Home Assistant. Con ella se monitorea y controla la estación DELTA 3 Classic en modo `private_api` |
+| [2026-07-04](hosts/savoy/README.md#2026-07-04-conexión-a-la-hipermegarhed) | [savoy](hosts/savoy/) | Alta del nodo en la *hipermegaRHED*, la red mesh sobre WireGuard de la RHED. Se instaló Tailscale desde su repositorio y se registró el nodo contra el servidor Headscale del KPR |
+| [2026-06-28](hosts/la-esperanza/README.md#2026-06-28-migración-a-go-librespot) | [la-esperanza](hosts/la-esperanza/) | Endpoint de Spotify Connect corriendo como servicio systemd de usuario. Se eligió go-librespot sobre raspotify por estar activamente mantenido, con salida por el codec rt5616 y volumen por software |
+| [2026-06-23](hosts/la-esperanza/README.md#2026-06-23-audio-roto-por-kernel-618) | [la-esperanza](hosts/la-esperanza/) | El kernel 6.18 rompió la salida de audio del codec rt5616, una regresión del driver y no de la configuración. Se bajó a la serie 6.12 con armbian-config y se retuvieron los paquetes con `apt-mark hold` |
