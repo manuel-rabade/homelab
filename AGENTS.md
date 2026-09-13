@@ -215,6 +215,6 @@ English, like everything outside the documentation prose. A commit reads:
 
 - **Subject**: one line in the imperative mood, capitalized, no trailing period, kept short (around 50-70 characters). It names the change as a whole (`Add per-section summaries to README and document the convention`).
 - **Body**: separated from the subject by a blank line, present whenever the change needs explaining. Unlike the documentation prose, commit bodies **are** hard-wrapped by hand, at around 72 columns. Open with a sentence on the what and why, then continue as prose paragraphs or a `-` bullet list. When several files or areas change, lead each bullet with the one it touches (`README.md:`, `AGENTS.md:`, `cloud/balalaika/README.md:`). Backtick technical terms as in the docs (`### Mapa`, `IOT`, `git -C ~ pull`).
-- **Trailer**: after a blank line, a `Co-Authored-By:` trailer crediting the assistant that helped write the change, in git's `Name <email>` form (e.g. `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`).
+- **Trailer**: after a blank line, a `Co-Authored-By:` trailer crediting the assistant that helped write the change, in git's `Name <email>` form (e.g. `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`). It is the only trailer: never add a `Claude-Session:` line, nor any other link back to an assistant session.
 
 PR messages follow the same voice.
