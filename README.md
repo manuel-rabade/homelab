@@ -59,7 +59,7 @@ Cinco zonas segmentan la casa por nivel de confianza: `LAN` confiable, `GUEST` a
 
 ## Computadoras y Equipos
 
-Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta, aplica firewall entre zonas y provee DHCP y DNS; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB, Jellyfin y respaldo automático de datos a un disco externo; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; `covadonga` es el mini PC dedicado a experimentar con LLMs locales; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
+Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta, aplica firewall entre zonas y provee DHCP y DNS; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB, Jellyfin y respaldo automático de datos a un disco externo; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; `covadonga` es el mini PC con Proxmox VE que hospeda contenedores y máquinas virtuales en la `LAN`, sobre todo para LLMs locales; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
 
 | Hostname                          | Propósito   | Hardware | OS | Redes |
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
@@ -67,7 +67,7 @@ Las computadoras administradas del hogar, excluyendo las personales. Cada una co
 | [la-esperanza](hosts/la-esperanza/)     | Laboratorio LAN | [NanoPC T6 LTS](https://www.friendlyelec.com/index.php?route=product/product&path=69&product_id=292) | [Armbian](https://armbian.com) 26 (trixie) | `LAN`&nbsp;192.168.1.2<br>`VPN`&nbsp;tailnet |
 | [el-respiro](hosts/el-respiro/)         | NAS         | [QNAP TS-253E](https://www.qnap.com/en/product/ts-253e) | [QTS](https://www.qnap.com/la/operating-system/qts) 5.2 | `LAN`&nbsp;192.168.1.3 |
 | [barba-azul](hosts/barba-azul/)         | Hub IoT     | [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | [Home Assistant OS](https://www.home-assistant.io) 18 | `LAN`&nbsp;192.168.1.4<br>`IOT`&nbsp;192.168.3.3 |
-| [covadonga](hosts/covadonga/)           | Laboratorio LLMs | [Minisforum UM890 Pro](https://www.minisforum.com/products/minisforum-um890-pro) | [Ubuntu Server](https://ubuntu.com/server) 26.04 LTS (resolute) | `LAN`&nbsp;192.168.1.5 |
+| [covadonga](hosts/covadonga/)           | Hipervisor LAN | [Minisforum UM890 Pro](https://www.minisforum.com/products/minisforum-um890-pro) | [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) 9.2 (trixie) | `LAN`&nbsp;192.168.1.5 |
 | [savoy](hosts/savoy/)                   | Laboratorio DMZ | [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | [Armbian](https://armbian.com) 26 (trixie) | `GUEST`&nbsp;192.168.2.2<br>`SBC`&nbsp;192.168.6.1<br>`RHED`&nbsp;tailnet |
 | [dux-de-venecia](hosts/dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC`&nbsp;192.168.6.2<br>`RHED`&nbsp;tailnet |
 
@@ -109,6 +109,7 @@ Vista agregada del trabajo registrado en cada host, de lo más reciente a lo má
 
 | Fecha | Host | Descripción |
 | ----- | ---- | ----------- |
+| [Oct&nbsp;3,&nbsp;2026](hosts/covadonga/README.md#2026-10-03-migración-a-proxmox-ve) | [covadonga](hosts/covadonga/) | Reinstalación con Proxmox VE 9.2 para hospedar contenedores LXC y máquinas virtuales |
 | [Ago&nbsp;22,&nbsp;2026](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga) | [covadonga](hosts/covadonga/) | Alta del mini PC dedicado a experimentar con LLMs locales. Se instaló Ubuntu Server 26.04 LTS con IP fija en la `LAN` |
 | [Ago&nbsp;16,&nbsp;2026](hosts/el-respiro/README.md#2026-08-16-respaldo-automático-al-disco-externo) | [el-respiro](hosts/el-respiro/) | El script `backup-usb` prende el enchufe inteligente del disco externo, espera el montaje y vigila el registro de eventos hasta que terminan los trabajos de HBS. Si todos salen bien desmonta y apaga el disco, reportando cada paso por Notification Center |
 | [Jul&nbsp;20,&nbsp;2026](hosts/barba-azul/README.md#2026-07-20-monitoreo-de-la-estación-ecoflow) | [barba-azul](hosts/barba-azul/) | Instalación de HACS y de la integración EcoFlow Cloud en Home Assistant. Con ella se monitorea y controla la estación DELTA 3 Classic en modo `private_api` |

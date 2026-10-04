@@ -59,7 +59,7 @@ Checklist de mantenimiento para mi infraestructura casera.
 
 - [ ] Revisar uso de disco: `df -h -t ext4`
 - [ ] Actualizar dotfiles (`root` y `manuel`): `git -C ~ pull`
-- [ ] Actualizar paquetes: `apt update && apt upgrade`
+- [ ] Actualizar paquetes: `apt update && apt full-upgrade`
 - [ ] Reiniciar: `reboot`
 
 ## savoy
