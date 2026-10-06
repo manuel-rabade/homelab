@@ -71,6 +71,13 @@ Checklist de mantenimiento para mi infraestructura casera.
 - [ ] Verificar conectividad hacia la red `SBC`: `ping -c 3 192.168.6.2`
 - [ ] Verificar estado de Tailscale: `tailscale status`
 
+## la-faena
+
+- [ ] Revisar uso de disco: `df -h -t ext4`
+- [ ] Revisar el enlace Wi-Fi: `iw dev nic1 link`
+- [ ] Actualizar paquetes: `apt update && apt full-upgrade`
+- [ ] Reiniciar: `reboot`
+
 ## dux-de-venecia
 
 - [ ] Revisar uso de disco: `df -h`

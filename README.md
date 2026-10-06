@@ -15,51 +15,54 @@ Fuente de verdad de mi infraestructura casera: [redes](#redes), [computadoras](#
 
 ## Redes
 
-Cinco zonas segmentan la casa por nivel de confianza: `LAN` confiable, `GUEST` aislada, e `IOT` y `MEDIA` para los dispositivos del hogar. `salon-corona` rutea esas cuatro y `SBC` cuelga de `savoy` como red aislada. Algunos equipos participan en tailnets, una personal en [Tailscale](https://tailscale.com) y otra de la [RHED](https://rhed.xyz) sobre [Headscale](https://headscale.net).
+Cuatro zonas segmentan la casa por nivel de confianza: `LAN` confiable, `GUEST` aislada, e `IOT` y `MEDIA` para los dispositivos del hogar. `VMS`, `SBC` y `VPS` son subredes ruteadas detrás de `covadonga`, `savoy` y `la-faena`. Algunos equipos participan en tailnets, una personal en [Tailscale](https://tailscale.com) y otra de la [RHED](https://rhed.xyz) sobre [Headscale](https://headscale.net).
 
-| Zona    | Segmento       | Propósito               | Medio                     | Políticas         |
-|---------|----------------|-------------------------|---------------------------|-------------------|
-| `LAN`   | 192.168.1.0/24 | Equipos confiables      | Wi-Fi 2.4/5 GHz, Ethernet | Sin restricciones |
-| `GUEST` | 192.168.2.0/24 | Equipos externos        | Wi-Fi 5 GHz               | Dispositivos aislados, acceso a internet limitado |
-| `IOT`   | 192.168.3.0/24 | Dispositivos IoT        | Wi-Fi 2.4 GHz             | Acceso a internet controlado por dispositivo |
-| `MEDIA` | 192.168.4.0/24 | Dispositivos multimedia | Wi-Fi 5 GHz               | Acceso limitado a `LAN` |
-| `SBC`   | 192.168.6.0/24 | Colección SBC           | Ethernet                  | Red aislada, acceso a internet limitado  |
+| Zona    | Segmento       | Propósito                     | Medio                     | Políticas         |
+|---------|----------------|-------------------------------|---------------------------|-------------------|
+| `LAN`   | 192.168.1.0/24 | Equipos confiables            | Wi-Fi 2.4/5 GHz, Ethernet | Sin restricciones |
+| `GUEST` | 192.168.2.0/24 | Equipos externos              | Wi-Fi 5 GHz               | Dispositivos aislados, acceso a internet limitado |
+| `IOT`   | 192.168.3.0/24 | Dispositivos IoT              | Wi-Fi 2.4 GHz             | Acceso a internet controlado por dispositivo |
+| `MEDIA` | 192.168.4.0/24 | Dispositivos multimedia       | Wi-Fi 5 GHz               | Acceso limitado a `LAN` |
+| `VMS`   | 192.168.5.0/24 | VMs y contenedores privados   | Bridge virtual            | Sin restricciones |
+| `SBC`   | 192.168.6.0/24 | Colección SBC                 | Ethernet                  | Acceso a internet limitado |
+| `VPS`   | 192.168.7.0/24 | Servidores virtuales públicos | Bridge virtual            | Acceso controlado por servidor |
 
 ### Mapa
 
 ```
-                                   +------------+
-                                   |  Internet  |
-                                   +------------+
-                                         |
-                                         |
-                          +-----------------------------+
-        +-----------------|         salon-corona        |-----------------+
-        |                 +-----------------------------+                 |
-        |                     |                     |                     |
-        |                     |                     |                     |
-        |                     |                     |                     |
-        |                     |                     |                     |
-+----------------+    +----------------+    +----------------+    +----------------+
-|      LAN       |    |     GUEST      |    |      IOT       |    |     MEDIA      |
-| 192.168.1.0/24 |    | 192.168.2.0/24 |    | 192.168.3.0/24 |    | 192.168.4.0/24 |
-+----------------+    +----------------+    +----------------+    +----------------+
-                              |
-                              |
-                      +----------------+
-                      |     savoy      |
-                      +----------------+
-                              |
-                              |
-                      +----------------+
-                      |      SBC       |
-                      | 192.168.6.0/24 |
-                      +----------------+
+                                 +------------+
+                                 |  Internet  |
+                                 +------------+
+                                       |
+                                       |
+                          +--------------------------+
+        +---------------- |       salon-corona       |-----------------+
+        |                 +--------------------------+                 |
+        |                    |                    |                    |
+        |                    |                    |                    |
++----------------+   +----------------+   +----------------+   +----------------+
+|      LAN       |   |      IOT       |   |     MEDIA      |   |     GUEST      |
+| 192.168.1.0/24 |   | 192.168.3.0/24 |   | 192.168.4.0/24 |   | 192.168.2.0/24 |
++----------------+   +----------------+   +----------------+   +----------------+
+        |                                                              |
+        |                                                              |
++----------------+                                           +---------+----------+
+|   covadonga    |                                           |                    |
++----------------+                                           |                    |
+        |                                            +----------------+   +----------------+
+        |                                            |     savoy      |   |    la-faena    |
++----------------+                                   +----------------+   +----------------+
+|      VMS       |                                           |                    |
+| 192.168.5.0/24 |                                           |                    |
++----------------+                                   +----------------+   +----------------+
+                                                     |      SBC       |   |      VPS       |
+                                                     | 192.168.6.0/24 |   | 192.168.7.0/24 |
+                                                     +----------------+   +----------------+
 ```
 
 ## Computadoras y Equipos
 
-Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta, aplica firewall entre zonas y provee DHCP y DNS; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB, Jellyfin y respaldo automático de datos a un disco externo; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; `covadonga` es el mini PC con Proxmox VE que hospeda contenedores y máquinas virtuales en la `LAN`, sobre todo para LLMs locales; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
+Las computadoras administradas del hogar, excluyendo las personales. Cada una con su página en [hosts/](hosts/) como fuente de verdad. `salon-corona` es el router OpenWrt que segmenta, aplica firewall entre zonas y provee DHCP y DNS; `la-esperanza`, laboratorio de la `LAN`, corre scripts, automatizaciones y un Spotify Connect hacia un amplificador; `el-respiro` es el NAS QNAP con SMB, Jellyfin y respaldo automático de datos a un disco externo; `barba-azul` aloja Home Assistant para controlar los dispositivos IoT; `covadonga` es el mini PC con Proxmox VE que hospeda contenedores y máquinas virtuales en la `LAN`, sobre todo para LLMs locales; `la-faena` es el segundo hipervisor Proxmox VE, conectado por Wi-Fi a `GUEST` para hospedar los servicios pesados de la DMZ; y `savoy` junto con la BeagleBone vintage `dux-de-venecia` forman la DMZ como nodos de la *hipermegaRHED*.
 
 | Hostname                          | Propósito   | Hardware | OS | Redes |
 | --------------------------------- | ----------- | ---------------------------------------------------------------- | --- | --- |
@@ -69,6 +72,7 @@ Las computadoras administradas del hogar, excluyendo las personales. Cada una co
 | [barba-azul](hosts/barba-azul/)         | Hub IoT     | [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | [Home Assistant OS](https://www.home-assistant.io) 18 | `LAN`&nbsp;192.168.1.4<br>`IOT`&nbsp;192.168.3.3 |
 | [covadonga](hosts/covadonga/)           | Hipervisor LAN | [Minisforum UM890 Pro](https://www.minisforum.com/products/minisforum-um890-pro) | [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) 9.2 (trixie) | `LAN`&nbsp;192.168.1.5 |
 | [savoy](hosts/savoy/)                   | Laboratorio DMZ | [Raspberry Pi 4B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | [Armbian](https://armbian.com) 26 (trixie) | `GUEST`&nbsp;192.168.2.2<br>`SBC`&nbsp;192.168.6.1<br>`RHED`&nbsp;tailnet |
+| [la-faena](hosts/la-faena/)             | Hipervisor DMZ | [KAMRUI E3B](https://store.kamrui.com/products/e3b-mini-pc) | [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) 9.2 (trixie) | `GUEST`&nbsp;192.168.2.3<br>`VPS`&nbsp;192.168.7.1 |
 | [dux-de-venecia](hosts/dux-de-venecia/) | SBC vintage | [BeagleBone](https://www.beagleboard.org/boards/beaglebone-original) | [Debian](https://www.debian.org) 12 (bookworm) | `SBC`&nbsp;192.168.6.2<br>`RHED`&nbsp;tailnet |
 
 ## Dispositivos IoT y Multimedia
@@ -109,6 +113,7 @@ Vista agregada del trabajo registrado en cada host, de lo más reciente a lo má
 
 | Fecha | Host | Descripción |
 | ----- | ---- | ----------- |
+| [Oct&nbsp;4,&nbsp;2026](hosts/la-faena/README.md#2026-10-04-instalación-de-la-faena) | [la-faena](hosts/la-faena/) | Alta del segundo hipervisor Proxmox VE, en la DMZ y conectado solo por Wi-Fi. Como una interfaz Wi-Fi no puede ser puerto de un bridge, los huéspedes quedan en una red interna ruteada detrás del host |
 | [Oct&nbsp;3,&nbsp;2026](hosts/covadonga/README.md#2026-10-03-migración-a-proxmox-ve) | [covadonga](hosts/covadonga/) | Reinstalación con Proxmox VE 9.2 para hospedar contenedores LXC y máquinas virtuales |
 | [Ago&nbsp;22,&nbsp;2026](hosts/covadonga/README.md#2026-08-22-instalación-de-covadonga) | [covadonga](hosts/covadonga/) | Alta del mini PC dedicado a experimentar con LLMs locales. Se instaló Ubuntu Server 26.04 LTS con IP fija en la `LAN` |
 | [Ago&nbsp;16,&nbsp;2026](hosts/el-respiro/README.md#2026-08-16-respaldo-automático-al-disco-externo) | [el-respiro](hosts/el-respiro/) | El script `backup-usb` prende el enchufe inteligente del disco externo, espera el montaje y vigila el registro de eventos hasta que terminan los trabajos de HBS. Si todos salen bien desmonta y apaga el disco, reportando cada paso por Notification Center |

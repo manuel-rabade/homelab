@@ -36,6 +36,8 @@ Nada por ahora.
 ## Pendientes
 
 - [ ] Crear los contenedores LXC con el stack de inferencia para correr LLMs locales
+- [ ] Mover la IP 192.168.1.5 a `nic0` y dejar `vmbr0` como bridge interno de `VMS` (192.168.5.1)
+- [ ] Configurar la ruta hacia `VMS`
 - [ ] Evaluar una eGPU por el puerto OCuLink
 
 ## Bitácora
